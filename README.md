@@ -66,27 +66,30 @@
 - [React]() para crear la ui de manera rapida
 - [Redux]() para conectar los componetes en un solo estado
 - [Material-ui]() -.-!
-- [Apollo-Client]() para conectarme a al servicio de graphql
+- [Apollo-Client]() para conectarme al servicio de graphql
 - [antd-Desing]() mejora el render en los componentes
 
 #### Backend
 
 - [Node]() simple y sencillo de usar
 - [Apollo-Server]() usando Graphql y express para construir un servicio rapido y seguro
-- [Express-Session]() guardar las sessiones segueras en los headers
-- [JWT]() para iniciar sessiones seguras con cookies
+- [Express-Session]() guardar las sesiones seguras en los headers
+- [JWT]() para iniciar sesiones seguras con cookies
 - [Sequelize]() ORM para poder trabajar con postgres
 - [Babel]() para poder usar es6
 
 #### Database
 
 - [Postgres]() como base de datos principal
-- [Redis]() para guardar sessiones y como cache
+- [Redis]() para guardar sesiones y como cache
 -
 
 #### Orchestration
 
 - [Docker]() para controlar la creacion y configuracion de contenedores, monitorizar el funcionamiento de los contenedores y en caso de fallos volver a levantarlo o crearlos
+  <p align="center">
+   <img src="https://profile.es/pro/wp-content/media/Docker-Swarm.png" alt="docker" width="350" height="280">
+  </p>
 
 <!-- GETTING STARTED -->
 
@@ -151,7 +154,7 @@ docker-compose up
 ```
 
 ```sh
- CREATE DATABASE practica
+ CREATE DATABASE practica;
 ```
 
 2. cd server/
@@ -165,6 +168,10 @@ docker-compose up
 ```sh
  npm start
 ```
+
+4. monitorin system and containers
+
+localhost:19999
 
 <!-- aca van los ejemplos -->
 
