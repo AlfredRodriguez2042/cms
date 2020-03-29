@@ -8,8 +8,8 @@
 -->
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][https://github.com/alfredrodriguez2042/cms/network/menmbers]
-[![Stargazers][stars-shield]][https://github.com/alfredrodriguez2042/cms/stargazers]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
@@ -164,3 +164,20 @@ Project Link: [https://github.com/AlfredRodriguez2042/cms](https://github.com/Al
 - []()
 - []()
 - []()
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/Alfredrodriguez2042/cms.svg?style=flat-square
+[contributors-url]: https://github.com/AlfredRodriguez2042/cms/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Alfredrodriguez2042/cms.svg?style=flat-square
+[forks-url]: https://github.com/AlfredRodriguez2042/cms/network/members
+[stars-shield]: https://img.shields.io/github/stars/Alfredrodriguez2042/cms.svg?style=flat-square
+[stars-url]: https://github.com/AlfredRodriguez2042/cms/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Alfredrodriguez2042/cms.svg?style=flat-square
+[issues-url]: https://github.com/AlfredRodriguez2042/cms/issues
+[license-shield]: https://img.shields.io/github/license/Alfredrodriguez2042/cms.svg?style=flat-square
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/alfredrodriguez2042
+[product-screenshot]: images/screenshot.png
