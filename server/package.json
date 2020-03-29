@@ -1,0 +1,52 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "servicio",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src/index.js -d dist",
+    "start": " cross-env NODE_ENV=production nodemon src/index.js --exec babel-node",
+    "dev": "nodemon  src/index.js --exec babel-node ",
+    "limit": "cross-env LIMIT=2048 increase-memory-limit"
+  },
+  "author": "Alfredo Rodriguez G.",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@hapi/joi": "^17.1.1",
+    "apollo-directive": "^0.1.2",
+    "bcrypt": "^4.0.1",
+    "connect-redis": "^4.0.4",
+    "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.2",
+    "csurf": "^1.11.0",
+    "dataloader": "^2.0.0",
+    "dotenv": "^8.2.0",
+    "express-rate-limit": "^5.1.1",
+    "express-session": "^1.17.0",
+    "graphql-cost-analysis": "^1.0.3",
+    "graphql-depth-limit": "^1.1.0",
+    "graphql-upload": "^10.0.0",
+    "ioredis": "^4.16.0",
+    "jsonwebtoken": "^8.5.1",
+    "merge-graphql-schemas": "^1.7.6",
+    "mongoose": "^5.9.5",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.5",
+    "sequelize-cli": "^5.5.1",
+    "uuid": "^7.0.2"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.11.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "helmet": "^3.21.3"
+  }
+}
