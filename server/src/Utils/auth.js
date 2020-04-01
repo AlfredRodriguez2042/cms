@@ -17,7 +17,7 @@ export const createRefreshToken = (id, res) => {
   })
 }
 export const checkAuth = (req, res) => {
-  if (!req.isAuth) throw new AuthenticationError("Error, must be autenticated")
+  if (!req.isAuth) throw new AuthenticationError("Error, must be authenticated")
   let token
   if (
     req.headers.authorization &&

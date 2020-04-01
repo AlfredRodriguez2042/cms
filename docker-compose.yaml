@@ -43,24 +43,24 @@ services:
       - db
       - storage
 
-  netdata:
-    image: netdata/netdata
-    hostname: kuro.com # set to fqdn of host
-    ports:
-      - 19999:19999
-    cap_add:
-      - SYS_PTRACE
-    security_opt:
-      - apparmor:unconfined
-    volumes:
-      - /etc/passwd:/host/etc/passwd:ro
-      - /etc/group:/host/etc/group:ro
-      - /proc:/host/proc:ro # ro is Read Only
-      - /sys:/host/sys:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    #   - netdata-etc:/etc/netdata
-    depends_on:
-      - servernode
+  # netdata:
+  #   image: netdata/netdata
+  #   hostname: kuro.com # set to fqdn of host
+  #   ports:
+  #     - 19999:19999
+  #   cap_add:
+  #     - SYS_PTRACE
+  #   security_opt:
+  #     - apparmor:unconfined
+  #   volumes:
+  #     - /etc/passwd:/host/etc/passwd:ro
+  #     - /etc/group:/host/etc/group:ro
+  #     - /proc:/host/proc:ro # ro is Read Only
+  #     - /sys:/host/sys:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   #   - netdata-etc:/etc/netdata
+  #   depends_on:
+  #     - servernode
 
 networks:
   overlay:

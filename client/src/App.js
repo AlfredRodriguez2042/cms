@@ -1,26 +1,31 @@
 import React, { useEffect } from 'react'
 import AppRouter from './Routes'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { store, persistor } from './Redux/store'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import { useSelector } from 'react-redux'
+import { useCheckAuth } from './Graphql/Mutations/User'
 import Layout from './Layout'
 import 'antd/dist/antd.css'
+import ErrorBoundary from './Components/ErrorBoundary'
 
 const App = () => {
+  const isAtuh = useSelector(state => state.user.isAuthenticated)
+  console.log(isAtuh)
+  const { loading, checkLoggedIn } = useCheckAuth()
   useEffect(() => {
+    // checkLoggedIn()
     // window.addEventListener('unload', StoreState)
-  }, [])
+  }, [checkLoggedIn])
+  if (loading) {
+    return <p>loading...</p>
+  }
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <Layout>
-            <AppRouter />
-          </Layout>
-        </Router>
-      </PersistGate>
-    </Provider>
+    <ErrorBoundary>
+      <Router>
+        <Layout>
+          <AppRouter />
+        </Layout>
+      </Router>
+    </ErrorBoundary>
   )
 }
 

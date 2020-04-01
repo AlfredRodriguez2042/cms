@@ -1,6 +1,6 @@
 import User from "../../Models/user"
 import bcrypt from "bcrypt"
-import { createSendToken } from "../../Utils/auth"
+import { createSendToken, checkAuth, isAuth } from "../../Utils/auth"
 import { validationLogin } from "../../Utils/validation"
 
 export default {
@@ -29,7 +29,14 @@ export default {
       req.session.userId = user.id
 
       const token = createSendToken(user.id, res)
+
       return { token, user }
     }
+    // checkLoggedIn: (parent, ctx, { req, res }) => {
+    //   isAuth(req)
+
+    //   const token = createSendToken(req.user._id, res)
+    //   return { token, user: req.user }
+    // }
   }
 }

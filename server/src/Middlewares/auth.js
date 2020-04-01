@@ -52,8 +52,16 @@ export const middlewareSession = async (req, res, next) => {
         }
       ]
     })
+
+    if (!user) {
+      console.log("!..user")
+      req.isAuth = false
+      return next()
+    }
+
     req.user = {
       id: user.id,
+      username: user.username,
       role: user.roles[0].name
     }
     req.isAuth = true
