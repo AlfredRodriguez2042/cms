@@ -31,12 +31,19 @@ export default {
       const token = createSendToken(user.id, res)
 
       return { token, user }
-    }
-    // checkLoggedIn: (parent, ctx, { req, res }) => {
-    //   isAuth(req)
+    },
+    checkLoggedIn: async (parent, ctx, { req, res }) => {
+      isAuth(req)
+      console.log(req.session.userId)
+      const user = await User.findByPk(req.session.userId, {
+        include: [
+          {
+            association: "roles"
+          }
+        ]
+      })
 
-    //   const token = createSendToken(req.user._id, res)
-    //   return { token, user: req.user }
-    // }
+      return { user }
+    }
   }
 }

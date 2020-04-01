@@ -3,10 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Modals from '../../Components/Modals'
 
 import MenuInfo from '../../Components/MenuInfo'
+import { useMutation } from '@apollo/react-hooks'
+import { LOGOUT } from '../../Graphql/Mutations/User'
+import { USER_LOG_OUT } from '../../Redux/types'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -37,10 +40,18 @@ const Admin = [
 ]
 
 const Navigation = props => {
+  const dispatch = useDispatch()
   const isAuth = useSelector(state => state.user.isAuthenticated)
   const rol = useSelector(state => state.user.roles)
 
   const classes = useStyles()
+
+  const [logout, { loading }] = useMutation(LOGOUT, {
+    onCompleted: data => dispatch({ type: USER_LOG_OUT })
+  })
+  const handleLogOut = () => {
+    logout()
+  }
 
   return (
     <>
@@ -76,6 +87,11 @@ const Navigation = props => {
           ))
         ) : (
           <Modals />
+        )}
+        {isAuth && (
+          <button onClick={handleLogOut} aria-busy={loading}>
+            Log{loading ? 'ging out...' : 'out'}
+          </button>
         )}
         {isAuth && <MenuInfo />}
       </Toolbar>

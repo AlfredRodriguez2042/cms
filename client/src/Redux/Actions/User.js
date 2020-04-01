@@ -1,4 +1,4 @@
-import { USER_LOADED, USER_LOGIN_ERROR } from '../types'
+import { USER_LOADED, USER_LOGIN_ERROR, USER_LOG_OUT } from '../types'
 
 export const SignIn = user => {
   return dispatch => {
@@ -30,6 +30,18 @@ export const SignUp = user => {
         type: USER_LOGIN_ERROR,
         payload: error
       })
+    }
+  }
+}
+
+export const LogOut = () => {
+  return dispatch => {
+    try {
+      dispatch({
+        type: USER_LOG_OUT
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
 }

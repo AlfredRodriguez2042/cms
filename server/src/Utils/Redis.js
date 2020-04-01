@@ -1,12 +1,12 @@
-import redis from 'ioredis'
-import session from 'express-session'
-import connectRedis from 'connect-redis'
-require('dotenv').config()
+import redis from "ioredis"
+import session from "express-session"
+import connectRedis from "connect-redis"
+require("dotenv").config()
 
 const RedisStore = connectRedis(session)
 export const client = redis.createClient({
   port: 6379, // Redis port
-  host: process.env.REDIS_HOST || '127.0.0.1' // Redis host
+  host: process.env.REDIS_HOST || "127.0.0.1" // Redis host
   //  family: 4, // 4 (IPv4) or 6 (IPv6)
   // password: 'auth',
   // db: 0
@@ -14,7 +14,7 @@ export const client = redis.createClient({
 const store = new RedisStore({ client })
 
 export const sessionOption = session({
-  name: 'qid',
+  name: "qid",
   store,
   secret: process.env.SESSION,
   resave: false,
@@ -25,7 +25,7 @@ export const sessionOption = session({
   }
 })
 
-client.on('connect', () => console.log('Redis is connected'))
+client.on("connect", () => console.log("Redis is connected"))
 
 export const RedisCache = async model => {
   await client.del(process.env.REDIS_CACHE_KEY)

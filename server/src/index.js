@@ -27,7 +27,7 @@ function main() {
         const uid = parseInt(process.env.SUDO_UID)
         console.log(uid)
         if (uid) {
-          // process.setuid(uid)  set uid of the process to user with lower privileges
+          // process.setuid(uid)  set uid of the process to user with lower privileges, only in docker run root user
         }
         console.log(
           `>>>   🚀   Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`

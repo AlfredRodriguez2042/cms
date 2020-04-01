@@ -54,14 +54,21 @@ const CHECK_LOGGED_IN = gql`
     }
   }
 `
+export const LOGOUT = gql`
+  mutation Logout {
+    Logout
+  }
+`
+
 export function useCheckAuth() {
   const dispatch = useDispatch()
 
   const [checkLoggedIn, { error, loading }] = useMutation(CHECK_LOGGED_IN, {
     onCompleted: ({ checkLoggedIn: { user } }) => {
-      console.log('mid', user)
+      console.log('usercheck', user)
       dispatch(SignIn(user))
-    }
+    },
+    onError: () => {}
   })
 
   return { loading, checkLoggedIn, error }

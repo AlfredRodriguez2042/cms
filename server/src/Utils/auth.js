@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 
 export const isAuth = req => {
   if (!req.session.userId) {
-    throw new AuthenticationError("You must be signed in")
+    throw new AuthenticationError("Error, must be authenticated")
   }
 }
 

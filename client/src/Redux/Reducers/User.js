@@ -1,4 +1,4 @@
-import { USER_LOGIN_ERROR, USER_LOADED } from '../types'
+import { USER_LOGIN_ERROR, USER_LOADED, USER_LOG_OUT } from '../types'
 import { storage_token } from '../../Utils/constants'
 import jwt from 'jsonwebtoken'
 //import { Cookies } from 'react-cookie'
@@ -25,6 +25,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
+  Object.freeze(state)
   switch (action.type) {
     case USER_LOADED:
       //localStorage.setItem(storage_token, jwtstorage)
@@ -42,6 +43,14 @@ export default function(state = initialState, action) {
         token: null,
         status: 'failure',
         errorMessage: action.payload
+      }
+    case USER_LOG_OUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        status: 'idle',
+        user: null,
+        roles: 'user'
       }
     default:
       return state

@@ -69,6 +69,15 @@ export default {
     deleteUser: async (_, { id }) => {
       const user = await User.destroy({ where: id })
       return user
+    },
+    Logout: async (_, __, { req, res }) => {
+      req.session.destroy("qid")
+      res.cookie("x-token", "logout...", {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1)
+      })
+      console.log(req.session)
+      return true
     }
   }
 }

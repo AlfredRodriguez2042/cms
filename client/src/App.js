@@ -6,17 +6,19 @@ import { useCheckAuth } from './Graphql/Mutations/User'
 import Layout from './Layout'
 import 'antd/dist/antd.css'
 import ErrorBoundary from './Components/ErrorBoundary'
+import Loader from './Components/Loader'
 
 const App = () => {
   const isAtuh = useSelector(state => state.user.isAuthenticated)
-  console.log(isAtuh)
+
   const { loading, checkLoggedIn } = useCheckAuth()
+
   useEffect(() => {
-    // checkLoggedIn()
+    checkLoggedIn()
     // window.addEventListener('unload', StoreState)
   }, [checkLoggedIn])
   if (loading) {
-    return <p>loading...</p>
+    return <Loader />
   }
   return (
     <ErrorBoundary>

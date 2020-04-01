@@ -35,6 +35,7 @@ export default `
     createUser(input: UserInput!): User!
     deleteUser(id:ID): User!
     Login(input: LoginInput): AuthPayload!
+    Logout:Boolean
     checkLoggedIn: AuthPayload!
   }
 

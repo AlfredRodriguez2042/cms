@@ -47,16 +47,14 @@ const afterware = new ApolloLink((operation, forward) => {
     // if (response.data.user.lastLoginDate) {
     //
     // }
-    if (response.data && response.data.Login.token) {
-      const token = response.data.Login.token
-      localStorage.setItem('x-token', token)
+    if (response.data && response.data.Login) {
     }
     //redireccionar en caso de error
     if (response.errors && response.errors.length > 0) {
       if (response.errors[0].message === 'Error, must be authenticated') {
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
-        window.location = '/login'
+        // window.location = '/'
       }
     }
     return response
