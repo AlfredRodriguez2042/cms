@@ -10,6 +10,7 @@ import MenuInfo from '../../Components/MenuInfo'
 import { useMutation } from '@apollo/react-hooks'
 import { LOGOUT } from '../../Graphql/Mutations/User'
 import { USER_LOG_OUT } from '../../Redux/types'
+import { Button } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -22,6 +23,15 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none',
     // color: "#383a42"
     color: '#53575A'
+  },
+  button: {
+    color: 'red',
+    borderRadius: 5,
+    border: '1px solid red',
+    margin: theme.spacing(2, 0),
+    padding: '4px 10px',
+    lineHeight: '12px',
+    textTransform: 'none'
   }
 }))
 
@@ -89,9 +99,14 @@ const Navigation = props => {
           <Modals />
         )}
         {isAuth && (
-          <button onClick={handleLogOut} aria-busy={loading}>
+          <Button
+            type="button"
+            onClick={handleLogOut}
+            variant="outlined"
+            className={classes.button}
+          >
             Log{loading ? 'ging out...' : 'out'}
-          </button>
+          </Button>
         )}
         {isAuth && <MenuInfo />}
       </Toolbar>

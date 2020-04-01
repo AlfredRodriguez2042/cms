@@ -22,7 +22,7 @@ client/npm-debug.log*
 clinet/yarn-debug.log*
 client/yarn-error.log*
 
-server/src/Config
+
 server/.env
 
 client/notas.txt
