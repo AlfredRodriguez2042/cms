@@ -6,6 +6,7 @@ import ErrorBoundary from '../Components/ErrorBoundary'
 const Home = lazy(() => import('../Pages/Home'))
 const About = lazy(() => import('../Pages/About'))
 const Admin = lazy(() => import('../Pages/Admin'))
+const Dashboard = lazy(() => import('../Pages/Admin/Dashboard'))
 const PrivateRoute = lazy(() => import('./PrivateRoute'))
 
 const AppRouter = () => {
@@ -14,7 +15,8 @@ const AppRouter = () => {
       <ErrorBoundary>
         <Suspense fallback={<Loader />}>
           <Route path="/" exact component={Home} />
-          <Route path="/dashboard" exact component={Admin} />
+          <Route path="/article/:id" exact component={Home} />
+          <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/about" exact component={About} />
           <PrivateRoute path="/programing" exact component={About} />
         </Suspense>

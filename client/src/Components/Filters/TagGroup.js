@@ -8,7 +8,6 @@ const TagGroup = props => {
   let inputId = null
   const handleClose = removedTag => {
     const tag = tags.filter(tag => tag !== removedTag)
-    console.log(tag)
     setTags(tag)
   }
 
@@ -20,8 +19,6 @@ const TagGroup = props => {
 
   const handleInputChange = e => {
     SetInputValue(e.target.value)
-
-    console.log(inputValue)
   }
 
   const handleInputConfirm = () => {
@@ -29,7 +26,6 @@ const TagGroup = props => {
       setTags([...tags, inputValue])
     }
 
-    console.log(tags)
     SetInputVisible(false)
     SetInputValue('')
   }

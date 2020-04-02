@@ -12,7 +12,11 @@ const httpLink = new HttpLink({
   //   authorization: `Bearer ${AUTH_TOKEN}`
   // },
   onError: ({ graphQLErrors, networkError }) => {
-    if (networkError.statusCode === 401) console.log('logout')
+    console.log(graphQLErrors)
+    console.log(networkError)
+    if (networkError.statusCode === 401) {
+      console.log('error 4001')
+    }
   }
 })
 

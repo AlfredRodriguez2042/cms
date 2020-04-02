@@ -75,16 +75,7 @@ const Navigation = props => {
             {section.title}
           </NavLink>
         ))}
-        {rol === 'admin' &&
-          Admin.map(section => (
-            <NavLink
-              key={section.title}
-              to={section.url}
-              className={classes.toolbarLink}
-            >
-              {section.title}
-            </NavLink>
-          ))}
+
         {isAuth ? (
           _private.map(section => (
             <NavLink

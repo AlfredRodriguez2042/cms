@@ -17,7 +17,7 @@ const CategoryGroup = props => {
 
   return (
     <div>
-      <strong style={{ marginRight: 8 }}>Categories:</strong>
+      <strong style={{ marginRight: 8 }}>Cate:</strong>
       {tagsFromServer.map(tag => (
         <CheckableTag
           key={tag}

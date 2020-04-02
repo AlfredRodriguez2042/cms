@@ -16,7 +16,7 @@ const initialState = {
   token: jwtstorage,
   isAuthenticated: false, //jwtstorage ? true : false,
   status: 'idle',
-  user: null,
+  user: {},
   roles: 'user',
   followings: {},
   playList: [],
@@ -49,7 +49,7 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: false,
         status: 'idle',
-        user: null,
+        user: {},
         roles: 'user'
       }
     default:
