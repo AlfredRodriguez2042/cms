@@ -6,10 +6,10 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import PeopleIcon from '@material-ui/icons/People'
+import EditIcon from '@material-ui/icons/Edit'
 import BarChartIcon from '@material-ui/icons/BarChart'
 import LayersIcon from '@material-ui/icons/Layers'
 import AssignmentIcon from '@material-ui/icons/Assignment'
-//import { Link } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 export const mainListItems = (
@@ -20,6 +20,14 @@ export const mainListItems = (
       </ListItemIcon>
       <Link to="/dashboard">
         <ListItemText primary="Dashboard" />
+      </Link>
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <EditIcon />
+      </ListItemIcon>
+      <Link to="/article/edit">
+        <ListItemText primary="Edit Article" />
       </Link>
     </ListItem>
     <ListItem button>

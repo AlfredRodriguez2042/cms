@@ -7,12 +7,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import EditorMD from '../../../Components/EditorMD'
 import TagGroup from '../../../Components/Filters/TagGroup'
 import CategoryGroup from '../../../Components/Filters/CategoryGroup'
-import { USERS_QUERY } from '../../../Graphql/Querys/User'
 import { CREATE_ARTICLE } from '../../../Graphql/Mutations/Articles'
 
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { useSelector, connect } from 'react-redux'
+import { useMutation } from '@apollo/react-hooks'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { validateError } from '../../../Utils/ValidateError'
 
 const useStyles = makeStyles({
   list: {
@@ -55,11 +55,22 @@ const CreateArticle = props => {
     },
     onError() {}
   })
+  validateError(error)
+  const [update, {}] = useMutation(CREATE_ARTICLE, {
+    variables: {
+      title,
+      content,
+      category,
+      tags,
+      userId
+    },
+    onCompleted: ({ createArticle }) => {
+      console.log(createArticle)
+    },
+    onError() {}
+  })
   if (loading) return <p>loading...</p>
-  console.log(title)
-  console.log(content)
-  console.log(category)
-  console.log(tags)
+
   return (
     <>
       <Grid container item spacing={1}>
@@ -101,7 +112,9 @@ const CreateArticle = props => {
             className={classes.button}
             title={editId ? '更新' : '新增'}
             icon={editId ? <SyncOutlined /> : <PlusOutlined />}
-            onClick={() => {}}
+            onClick={() => {
+              editId ? update() : create()
+            }}
           />
         </Grid>
       </Grid>

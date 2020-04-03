@@ -5,10 +5,19 @@ const TagGroup = props => {
   const { tags, setTags } = props
   const [inputVisible, SetInputVisible] = useState(false)
   const [inputValue, SetInputValue] = useState('')
+
   let inputId = null
+
   const handleClose = removedTag => {
-    const tag = tags.filter(tag => tag !== removedTag)
-    setTags(tag)
+    const tag = tags
+      .map(value => {
+        return value.name
+      })
+      .find(tag => tag !== removedTag)
+
+    if (tag) {
+      setTags(tag)
+    }
   }
 
   const showInput = () => {
@@ -22,8 +31,11 @@ const TagGroup = props => {
   }
 
   const handleInputConfirm = () => {
-    if (inputValue && tags.indexOf(inputValue) === -1) {
-      setTags([...tags, inputValue])
+    const TAG = tags.map(value => {
+      return value.name
+    })
+    if (inputValue && TAG.indexOf(inputValue) === -1) {
+      setTags([...tags, { name: inputValue }])
     }
 
     SetInputVisible(false)
@@ -38,15 +50,15 @@ const TagGroup = props => {
         const isLongTag = tag.length > 20
         const tagElem = (
           <Tag
-            key={tag}
+            key={tag.name}
             closable={index !== -1}
-            onClose={() => handleClose(tag)}
+            onClose={() => handleClose(tag.name)}
           >
-            {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+            {isLongTag ? `${tag.name.slice(0, 20)}...` : tag.name}
           </Tag>
         )
         return isLongTag ? (
-          <Tooltip title={tag} key={tag}>
+          <Tooltip title={tag.name} key={tag.name}>
             {tagElem}
           </Tooltip>
         ) : (
@@ -60,6 +72,7 @@ const TagGroup = props => {
           }}
           type="text"
           size="small"
+          name="name"
           style={{ width: 78 }}
           value={inputValue}
           onChange={handleInputChange}

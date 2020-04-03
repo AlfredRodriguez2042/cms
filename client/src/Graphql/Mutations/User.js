@@ -65,7 +65,6 @@ export function useCheckAuth() {
 
   const [checkLoggedIn, { error, loading }] = useMutation(CHECK_LOGGED_IN, {
     onCompleted: ({ checkLoggedIn: { user } }) => {
-      console.log('usercheck', user)
       dispatch(SignIn(user))
     },
     onError: () => {}

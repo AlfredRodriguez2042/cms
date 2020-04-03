@@ -4,9 +4,9 @@ export const CREATE_ARTICLE = gql`
   mutation createArticle(
     $title: String!
     $content: String!
-    $userId: ID!
-    $tags: [TagInput]
-    $categories: [categoryInput]
+    $userId: String!
+    $tags: [TagInput]!
+    $categories: [CategoryInput]
   ) {
     createArticle(
       input: {

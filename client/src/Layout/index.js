@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }))
 const Layout = ({ children }) => {
   const rol = useSelector(state => state.user.roles)
-  console.log(rol)
+
   const classes = useStyles()
   return (
     <div className={classes.root}>

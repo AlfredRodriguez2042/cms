@@ -15,9 +15,11 @@ const AppRouter = () => {
       <ErrorBoundary>
         <Suspense fallback={<Loader />}>
           <Route path="/" exact component={Home} />
-          <Route path="/article/:id" exact component={Home} />
-          <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/about" exact component={About} />
+          <PrivateRoute path="/article/edit" exact component={Admin} />
+          <PrivateRoute path="/article/edit/:id" exact component={Home} />
+          <PrivateRoute path="/dashboard" exact component={Dashboard} />
+
           <PrivateRoute path="/programing" exact component={About} />
         </Suspense>
       </ErrorBoundary>
