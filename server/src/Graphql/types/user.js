@@ -13,6 +13,7 @@ export default `
     password: String
     roles: [Roles] !
     active: Boolean!
+    createdAt: ID!
     articles:[ArticleShort!]
     comments:[Comment!]
   }

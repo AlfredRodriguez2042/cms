@@ -9,15 +9,8 @@ const TagGroup = props => {
   let inputId = null
 
   const handleClose = removedTag => {
-    const tag = tags
-      .map(value => {
-        return value.name
-      })
-      .find(tag => tag !== removedTag)
-
-    if (tag) {
-      setTags(tag)
-    }
+    const tag = tags.filter(tag => tag.name !== removedTag)
+    setTags(tag)
   }
 
   const showInput = () => {

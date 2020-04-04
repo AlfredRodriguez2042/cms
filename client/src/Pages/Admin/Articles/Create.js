@@ -11,7 +11,7 @@ import { CREATE_ARTICLE } from '../../../Graphql/Mutations/Articles'
 
 import { useMutation } from '@apollo/react-hooks'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { validateError } from '../../../Utils/ValidateError'
 
 const useStyles = makeStyles({
@@ -35,8 +35,9 @@ const CreateArticle = props => {
   const classes = useStyles()
   const userId = useSelector(state => state.user.user.id)
   const params = useParams()
+  const history = useHistory()
   const editId = params.id
-
+  console.log(history)
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
   const [tags, setTags] = useState([])
@@ -50,12 +51,13 @@ const CreateArticle = props => {
       tags,
       userId
     },
-    onCompleted: ({ createArticle }) => {
-      console.log(createArticle)
+    onCompleted: ({ createArticle: { id } }) => {
+      history.push(`/article/${id}`)
+      console.log(id)
     },
     onError() {}
   })
-  validateError(error)
+
   const [update, {}] = useMutation(CREATE_ARTICLE, {
     variables: {
       title,

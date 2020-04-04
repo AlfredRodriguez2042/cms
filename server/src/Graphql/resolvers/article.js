@@ -1,36 +1,36 @@
-import Article from '../../Models/article'
-import { checkAuth } from '../../Utils/auth'
+import Article from "../../Models/article"
+import { checkAuth } from "../../Utils/auth"
 
 export default {
   Query: {
     Article: async (_, { id }) => {
       const post = await Article.findByPk(id, {
-        include: [{ association: 'comments' }],
-        attributes: { exclude: ['user_id'] }
+        include: [{ association: "comments" }],
+        attributes: { exclude: ["user_id"] }
       })
       return post
     },
     Articles: async (_, __, { req, res }) => {
-      checkAuth(req, res)
+      // checkAuth(req, res)
       const posts = await Article.findAll({
         include: [
           {
-            association: 'tags',
-            attributes: ['name']
+            association: "tags",
+            attributes: ["name"]
           },
           {
-            association: 'categories',
-            attributes: ['name'],
+            association: "categories",
+            attributes: ["name"],
             through: { attributes: [] }
           },
           {
-            association: 'user'
+            association: "user"
           }
         ],
-        attributes: { exclude: ['updatedAt', 'user_id'] },
-        order: [['createdAt', 'DESC']]
+        attributes: { exclude: ["updatedAt", "user_id"] },
+        order: [["createdAt", "DESC"]]
       })
-      console.log('art-use', req.user)
+
       return posts
     }
   },
@@ -39,10 +39,10 @@ export default {
       const post = await Article.create(input, {
         include: [
           {
-            association: 'tags'
+            association: "tags"
           },
           {
-            association: 'categories'
+            association: "categories"
           }
         ]
       })

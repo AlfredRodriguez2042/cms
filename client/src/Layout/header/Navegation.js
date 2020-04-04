@@ -36,17 +36,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const _private = [
-  { title: 'Programin', url: '/programing' },
+  { title: 'Articles', url: '/articles' },
   { title: 'system', url: '/system' }
 ]
 const _public = [
   { title: 'Home', url: '/' },
   { title: 'About', url: '/about' }
-]
-
-const Admin = [
-  { title: 'Admin', url: '/admin' },
-  { title: 'Dashboard', url: '/admin/dashboard' }
 ]
 
 const Navigation = props => {

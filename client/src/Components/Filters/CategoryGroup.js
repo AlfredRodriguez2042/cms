@@ -14,14 +14,9 @@ const CategoryGroup = props => {
   const { selectedTags, setSelectedTags } = props
 
   const handleChange = (tag, checked) => {
-    console.log(
-      'ver',
-      selectedTags //.map(value => value.name).filter(t => {name:t})
-    )
-    const newtag = selectedTags.map(value => value.name).filter(t => t !== tag)
     const nextSelectedTags = checked
       ? [...selectedTags, { name: tag }]
-      : { name: newtag }
+      : selectedTags.filter(t => t.name !== tag)
     console.log('You are interested in: ', nextSelectedTags)
     setSelectedTags(nextSelectedTags)
   }

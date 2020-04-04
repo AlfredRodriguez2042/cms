@@ -1,5 +1,6 @@
 import marked from 'marked'
 import xss from 'xss'
+import { COLOR_LIST } from '../Config'
 
 export const translateMarkdown = (plainText, isGuardXss = false) => {
   return marked(isGuardXss ? xss(plainText) : plainText, {
@@ -18,3 +19,11 @@ export const translateMarkdown = (plainText, isGuardXss = false) => {
   })
 }
 //npm install highlight.js --save
+export const randomIndex = arr => Math.floor(Math.random() * arr.length)
+export function generateColor(list = [], colorList = COLOR_LIST) {
+  const _list = [...list]
+  _list.forEach((l, i) => {
+    l.color = colorList[i] || colorList[randomIndex(colorList)]
+  })
+  return _list
+}

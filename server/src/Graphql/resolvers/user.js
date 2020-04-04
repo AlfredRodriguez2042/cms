@@ -17,20 +17,22 @@ const options = [
 export default {
   Query: {
     User: async (_, { id }, { req }) => {
-      isAuth(req)
+      //  isAuth(req)
 
       const user = await User.findByPk(id, {
         include: options
       })
+      console.log(user.createdAt)
 
       return user
     },
     Users: async (_, __, { req, res }) => {
-      checkAuth(req, res)
-      console.log()
+      // checkAuth(req, res)
+
       const users = await User.findAll({
         include: options
       })
+
       return users
     }
   },
@@ -73,6 +75,10 @@ export default {
     Logout: async (_, __, { req, res }) => {
       req.session.destroy("qid")
       res.cookie("x-token", "logout...", {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1)
+      })
+      res.cookie("qid", "logout...", {
         httpOnly: true,
         expires: new Date(Date.now() + 1)
       })
