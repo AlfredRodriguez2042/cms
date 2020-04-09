@@ -1,13 +1,15 @@
 import React from 'react'
 import { useParams, useRouteMatch } from 'react-router-dom'
+import Carrousel from '../../Components/Carrousel'
 
 const Home = () => {
   const params = useParams()
   const match = useRouteMatch()
-  console.log(match)
+
   //console.log(params.id)
   return (
     <>
+      <Carrousel />
       <h1>something</h1>
       <h1>something</h1>
       <p>

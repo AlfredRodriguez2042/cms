@@ -43,7 +43,7 @@ const CreateArticle = props => {
   const [tags, setTags] = useState([])
   const [category, setCategory] = useState([])
   // const { loading, error, data } = useQuery(USERS_QUERY)
-  const [create, { loading, error }] = useMutation(CREATE_ARTICLE, {
+  const [create, { loading }] = useMutation(CREATE_ARTICLE, {
     variables: {
       title,
       content,
@@ -53,7 +53,6 @@ const CreateArticle = props => {
     },
     onCompleted: ({ createArticle: { id } }) => {
       history.push(`/article/${id}`)
-      console.log(id)
     },
     onError() {}
   })

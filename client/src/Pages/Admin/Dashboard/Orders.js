@@ -70,15 +70,15 @@ export default function Orders() {
   const classes = useStyles()
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Users Online</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Country</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell align="right">IP</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -95,7 +95,7 @@ export default function Orders() {
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
+          See more Users
         </Link>
       </div>
     </React.Fragment>

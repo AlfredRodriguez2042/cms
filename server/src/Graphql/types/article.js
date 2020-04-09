@@ -12,7 +12,7 @@ export default `
     userId: String
     user:UserShort
     image: String!
-    createdAt: String!
+    createdAt: Date!
     comment:[Comment!]
     commentNum: Int
     viewCount: Int

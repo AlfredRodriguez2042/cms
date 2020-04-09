@@ -3,6 +3,12 @@ import Link from '@material-ui/core/Link'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Title from './Title'
+import { useRef } from 'react'
+
+const CountViews = () => {
+  const render = useRef(0)
+  return render.current++
+}
 
 function preventDefault(event) {
   event.preventDefault()
@@ -18,16 +24,16 @@ export default function Deposits() {
   const classes = useStyles()
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Recent Views</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        {CountViews()}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+        on {new Date().toTimeString()}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
+          View more
         </Link>
       </div>
     </React.Fragment>

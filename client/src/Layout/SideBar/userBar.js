@@ -32,7 +32,8 @@ const useStyle = makeStyles(theme => ({
     color: '#53575A'
   },
   paper: {
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: 10
   },
   avatar: {
     width: '132px',

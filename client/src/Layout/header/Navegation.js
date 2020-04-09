@@ -3,14 +3,10 @@ import { NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Modals from '../../Components/Modals'
 
 import MenuInfo from '../../Components/MenuInfo'
-import { useMutation } from '@apollo/react-hooks'
-import { LOGOUT } from '../../Graphql/Mutations/User'
-import { USER_LOG_OUT } from '../../Redux/types'
-import { Button } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -21,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     flexShrink: 0,
     textDecoration: 'none',
-    // color: "#383a42"
+    //color: '#383a42'
     color: '#53575A'
   },
   button: {
@@ -35,28 +31,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const _private = [
-  { title: 'Articles', url: '/articles' },
-  { title: 'system', url: '/system' }
-]
+const _private = [{ title: 'system', url: '/system' }]
 const _public = [
   { title: 'Home', url: '/' },
-  { title: 'About', url: '/about' }
+  { title: 'About', url: '/about' },
+  { title: 'Articles', url: '/articles' }
 ]
 
-const Navigation = props => {
-  const dispatch = useDispatch()
+const Navigation = () => {
   const isAuth = useSelector(state => state.user.isAuthenticated)
-  const rol = useSelector(state => state.user.roles)
 
   const classes = useStyles()
-
-  const [logout, { loading }] = useMutation(LOGOUT, {
-    onCompleted: data => dispatch({ type: USER_LOG_OUT })
-  })
-  const handleLogOut = () => {
-    logout()
-  }
 
   return (
     <>
@@ -84,16 +69,7 @@ const Navigation = props => {
         ) : (
           <Modals />
         )}
-        {isAuth && (
-          <Button
-            type="button"
-            onClick={handleLogOut}
-            variant="outlined"
-            className={classes.button}
-          >
-            Log{loading ? 'ging out...' : 'out'}
-          </Button>
-        )}
+
         {isAuth && <MenuInfo />}
       </Toolbar>
     </>

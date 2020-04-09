@@ -1,4 +1,5 @@
 export default `
+
   type Query {
     User(id:ID):User!
     Users:[User!]

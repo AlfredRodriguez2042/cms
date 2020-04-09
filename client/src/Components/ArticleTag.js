@@ -8,12 +8,12 @@ import { FolderOutlined } from '@ant-design/icons'
 import SvgIcon from './SvgIcon'
 
 function getColor(name, colorList) {
-  const target = colorList.find(c => c.name === name)
+  const target = colorList.find((c) => c.name === name)
   return target ? target.color : ''
 }
 
-const ArticleTag = props => {
-  // const tagColorList = useSelector(state => state.article.tagList) // 相当于 connect(state => state.article.tagList)(ArticleTag)
+const ArticleTag = (props) => {
+  const tagColorList = useSelector((state) => state.articles.tagList) // 相当于 connect(state => state.article.tagList)(ArticleTag)
   const { tagList, categoryList } = props
   // color={getColor(tag.name, tagColorList)
 
@@ -48,7 +48,7 @@ const ArticleTag = props => {
 
 ArticleTag.propTypes = {
   tagList: PropTypes.array.isRequired,
-  categoryList: PropTypes.array.isRequired
+  categoryList: PropTypes.array.isRequired,
 }
 
 export default withRouter(ArticleTag)

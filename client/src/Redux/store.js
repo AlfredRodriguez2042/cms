@@ -4,10 +4,12 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import thunk from 'redux-thunk'
 import user from './Reducers/User'
+import articles from './Reducers/Article'
 import { GLOBAL_STATE } from './types'
 
 const reducer = combineReducers({
-  user
+  user,
+  articles,
 })
 let storeEnchance
 
@@ -20,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 const persistConfig = {
   key: GLOBAL_STATE,
   storage,
-  blacklist: ['user']
+  blacklist: ['user', 'articles'],
 }
 const persistedReducer = persistReducer(persistConfig, reducer)
 

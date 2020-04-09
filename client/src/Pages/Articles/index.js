@@ -1,27 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { ARTICLES_QUERY } from '../../Graphql/Querys/Articles'
 import Loader from '../../Components/Loader'
 import { translateMarkdown } from '../../Utils'
 import ArticleContent from '../../Components/Articles/ArticleContent'
+import { useSelector, useDispatch } from 'react-redux'
+import { GetArtcles } from '../../Redux/Actions/Article'
+import FilterArticle from '../../Components/Articles/FilterArticle'
 
 const Articles = () => {
-  const { data, loading } = useQuery(ARTICLES_QUERY)
+  const [state, setState] = useState([])
+  const { data, loading } = useQuery(ARTICLES_QUERY, {
+    onCompleted: ({ Articles }) => {
+      const Posts = Articles.map((item) => {
+        const index = item.content.indexOf('<!--more-->')
+        item.content = translateMarkdown(item.content.slice(0, index))
+        return item
+      })
+      setState(Posts)
+    },
+  })
 
   if (loading) {
     return <Loader />
   }
 
-  const { Articles } = data
-  const Posts = Articles.map(item => {
-    const index = item.content.indexOf('<!--more-->')
-    item.content = translateMarkdown(item.content.slice(0, index))
-    return item
-  })
-
   return (
     <div>
-      {Posts.map(post => (
+      <FilterArticle state={state} setState={setState} />
+      {state.map((post) => (
         <ArticleContent key={post.id} post={post} />
       ))}
     </div>
