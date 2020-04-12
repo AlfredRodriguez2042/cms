@@ -18,7 +18,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/AlfredRodriguez2042/cms">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/dev-logos.png" alt="Logo" width="350" height="200">
   </a>
 
   <h3 align="center">CMS</h3>

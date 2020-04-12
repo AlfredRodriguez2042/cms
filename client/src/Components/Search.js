@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import InputBase from '@material-ui/core/InputBase'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
-//import MenuIcon from '@material-ui/icons/Menu';
+
 import SearchIcon from '@material-ui/icons/Search'
 import { useApolloClient } from '@apollo/react-hooks'
 import { ARTICLES_QUERY } from '../Graphql/Querys/Articles'
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SearchInput = ({ handleSearch }) => {
+const SearchInput = () => {
   const [initialState, setInitialState] = useState()
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
@@ -65,24 +65,22 @@ const SearchInput = ({ handleSearch }) => {
 
   return (
     <div component="form" className={classes.root}>
-      <form onSubmit={handleSubmit}>
-        <Divider className={classes.divider} orientation="vertical" />
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="search"
-        >
-          <SearchIcon />
-        </IconButton>
+      <Divider className={classes.divider} orientation="vertical" />
+      <IconButton
+        type="submit"
+        className={classes.iconButton}
+        aria-label="search"
+      >
+        <SearchIcon />
+      </IconButton>
 
-        <InputBase
-          className={classes.input}
-          name="title"
-          onChange={changeInput}
-          placeholder="Search "
-        />
-        {open && <Paper></Paper>}
-      </form>
+      <InputBase
+        className={classes.input}
+        name="title"
+        onChange={changeInput}
+        placeholder="Search "
+      />
+      {open && <Paper></Paper>}
     </div>
   )
 }

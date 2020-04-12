@@ -1,4 +1,9 @@
-import { GET_ARTICLES, GET_ARTICLES_ERROR, SEARCH_ARTICLE } from '../types'
+import {
+  GET_ARTICLES,
+  GET_ARTICLES_ERROR,
+  SEARCH_ARTICLE,
+  FILTER_ARTICLE,
+} from '../types'
 
 export const GetArtcles = (Posts) => {
   return (dispatch) => {
@@ -22,6 +27,17 @@ export const SearchArticle = (input) => {
       dispatch({
         type: SEARCH_ARTICLE,
         payload: input,
+      })
+    } catch (error) {}
+  }
+}
+
+export const FilterArticles = (posts, categories) => {
+  return (dispatch) => {
+    try {
+      dispatch({
+        type: FILTER_ARTICLE,
+        payload: posts.filter((c) => c.tags === categories),
       })
     } catch (error) {}
   }

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Checkbox, Button, Grid } from '@material-ui/core'
+import { Checkbox, Button, Grid, Menu } from '@material-ui/core'
 import { ArrowDropDown } from '@material-ui/icons'
-import Titles from '../Titles'
 
-const FilterArticle = ({ state, setState }) => {
+const FilterArticle = () => {
   const [open, setOpen] = useState(false)
+  const handleToggle = () => {
+    setOpen(!open)
+  }
   const changeInput = (e) => {
     e.preventDefault()
     const type = e.target.type
@@ -13,27 +15,40 @@ const FilterArticle = ({ state, setState }) => {
   }
 
   return (
-    <Grid>
-      <Titles title="Filtrar por" />
-      <div>
-        <form>
-          <div>
-            <span>
-              <Button endIcon={<ArrowDropDown color="primary" />}>
-                categories
-              </Button>
-            </span>
-            <span>
-              <Button endIcon={<ArrowDropDown color="primary" />}>tags</Button>
-            </span>
-            <span>
-              <Button variant="contained" size="small" color="primary">
-                filtrar
-              </Button>
-            </span>
-          </div>
-        </form>
-      </div>
+    <Grid style={{ marginBottom: '1.5em' }}>
+      <form>
+        <Grid container justify="space-between">
+          <span>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={handleToggle}
+              endIcon={<ArrowDropDown color="primary" />}
+            >
+              categories
+            </Button>
+            <span></span>
+          </span>
+
+          <span>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              endIcon={<ArrowDropDown color="primary" />}
+            >
+              tags
+            </Button>
+            <span></span>
+          </span>
+          <span>
+            <Button variant="contained" size="small" color="primary">
+              filtrar
+            </Button>
+          </span>
+        </Grid>
+      </form>
     </Grid>
   )
 }

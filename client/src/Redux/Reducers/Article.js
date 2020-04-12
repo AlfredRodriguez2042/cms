@@ -27,14 +27,11 @@ const tag = [
 generateColor(tag)
 const initialState = {
   articles: [],
-  listArtciles: [],
-  type: 'all',
+  listArticles: [],
   categoryList: [],
   tagList: tag,
-  text: '',
 }
 
-console.log(initialState.articles)
 export default function articleReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ARTICLES:
@@ -45,11 +42,10 @@ export default function articleReducer(state = initialState, action) {
         //    categoryList: payload.category
       }
     case SEARCH_ARTICLE:
-      const regex = new RegExp(`^${action.payload}`, 'i')
-      console.log(regex)
+      const regex = new RegExp(`^${action.payload.title}`, 'i')
       return {
         ...state,
-        listArtciles: state.articles.filter((q) => regex.test(q.title)),
+        listArticles: state.articles.filter((q) => regex.test(q.title)),
       }
 
     // case GET_ARTICLES:
