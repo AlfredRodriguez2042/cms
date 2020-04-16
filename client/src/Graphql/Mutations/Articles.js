@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 export const CREATE_ARTICLE = gql`
   mutation createArticle(
     $title: String!
+    $description: String!
     $content: String!
     $userId: String!
     $tags: [TagInput]!
@@ -12,6 +13,7 @@ export const CREATE_ARTICLE = gql`
       input: {
         title: $title
         content: $content
+        description: $description
         userId: $userId
         tags: $tags
         categories: $categories

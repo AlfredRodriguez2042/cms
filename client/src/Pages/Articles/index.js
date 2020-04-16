@@ -14,7 +14,7 @@ const Articles = () => {
   const articles = useSelector((state) => state.articles.articles)
   const dispatch = useDispatch()
   const [state, setState] = useState([])
-  const { loading } = useQuery(ARTICLES_QUERY, {
+  const { loading, error } = useQuery(ARTICLES_QUERY, {
     onCompleted: ({ Articles }) => {
       const Posts = Articles.map((item) => {
         const index = item.content.indexOf('<!--more-->')
@@ -29,7 +29,6 @@ const Articles = () => {
   if (loading) {
     return <Loader />
   }
-  console.log(filterList)
   return (
     <div>
       <Titles title="Filtrar por" />

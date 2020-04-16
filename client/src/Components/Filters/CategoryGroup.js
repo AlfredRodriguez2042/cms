@@ -7,33 +7,33 @@ const tagsFromServer = [
   { name: 'System' },
   { name: 'Linux' },
   { name: 'Windows' },
-  { name: 'Node' }
+  { name: 'Node' },
 ]
 
-const CategoryGroup = props => {
+const CategoryGroup = (props) => {
   const { selectedTags, setSelectedTags } = props
 
   const handleChange = (tag, checked) => {
     const nextSelectedTags = checked
       ? [...selectedTags, { name: tag }]
-      : selectedTags.filter(t => t.name !== tag)
+      : selectedTags.filter((t) => t.name !== tag)
     console.log('You are interested in: ', nextSelectedTags)
     setSelectedTags(nextSelectedTags)
   }
-  const handleChecked = name => {
-    const check = selectedTags.map(value => value.name).indexOf(name) > -1
-    console.log('chek', check)
+  const handleChecked = (name) => {
+    const check = selectedTags.map((value) => value.name).indexOf(name) > -1
+
     return check
   }
 
   return (
     <div>
       <strong style={{ marginRight: 8 }}>Cate:</strong>
-      {tagsFromServer.map(tag => (
+      {tagsFromServer.map((tag) => (
         <CheckableTag
           key={tag.name}
           checked={handleChecked(tag.name)}
-          onChange={checked => handleChange(tag.name, checked)}
+          onChange={(checked) => handleChange(tag.name, checked)}
         >
           {tag.name}
         </CheckableTag>

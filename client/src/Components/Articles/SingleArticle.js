@@ -5,12 +5,14 @@ import { useQuery } from '@apollo/react-hooks'
 import moment from 'moment'
 import { ARTICLE_QUERY } from '../../Graphql/Querys/Articles'
 import Loader from '../Loader'
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography, ListItem } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ArticleTag from '../ArticleTag'
 import { translateMarkdown } from '../../Utils'
 import { SIDEBAR } from '../../Config'
 import Page404 from '../../Pages/Page404'
+import { QueryBuilder } from '@material-ui/icons'
+import { CalendarOutlined } from '@ant-design/icons'
 
 // https://source.unsplash.com/random
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +71,7 @@ const SingleArticle = () => {
       <Grid container className={classes.container}>
         <Grid item sm={6} className={classes.body}>
           <Typography
-            component="h2"
+            component="h1"
             variant="h5"
             color="textPrimary"
             //align="center"
@@ -77,12 +79,16 @@ const SingleArticle = () => {
           >
             {Article.title}
           </Typography>
-          <Typography variant="h6">
-            aprennde a usar este articluo para tu mejor desepmeño
-          </Typography>
+          <Typography variant="h6">{Article.description}</Typography>
           <div>
-            <span>{moment(Article.createdAt).fromNow()}</span>
-            <ArticleTag tagList={Article.tags} categoryList={Article.tags} />
+            <span>
+              <CalendarOutlined style={{ marginRight: 5 }} />
+              {moment(Article.createdAt).fromNow()}
+            </span>
+            <ArticleTag
+              tagList={Article.tags}
+              categoryList={Article.categories}
+            />
           </div>
           <div>
             <span>&nbsp; Posted by &nbsp;</span>

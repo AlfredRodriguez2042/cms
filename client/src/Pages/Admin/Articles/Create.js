@@ -17,58 +17,57 @@ import { validateError } from '../../../Utils/ValidateError'
 const useStyles = makeStyles({
   list: {
     display: 'flex',
-    lineHeight: '36px'
+    lineHeight: '36px',
   },
   label: {
     width: '50px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   button: {
     position: 'fixed',
     bottom: '100px',
     right: '300px',
-    zIndex: 2
-  }
+    zIndex: 2,
+  },
 })
 
-const CreateArticle = props => {
+const CreateArticle = (props) => {
   const classes = useStyles()
-  const userId = useSelector(state => state.user.user.id)
+  const userId = useSelector((state) => state.user.user.id)
   const params = useParams()
   const history = useHistory()
   const editId = params.id
-  console.log(history)
   const [content, setContent] = useState('')
+  const [description, setDescription] = useState('')
   const [title, setTitle] = useState('')
   const [tags, setTags] = useState([])
   const [category, setCategory] = useState([])
-  // const { loading, error, data } = useQuery(USERS_QUERY)
-  const [create, { loading }] = useMutation(CREATE_ARTICLE, {
+  const [create, { loading, error }] = useMutation(CREATE_ARTICLE, {
     variables: {
       title,
+      description,
       content,
       category,
       tags,
-      userId
+      userId,
     },
     onCompleted: ({ createArticle: { id } }) => {
-      history.push(`/article/${id}`)
+      history.push(`/articles/${id}`)
     },
-    onError() {}
   })
-
+  validateError(error)
   const [update, {}] = useMutation(CREATE_ARTICLE, {
     variables: {
       title,
       content,
       category,
       tags,
-      userId
+      userId,
     },
     onCompleted: ({ createArticle }) => {
       console.log(createArticle)
     },
-    onError() {}
+    onError() {},
   })
   if (loading) return <p>loading...</p>
 
@@ -91,6 +90,17 @@ const CreateArticle = props => {
               name="title"
               type="text"
               onChange={({ target }) => setTitle(target.value)}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={12}>
+          <div className={classes.list}>
+            <span className={classes.label}>Desc:</span>
+            <Input
+              style={{ flex: 1 }}
+              name="description"
+              type="text"
+              onChange={({ target }) => setDescription(target.value)}
             />
           </div>
         </Grid>

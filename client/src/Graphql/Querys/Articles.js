@@ -5,20 +5,28 @@ export const ARTICLE_QUERY = gql`
     Article(id: $id) {
       id
       title
+      description
       content
       user {
         username
       }
       createdAt
-      comment {
+      viewCount
+      commentNum
+      comments {
         content
       }
-      commentNum
-      viewCount
+      likesNum
+
+      likes {
+        username
+      }
       tags {
         name
       }
-      likesNum
+      categories {
+        name
+      }
     }
   }
 `
@@ -27,17 +35,26 @@ export const ARTICLES_QUERY = gql`
     Articles {
       id
       title
+      description
       content
       user {
         username
       }
       createdAt
       viewCount
-      comment {
+      commentNum
+      comments {
         content
       }
       likesNum
+
+      likes {
+        username
+      }
       tags {
+        name
+      }
+      categories {
         name
       }
     }

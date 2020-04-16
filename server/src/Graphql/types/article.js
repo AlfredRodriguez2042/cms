@@ -12,13 +12,15 @@ export default `
     userId: String
     user:UserShort
     image: String!
+    description: String!
     createdAt: Date!
-    comment:[Comment!]
+    comments:[Comment!]
     commentNum: Int
     viewCount: Int
     likes:[Likes!]
     likesNum: Int
     tags:[Tag!]
+    categories: [Category!]
   }
 
   type ArticleShort {
@@ -35,6 +37,8 @@ export default `
 
   input ArticleInput {
     title: String!
+    description: String!
+    image: String
     content: String!
     userId: String!
     tags:[TagInput]!

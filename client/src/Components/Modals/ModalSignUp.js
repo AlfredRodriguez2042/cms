@@ -13,13 +13,13 @@ import Loader from '.././Loader'
 import { validateError } from '../../Utils/ValidateError'
 import { CountRender } from '../Renders'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginTop: theme.spacing(8)
+    marginTop: theme.spacing(8),
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -29,26 +29,26 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
   avatar: {
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   button: {
     color: 'red',
     borderRadius: 5,
     border: '1px solid red',
     margin: theme.spacing(2, 0),
-    padding: '4px 10px',
-    lineHeight: '16px'
-  }
+    padding: '2px 6px',
+    lineHeight: '16px',
+  },
 }))
 
 const ModalSignUp = () => {
@@ -66,13 +66,13 @@ const ModalSignUp = () => {
       console.log('prx', proxy)
       console.log('enviado', result)
     },
-    onError(e) {}
+    onError(e) {},
   })
 
   if (process.env.NODE_ENV !== 'production') {
     validateError(error)
   }
-  const setValues = values => {
+  const setValues = (values) => {
     const { confirm, ...data } = values
     setState(data)
     signUp()
@@ -100,7 +100,7 @@ const ModalSignUp = () => {
         width={460}
         title="Register"
         visible={visible}
-        onCancel={e => setVisible(false)}
+        onCancel={(e) => setVisible(false)}
         footer={null}
       >
         <Form
@@ -126,8 +126,8 @@ const ModalSignUp = () => {
                   }
 
                   return Promise.reject('')
-                }
-              }
+                },
+              },
             ]}
           >
             <Input placeholder="name " type="text" />
@@ -151,8 +151,8 @@ const ModalSignUp = () => {
                   }
 
                   return Promise.reject('min 5 / max 12')
-                }
-              }
+                },
+              },
             ]}
           >
             <Input placeholder="Username" type="text" />
@@ -184,8 +184,8 @@ const ModalSignUp = () => {
                   return Promise.reject(
                     'Invalid password must be a number and one capital letter'
                   )
-                }
-              }
+                },
+              },
             ]}
           >
             <Input.Password placeholder="Password " type="password" />
@@ -198,7 +198,7 @@ const ModalSignUp = () => {
             rules={[
               {
                 required: true,
-                message: 'Please confirm your password!'
+                message: 'Please confirm your password!',
               },
               ({ getFieldValue }) => ({
                 validator(rule, value) {
@@ -209,8 +209,8 @@ const ModalSignUp = () => {
                   return Promise.reject(
                     'The two passwords that you entered do not match!'
                   )
-                }
-              })
+                },
+              }),
             ]}
           >
             <Input type="password" />
@@ -222,8 +222,8 @@ const ModalSignUp = () => {
                 validator: (_, value) =>
                   value
                     ? Promise.resolve()
-                    : Promise.reject('Should accept agreement')
-              }
+                    : Promise.reject('Should accept agreement'),
+              },
             ]}
           >
             <Checkbox

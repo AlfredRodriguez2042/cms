@@ -4,7 +4,7 @@
   "description": "servicio",
   "main": "index.js",
   "scripts": {
-    "build": "babel src/index.js -d dist",
+    "build": "babel src/ -d dist",
     "start": " cross-env NODE_ENV=production nodemon src/index.js --exec babel-node",
     "dev": "nodemon  src/index.js --exec babel-node ",
     "limit": "cross-env LIMIT=2048 increase-memory-limit"

@@ -5,22 +5,25 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Container, Hidden } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+  },
+  container: {
+    background: '#f0f0f0',
   },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     boxShadow: '0 2px 8px #f0f1f2',
-    fontSize: '14px'
+    fontSize: '14px',
   },
   item: {
-    marginBottom: '5px'
-  }
+    marginBottom: '5px',
+  },
 }))
 const Layout = ({ children }) => {
-  const rol = useSelector(state => state.user.roles)
+  const rol = useSelector((state) => state.user.roles)
 
   const classes = useStyles()
   return (

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Tag, Divider } from 'antd'
-import { FolderOutlined } from '@ant-design/icons'
-import SvgIcon from './SvgIcon'
+import { FolderOutlined, TagOutlined } from '@ant-design/icons'
 
 function getColor(name, colorList) {
   const target = colorList.find((c) => c.name === name)
@@ -22,7 +21,7 @@ const ArticleTag = (props) => {
       {tagList.length > 0 && (
         <>
           <Divider type="vertical" style={{ marginRight: 7 }} />
-          <SvgIcon type="icontags" style={{ marginRight: 7 }} />
+          <TagOutlined type="icontags" style={{ marginRight: 7 }} />
 
           {tagList.map((tag, i) => (
             <Tag key={i}>

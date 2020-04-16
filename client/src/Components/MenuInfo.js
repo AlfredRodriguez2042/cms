@@ -5,7 +5,7 @@ import { LOGOUT } from '../Graphql/Mutations/User'
 import { USER_LOG_OUT } from '../Redux/types'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { MoreVert } from '@material-ui/icons'
+import { MoreVert, PowerSettingsNew, Star, Person } from '@material-ui/icons'
 import { IconButton, Menu } from '@material-ui/core'
 
 export default function MenuInfo() {
@@ -14,16 +14,16 @@ export default function MenuInfo() {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const [logout, { loading }] = useMutation(LOGOUT, {
-    onCompleted: data => {
+    onCompleted: (data) => {
       dispatch({ type: USER_LOG_OUT })
       history.push('/')
-    }
+    },
   })
   const handleLogOut = () => {
     logout()
   }
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -43,9 +43,20 @@ export default function MenuInfo() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My Favorites</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Person fontSize="small" color="inherit" style={{ marginRight: 5 }} />
+          Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Star fontSize="small" color="secondary" style={{ marginRight: 5 }} />
+          My Favorites
+        </MenuItem>
         <MenuItem onClick={handleLogOut}>
+          <PowerSettingsNew
+            fontSize="small"
+            color="error"
+            style={{ marginRight: 5 }}
+          />
           Log{loading ? 'ging out...' : 'out'}
         </MenuItem>
       </Menu>

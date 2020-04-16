@@ -4,32 +4,36 @@ import ArticleTag from '../ArticleTag'
 import { Divider } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { Paper, makeStyles, IconButton } from '@material-ui/core'
-import { EyeFilled, HeartFilled } from '@ant-design/icons'
+import { EyeFilled, HeartFilled, WechatFilled } from '@ant-design/icons'
+import { CalendarOutlined } from '@ant-design/icons'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     color: '#394d69',
-    fontSize: '22px'
+    fontSize: '22px',
   },
   paper: {
     padding: '1em',
-    marginBottom: '1em'
+    marginBottom: '1em',
   },
   favorite: {
-    color: '#ff1744'
-  }
+    color: '#ff1744',
+  },
 }))
 
 const ArticleContent = ({ post }) => {
   const classes = useStyles()
   const history = useHistory()
-  const JumpTo = id => history.push(`/articles/${id}`)
+  const JumpTo = (id) => history.push(`/articles/${id}`)
   return (
     <Paper className={classes.paper}>
       <div>
-        <span style={{ float: 'right' }}>
+        <span style={{ float: 'right', fontSize: 10 }}>
+          <CalendarOutlined style={{ marginRight: 5 }} />
+
           {moment(post.createdAt).fromNow()}
         </span>
+
         <Divider orientation="left">
           <span className={classes.title} onClick={() => JumpTo(post.id)}>
             {post.title}
@@ -53,7 +57,12 @@ const ArticleContent = ({ post }) => {
             <EyeFilled style={{ marginRight: 7 }} />
             <span style={{ marginRight: 7 }}>{post.viewCount}</span>
           </span>
-          <ArticleTag tagList={post.tags} categoryList={post.tags} />
+          <span>
+            <Divider type="vertical" style={{ marginRight: 7 }} />
+            <WechatFilled style={{ marginRight: 7 }} />
+            <span style={{ marginRight: 7 }}>{post.commentNum}</span>
+          </span>
+          <ArticleTag tagList={post.tags} categoryList={post.categories} />
         </div>
       </div>
     </Paper>

@@ -14,17 +14,17 @@ import Loader from '../Loader'
 import { storage_token } from '../../Utils/constants'
 import { validateError } from '../../Utils/ValidateError'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   label: {
-    borderColor: '#2196f3'
+    borderColor: '#2196f3',
   },
 
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
 
   button: {
@@ -32,9 +32,9 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 5,
     border: '1px solid #2196f3 ',
     margin: theme.spacing(1),
-    padding: '4px 10px',
-    lineHeight: '16px'
-  }
+    padding: '2px 6px',
+    lineHeight: '16px',
+  },
 }))
 
 const ModalSignIn = () => {
@@ -53,14 +53,14 @@ const ModalSignIn = () => {
 
       setVisible(false)
     },
-    onError(error) {}
+    onError(error) {},
   })
 
   if (process.env.NODE_ENV !== 'production') {
     validateError(error)
   }
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     console.log('val', values)
     setState(values)
     login()
@@ -87,7 +87,7 @@ const ModalSignIn = () => {
         width={400}
         title="login"
         visible={visible}
-        onCancel={e => setVisible(false)}
+        onCancel={(e) => setVisible(false)}
         footer={null}
         className={classes.modal}
       >
