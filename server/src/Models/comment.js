@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize'
+import { Model, DataTypes } from "sequelize"
 const { UUID, UUIDV4, TEXT } = DataTypes
 
 class Comment extends Model {
@@ -8,26 +8,32 @@ class Comment extends Model {
         id: {
           type: UUID,
           primaryKey: true,
-          defaultValue: UUIDV4()
+          defaultValue: UUIDV4(),
         },
         content: {
           type: TEXT,
-          allowNull: false
-        }
+          allowNull: false,
+        },
       },
       {
-        sequelize
+        sequelize,
       }
     )
   }
   static associate(models) {
     this.belongsTo(models.Article, {
-      foreignKey: 'article_id',
-      as: 'article'
+      foreignKey: {
+        name: "articleId",
+        field: "article_id",
+      },
+      as: "article",
     })
     this.belongsTo(models.User, {
-      foreignKey: 'user_id',
-      as: 'user'
+      foreignKey: {
+        name: "userId",
+        field: "user_id",
+      },
+      as: "user",
     })
     // this.hasMany(models.Reply)
   }

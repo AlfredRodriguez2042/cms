@@ -13,12 +13,14 @@ export default `
   }
 
   type Mutation {
-    createComment(ArticleId: ID , input: CommentInput): Comment!
+    createComment(input: CommentInput): Comment!
     deleteComment(id:ID): Comment!
   }
 
   input CommentInput {
     content: String!
+    articleId: ID
+    userId: ID
   }
 `
 // mutacion puede devolver un post!

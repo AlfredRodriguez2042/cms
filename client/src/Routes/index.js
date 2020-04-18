@@ -18,6 +18,7 @@ const AppRouter = () => {
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
           <Route path="/about" exact component={About} />
           <Route path="/articles" exact component={Articles} />
           <Route path="/articles/:id/" exact component={SingleArticle} />
