@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 import { Modal, Form, Input } from 'antd'
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
     border: '1px solid #2196f3 ',
     margin: theme.spacing(1),
-    padding: '2px 6px',
-    lineHeight: '16px',
+    lineHeight: '1em',
+    textTransform: 'none',
   },
 }))
 
@@ -45,7 +45,7 @@ const ModalSignIn = () => {
   const [visible, setVisible] = React.useState(false)
   const [state, setState] = React.useState()
 
-  const [login, { loading, error, called }] = useMutation(SIGNIN_MUTATION, {
+  const [login, { loading, error }] = useMutation(SIGNIN_MUTATION, {
     variables: state,
     onCompleted: ({ Login: { user, token } }) => {
       localStorage.setItem(storage_token, token)
@@ -53,7 +53,7 @@ const ModalSignIn = () => {
 
       setVisible(false)
     },
-    onError(error) {},
+    onError() {},
   })
 
   if (process.env.NODE_ENV !== 'production') {
@@ -61,7 +61,6 @@ const ModalSignIn = () => {
   }
 
   const handleSubmit = (values) => {
-    console.log('val', values)
     setState(values)
     login()
   }
@@ -76,6 +75,7 @@ const ModalSignIn = () => {
   return (
     <>
       <Button
+        size="small"
         type="button"
         onClick={() => setVisible(true)}
         variant="outlined"

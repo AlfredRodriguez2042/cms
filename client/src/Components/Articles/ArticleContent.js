@@ -3,27 +3,27 @@ import moment from 'moment'
 import ArticleTag from '../ArticleTag'
 import { Divider } from 'antd'
 import { useHistory } from 'react-router-dom'
-import { Paper, makeStyles, IconButton } from '@material-ui/core'
-import { EyeFilled, HeartFilled, WechatFilled } from '@ant-design/icons'
+import { Paper, makeStyles } from '@material-ui/core'
+import { EyeFilled, WechatFilled } from '@ant-design/icons'
 import { CalendarOutlined } from '@ant-design/icons'
+import FavoriteButton from '../Buttons.js/FavoriteButton'
 
 const useStyles = makeStyles((theme) => ({
   title: {
     color: '#394d69',
     fontSize: '22px',
+    cursor: 'pointer',
   },
   paper: {
     padding: '1em',
     marginBottom: '1em',
-  },
-  favorite: {
-    color: '#ff1744',
   },
 }))
 
 const ArticleContent = ({ post }) => {
   const classes = useStyles()
   const history = useHistory()
+
   const JumpTo = (id) => history.push(`/articles/${id}`)
   return (
     <Paper className={classes.paper}>
@@ -46,12 +46,7 @@ const ArticleContent = ({ post }) => {
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
         <div className="list-item-others">
-          <span>
-            <IconButton className={classes.favorite}>
-              <HeartFilled style={{ fontSize: '13px' }} />
-            </IconButton>
-            <span>{post.likesNum}</span>
-          </span>
+          <FavoriteButton post={post} />
           <span>
             <Divider type="vertical" style={{ marginRight: 7 }} />
             <EyeFilled style={{ marginRight: 7 }} />

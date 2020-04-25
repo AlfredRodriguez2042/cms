@@ -1,44 +1,43 @@
 import { USER_LOADED, USER_LOGIN_ERROR, USER_LOG_OUT } from '../types'
 
-export const SignIn = user => {
-  return dispatch => {
+export const SignIn = (user) => {
+  return (dispatch) => {
     try {
       dispatch({
         type: USER_LOADED,
-        payload: user
+        payload: user,
       })
-      console.log('llego', user)
     } catch (error) {
-      console.log('aa', error)
+      console.log('error', error)
       dispatch({
         type: USER_LOGIN_ERROR,
-        payload: error.response.data
+        payload: error.response.data,
       })
     }
   }
 }
 
-export const SignUp = user => {
-  return dispatch => {
+export const SignUp = (user) => {
+  return (dispatch) => {
     try {
       dispatch({
         type: USER_LOADED,
-        payload: user
+        payload: user,
       })
     } catch (error) {
       dispatch({
         type: USER_LOGIN_ERROR,
-        payload: error
+        payload: error,
       })
     }
   }
 }
 
 export const LogOut = () => {
-  return dispatch => {
+  return (dispatch) => {
     try {
       dispatch({
-        type: USER_LOG_OUT
+        type: USER_LOG_OUT,
       })
     } catch (error) {
       console.log(error)

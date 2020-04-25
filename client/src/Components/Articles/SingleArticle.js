@@ -1,18 +1,21 @@
 import React from 'react'
 import {} from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useSubscription } from '@apollo/react-hooks'
 import moment from 'moment'
 import { ARTICLE_QUERY } from '../../Graphql/Querys/Articles'
 import Loader from '../Loader'
-import { Paper, Grid, Typography, ListItem } from '@material-ui/core'
+import { Paper, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ArticleTag from '../ArticleTag'
 import { translateMarkdown } from '../../Utils'
 import { SIDEBAR } from '../../Config'
 import Page404 from '../../Pages/Page404'
-import { QueryBuilder } from '@material-ui/icons'
 import { CalendarOutlined } from '@ant-design/icons'
+import Comment from '../Comment/Comment'
+import { SUSCRIPTION_COMMENT } from '../../Graphql/Mutations/Comments'
+import { validateError } from '../../Utils/ValidateError'
+import CommentBox from '../Comment/CommentBox'
 
 // https://source.unsplash.com/random
 const useStyles = makeStyles((theme) => ({
@@ -44,15 +47,23 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
     boxShadow: '0 2px 8px #f0f1f2',
   },
+  comments: {
+    paddingLeft: '3.5em',
+    paddingRight: '3.5em',
+    boxSizing: 'border-box',
+  },
 }))
 const SingleArticle = () => {
   const history = useHistory()
   const classes = useStyles()
   const { id } = useParams()
 
+  const { data: { newComment } = [] } = useSubscription(SUSCRIPTION_COMMENT)
+
   const { data, loading, error } = useQuery(ARTICLE_QUERY, {
     variables: { id },
   })
+  validateError(error)
   if (error) {
     history.push('/404')
     return <Page404 />
@@ -74,7 +85,6 @@ const SingleArticle = () => {
             component="h1"
             variant="h5"
             color="textPrimary"
-            //align="center"
             gutterBottom
           >
             {Article.title}
@@ -112,6 +122,18 @@ const SingleArticle = () => {
           className="article-detail"
           dangerouslySetInnerHTML={{ __html: Article.content }}
         />
+      </Grid>
+      <Grid className={classes.comments}>
+        {Article.comments.map((comment, i) => (
+          <div key={i}>
+            <CommentBox comment={comment} />
+          </div>
+        ))}
+
+        <div>{newComment && <CommentBox comment={newComment} />}</div>
+      </Grid>
+      <Grid className={classes.comments}>
+        <Comment />
       </Grid>
     </>
   )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Checkbox, Button, Grid, Menu } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import { ArrowDropDown } from '@material-ui/icons'
 
 const FilterArticle = () => {
@@ -8,10 +8,10 @@ const FilterArticle = () => {
     setOpen(!open)
   }
   const changeInput = (e) => {
-    e.preventDefault()
-    const type = e.target.type
-    const name = e.target.name
-    const value = e.type === 'checkbox' ? e.target.checked : e.target.value
+    // e.preventDefault()
+    // const type = e.target.type
+    // const name = e.target.name
+    // const value = e.type === 'checkbox' ? e.target.checked : e.target.value
   }
 
   return (

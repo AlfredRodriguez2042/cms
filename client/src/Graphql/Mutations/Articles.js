@@ -20,6 +20,32 @@ export const CREATE_ARTICLE = gql`
       }
     ) {
       id
+      title
+      description
+      content
+      user {
+        username
+      }
+      createdAt
+      viewCount
+      commentNum
+      comments {
+        content
+      }
+      likesNum
+
+      likes {
+        userId
+        user {
+          username
+        }
+      }
+      tags {
+        name
+      }
+      categories {
+        name
+      }
     }
   }
 `

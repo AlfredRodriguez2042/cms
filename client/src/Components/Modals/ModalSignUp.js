@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
     border: '1px solid red',
     margin: theme.spacing(2, 0),
-    padding: '2px 6px',
-    lineHeight: '16px',
+    lineHeight: '1em',
+    textTransform: 'none',
   },
 }))
 
@@ -90,6 +90,7 @@ const ModalSignUp = () => {
     <div>
       <Button
         type="button"
+        size="small"
         onClick={() => setVisible(true)}
         variant="outlined"
         className={classes.button}
@@ -105,7 +106,6 @@ const ModalSignUp = () => {
       >
         <Form
           onFinish={setValues}
-          //  initialValues={{ remember: check }}
           className={classes.form}
           onFinishFailed={onFinishFailed}
         >

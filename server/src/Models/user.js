@@ -10,16 +10,16 @@ class User extends Model {
           primaryKey: true,
           allowNull: false,
           type: UUID,
-          defaultValue: UUIDV4()
+          defaultValue: UUIDV4(),
         },
         name: {
           type: STRING,
-          allowNull: false
+          allowNull: false,
         },
         username: {
           type: STRING,
           allowNull: false,
-          unique: true
+          unique: true,
         },
         password: {
           type: STRING,
@@ -27,20 +27,20 @@ class User extends Model {
           set(value) {
             const hash = bcrypt.hashSync(value, 12)
             this.setDataValue('password', hash)
-          }
+          },
         },
         email: {
           type: STRING,
           allowNull: false,
-          unique: true
+          unique: true,
         },
         active: {
           type: BOOLEAN,
-          defaultValue: false
-        }
+          defaultValue: false,
+        },
       },
       {
-        sequelize
+        sequelize,
       }
     )
   }
@@ -48,32 +48,39 @@ class User extends Model {
     this.belongsToMany(models.Role, {
       foreignKey: {
         name: 'userId',
-        field: 'user_id'
+        field: 'user_id',
       },
       through: 'user_role',
       as: 'roles',
-      onUpdate: 'CASCADE'
+      onUpdate: 'CASCADE',
     })
     this.hasMany(models.Article, {
       foreignKey: {
         name: 'userId',
-        field: 'user_id'
+        field: 'user_id',
       },
-      as: 'articles'
+      as: 'articles',
     })
     this.hasMany(models.Comment, {
       foreignKey: {
         name: 'userId',
-        field: 'user_id'
+        field: 'user_id',
       },
-      as: 'comments'
+      as: 'comments',
     })
     this.hasMany(models.Reply, {
       foreignKey: {
         name: 'userId',
-        field: 'user_id'
+        field: 'user_id',
       },
-      as: 'replies'
+      as: 'replies',
+    })
+    this.hasMany(models.Likes, {
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id',
+      },
+      as: 'likes',
     })
   }
 }

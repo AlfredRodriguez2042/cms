@@ -1,26 +1,26 @@
-version: "2.0"
+version: '3.7'
 services:
   db:
     image: postgres:alpine
     container_name: mypostgres
     ports:
-      - 5432:5432
+      - '5432'
     networks:
-      - overlay
+      - backend
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: practica
-      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
   #  volumes:
 
   storage:
     image: redis:alpine
     container_name: myredis
     networks:
-      - overlay
+      - backend
     ports:
-      - 6379:6379
+      - '6379'
   #   volumes:
   #    - ~/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
 
@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     command: npm run dev
     networks:
-      - overlay
+      - backend
     ports:
       - 5500:5500
     volumes:
@@ -63,4 +63,5 @@ services:
   #     - servernode
 
 networks:
-  overlay:
+  backend:
+    driver: bridge

@@ -157,21 +157,17 @@ docker-compose up
  CREATE DATABASE practica;
 ```
 
-2. cd server/
-
-```sh
- npm start  or npm run dev
-```
-
-3. cd client
+2. cd client/
 
 ```sh
  npm start
 ```
 
-4. monitorin system and containers
+3. monitorin system and containers
 
+```sh
 localhost:19999
+```
 
 <!-- aca van los ejemplos -->
 

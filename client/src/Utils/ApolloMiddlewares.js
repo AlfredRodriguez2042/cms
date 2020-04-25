@@ -1,5 +1,7 @@
-import { ApolloLink } from 'apollo-link'
+import { ApolloLink, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
+import { WebSocketLink } from 'apollo-link-ws'
+import { getMainDefinition } from 'apollo-utilities'
 
 const AUTH_TOKEN = 'token'
 const REFRESH_TOKEN = 'refreshToken'
@@ -17,15 +19,33 @@ const httpLink = new HttpLink({
     if (networkError.statusCode === 401) {
       console.log('error 4001')
     }
-  }
+  },
 })
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:5500/graphql`,
+  options: {
+    reconnect: true,
+  },
+})
+const links = split(
+  // split based on operation type
+  ({ query }) => {
+    const definition = getMainDefinition(query)
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    )
+  },
+  wsLink,
+  httpLink
+)
 
 const csrfMiddlewareLink = new ApolloLink((operation, forward) => {
   if (typeof window.CSRF_TOKEN === 'string') {
     operation.setContext({
       headers: {
-        'X-Token': window.CSRF_TOKEN
-      }
+        'X-Token': window.CSRF_TOKEN,
+      },
     })
   }
 
@@ -33,10 +53,10 @@ const csrfMiddlewareLink = new ApolloLink((operation, forward) => {
 })
 
 const afterware = new ApolloLink((operation, forward) => {
-  return forward(operation).map(response => {
+  return forward(operation).map((response) => {
     const context = operation.getContext()
     const {
-      response: { headers }
+      response: { headers },
     } = context
     if (headers) {
       const token = headers.get('x-token')
@@ -66,8 +86,8 @@ const afterware = new ApolloLink((operation, forward) => {
 })
 
 export const link = ApolloLink.from([
+  links,
   afterware,
   // logoutOn401ErrorLink,
   csrfMiddlewareLink,
-  httpLink
 ])

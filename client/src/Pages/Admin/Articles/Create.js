@@ -13,6 +13,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import { validateError } from '../../../Utils/ValidateError'
+import { ARTICLES_QUERY } from '../../../Graphql/Querys/Articles'
 
 const useStyles = makeStyles({
   list: {
@@ -51,12 +52,25 @@ const CreateArticle = (props) => {
       tags,
       userId,
     },
-    onCompleted: ({ createArticle: { id } }) => {
-      history.push(`/articles/${id}`)
+    update: (proxy, { data }) => {
+      try {
+        const { Articles } = proxy.readQuery({
+          query: ARTICLES_QUERY,
+        })
+        proxy.writeQuery({
+          query: ARTICLES_QUERY,
+          data: { Articles: [data.createArticle, ...Articles] },
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    onCompleted: () => {
+      history.push(`/articles/`)
     },
   })
   validateError(error)
-  const [update, {}] = useMutation(CREATE_ARTICLE, {
+  const [update, _] = useMutation(CREATE_ARTICLE, {
     variables: {
       title,
       content,
@@ -121,7 +135,7 @@ const CreateArticle = (props) => {
             size="large"
             disabled={!title}
             className={classes.button}
-            title={editId ? '更新' : '新增'}
+            title={editId ? 'Edit' : 'Create'}
             icon={editId ? <SyncOutlined /> : <PlusOutlined />}
             onClick={() => {
               editId ? update() : create()

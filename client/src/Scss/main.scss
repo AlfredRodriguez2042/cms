@@ -5,6 +5,36 @@
   z-index: 2;
 }
 
+.content {
+  min-height: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.toggle {
+  min-height: 10rem;
+  height: 10rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.show-footer {
+  display: none;
+  box-sizing: border-box;
+  background-color: #eff3f5;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  button {
+    text-transform: none;
+    line-height: 1rem;
+    &.MuiButton-contained.Mui-disabled {
+      background-color: #eff3f5;
+    }
+  }
+}
+
+.hidenFooter {
+  display: block;
+}
 .article-detail {
   margin: 0 auto;
   font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', sans-serif;

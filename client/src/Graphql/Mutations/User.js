@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { useDispatch } from 'react-redux'
-import { USER_LOADED } from '../../Redux/types'
 import { useMutation } from '@apollo/react-hooks'
 import { SignIn } from '../../Redux/Actions/User'
 
@@ -67,7 +66,7 @@ export function useCheckAuth() {
     onCompleted: ({ checkLoggedIn: { user } }) => {
       dispatch(SignIn(user))
     },
-    onError: () => {}
+    onError: () => {},
   })
 
   return { loading, checkLoggedIn, error }

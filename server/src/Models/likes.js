@@ -1,4 +1,4 @@
-import { Model, DataTypes } from "sequelize"
+import { Model, DataTypes } from 'sequelize'
 const { UUID, UUIDV4, TEXT } = DataTypes
 
 class Likes extends Model {
@@ -17,7 +17,11 @@ class Likes extends Model {
     )
   }
   static associate(models) {
-    this.belongsTo(models.User), this.belongsTo(models.Article)
+    this.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'user',
+    }),
+      this.belongsTo(models.Article)
   }
 }
 export default Likes

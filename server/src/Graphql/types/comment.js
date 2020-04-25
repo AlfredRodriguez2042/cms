@@ -1,13 +1,14 @@
 export default `
   type Query {
     Comments:[Comment]
+    Comment(id:ID):Comment!
   }
   type Comment {
     id: ID!
-    author: UserShort!
-    createdAt: String!
+    user: UserShort!
+    createdAt: Date!
     updatedAt: String!
-    post: ArticleShort!
+    article: ArticleShort!
     content: String!
     likes:[Likes!]
   }
@@ -21,6 +22,10 @@ export default `
     content: String!
     articleId: ID
     userId: ID
+  }
+
+  type Subscription {
+    newComment: Comment!
   }
 `
 // mutacion puede devolver un post!

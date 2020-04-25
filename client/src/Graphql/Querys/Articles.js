@@ -14,12 +14,20 @@ export const ARTICLE_QUERY = gql`
       viewCount
       commentNum
       comments {
+        createdAt
         content
+        user {
+          username
+        }
       }
       likesNum
 
       likes {
         username
+        userId
+        user {
+          username
+        }
       }
       tags {
         name
@@ -49,7 +57,10 @@ export const ARTICLES_QUERY = gql`
       likesNum
 
       likes {
-        username
+        userId
+        user {
+          username
+        }
       }
       tags {
         name

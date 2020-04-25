@@ -1,30 +1,33 @@
-import Article from "../../Models/article"
-import sequelize from "../../Models"
-import { checkAuth } from "../../Utils/auth"
+import Article from '../../Models/article'
+import sequelize from '../../Models'
+import { checkAuth } from '../../Utils/auth'
 
 const options = {
   include: [
     {
-      association: "tags",
-      attributes: ["name"],
+      association: 'tags',
+      attributes: ['name'],
     },
     {
-      association: "categories",
-      attributes: ["name"],
+      association: 'categories',
+      attributes: ['name'],
       through: { attributes: [] },
     },
     {
-      association: "user",
+      association: 'user',
     },
     {
-      association: "comments",
+      association: 'comments',
+      include: [{ association: 'user' }],
+      attributes: { exclude: ['updatedAt', 'userId'] },
     },
     {
-      association: "likes",
+      association: 'likes',
+      include: [{ association: 'user' }],
     },
   ],
-  attributes: { exclude: ["updatedAt", "user_id"] },
-  order: [["createdAt", "DESC"]],
+  attributes: { exclude: ['updatedAt', 'user_id'] },
+  order: [['createdAt', 'DESC']],
 }
 
 export default {
@@ -34,11 +37,10 @@ export default {
         const post = await Article.findByPk(id, options)
         await Article.update(
           {
-            viewCount: sequelize.literal("view_count +1"),
+            viewCount: sequelize.literal('view_count +1'),
           },
           { where: { id } }
         )
-
         return post
       } catch (error) {
         console.log(error)
@@ -56,14 +58,14 @@ export default {
       const post = await Article.create(input, {
         include: [
           {
-            association: "tags",
+            association: 'tags',
           },
           {
-            association: "categories",
+            association: 'categories',
           },
         ],
       })
-      return post
+      return post.reload(options)
     },
     deleteArticle: async (_, { id }) => {
       const post = await Article.destroy({ where: id })
@@ -72,10 +74,10 @@ export default {
   },
   Article: {
     commentNum: (parent) => {
-      return parent.comments.length
+      return parent.comments.length ? parent.comments.length : 0
     },
     likesNum: (parent) => {
-      return parent.likes.length
+      return parent.likes.length ? parent.likes.length : 0
     },
   },
 }

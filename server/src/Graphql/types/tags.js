@@ -1,7 +1,7 @@
 export default `
 
   type Tag {
-    _id: ID
+    id: ID
     name: String!
   }
   type Roles {
@@ -14,14 +14,16 @@ export default `
     name: String!
   }
   type Likes {
-    _id: ID!
+    id: ID!
     username: ID
+    userId:ID
+    user:UserShort
     createdAt: String
   }
 
   type Mutation {
     likeArticle(id: ID): Article
-    likeComment(_id: ID): Comment
+    likeComment(id: ID): Comment
   }
 
 `
