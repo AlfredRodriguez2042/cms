@@ -8,7 +8,7 @@ import { EyeFilled, WechatFilled } from '@ant-design/icons'
 import { CalendarOutlined } from '@ant-design/icons'
 import FavoriteButton from '../Buttons.js/FavoriteButton'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   title: {
     color: '#394d69',
     fontSize: '22px',
@@ -24,7 +24,7 @@ const ArticleContent = ({ post }) => {
   const classes = useStyles()
   const history = useHistory()
 
-  const JumpTo = (id) => history.push(`/articles/${id}`)
+  const JumpTo = (id) => history.push(`/articles/${id}/`)
   return (
     <Paper className={classes.paper}>
       <div>

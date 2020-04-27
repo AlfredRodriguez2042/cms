@@ -1,45 +1,47 @@
 import React from 'react'
 import { SIDEBAR } from '../../Config'
-import { Typography, makeStyles, Paper } from '@material-ui/core'
+import { Typography, makeStyles, Paper, Button, Link } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { Divider } from 'antd'
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles(() => ({
   homepages: {
     padding: 0,
     width: '214px',
     lineHeight: '24px',
     display: 'flex',
     justifyContent: 'center',
-    listStyle: 'none'
+    listStyle: 'none',
   },
   item: {
-    padding: '0 6px'
+    padding: '0 6px',
     // textAlign: 'center'
   },
   link: {
     textDecoration: 'none',
     color: '#53575A',
-    marginLeft: '4px'
+    marginLeft: '4px',
   },
   iconButton: {
     padding: 2,
     fontSize: '16px',
-    borderRadius: '7px'
+    borderRadius: '7px',
+    textTransform: 'none',
+    marginLeft: '4px',
   },
   text: {
-    color: '#53575A'
+    color: '#53575A',
   },
   paper: {
     textAlign: 'center',
-    padding: 10
+    padding: 10,
   },
   avatar: {
     width: '132px',
     height: '132px',
-    borderRadius: '66px'
-  }
+    borderRadius: '66px',
+  },
 }))
 const UserBar = () => {
   const classes = useStyle()
@@ -55,14 +57,15 @@ const UserBar = () => {
         </Typography>
         <ul className={classes.homepages}>
           {Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
-            <IconButton key={linkName} className={classes.iconButton}>
-              <li className={classes.item}>
-                {item.icon}
-                <a href={item.link} className={classes.link}>
-                  {linkName}
-                </a>
-              </li>
-            </IconButton>
+            <Button
+              key={linkName}
+              className={classes.iconButton}
+              startIcon={item.icon}
+            >
+              <Link href={item.link} className={classes.link}>
+                {linkName}
+              </Link>
+            </Button>
           ))}
         </ul>
         <Alert variant="outlined" severity="info">

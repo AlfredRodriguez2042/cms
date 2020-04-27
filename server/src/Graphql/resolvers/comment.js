@@ -1,6 +1,6 @@
 import Comment from '../../Models/comment'
-import Article from '../../Models/article'
 const COMMENT_ADDED = 'COMMENT_ADDED'
+
 export default {
   Query: {
     Comments: async () => {
@@ -26,10 +26,11 @@ export default {
           },
         ],
       })
+      await comment.reload({ include: [{ association: 'user' }] })
+
       pubsub.publish(COMMENT_ADDED, {
         newComment: comment,
       })
-
       return comment
     },
     deleteComment: async (_, { id }) => {

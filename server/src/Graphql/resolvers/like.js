@@ -11,18 +11,16 @@ export default {
         throw new Error('article not exits')
       }
       if (!article.likes.find((like) => like.userId === req.session.userId)) {
-        console.log('creando')
         await Likes.create({
           articleId: id,
           userId: req.session.userId,
         })
-        return article
+        console.log(article.likes)
       } else {
-        console.log('destroy')
-
-        // await Likes.destroy({ where: { article_id: id } })
+        await Likes.destroy({ where: { article_id: id } })
       }
-      return article
+
+      return article //.reload({ include: [{ association: 'likes' }] })
     },
   },
 }

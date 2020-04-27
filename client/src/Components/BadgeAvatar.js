@@ -3,8 +3,9 @@ import Badge from '@material-ui/core/Badge'
 import Avatar from '@material-ui/core/Avatar'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
+import { useSelector } from 'react-redux'
 
-const StyledBadge = withStyles(theme => ({
+const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: '#44b700',
     color: '#44b700',
@@ -18,34 +19,39 @@ const StyledBadge = withStyles(theme => ({
       borderRadius: '50%',
       animation: '$ripple 1.2s infinite ease-in-out',
       border: '1px solid currentColor',
-      content: '""'
-    }
+      content: '""',
+    },
   },
   '@keyframes ripple': {
     '0%': {
       transform: 'scale(.8)',
-      opacity: 1
+      opacity: 1,
     },
     '100%': {
       transform: 'scale(2.4)',
-      opacity: 0
-    }
-  }
+      opacity: 0,
+    },
+  },
 }))(Badge)
 
 export default function BadgeAvatar({ image, title }) {
+  const auth = useSelector((state) => state.user.isAuthenticated)
   return (
     <div>
-      <StyledBadge
-        overlap="circle"
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
-        variant="dot"
-      >
-        <Avatar alt="Remy Sharp" src={image} />
-      </StyledBadge>
+      {auth ? (
+        <StyledBadge
+          overlap="circle"
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          variant="dot"
+        >
+          <Avatar alt="thumbnail" src={image} />
+        </StyledBadge>
+      ) : (
+        <Avatar alt="thumbnail " src={image} />
+      )}
       <Typography>{title}</Typography>
     </div>
   )

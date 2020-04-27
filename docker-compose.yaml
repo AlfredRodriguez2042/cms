@@ -8,11 +8,12 @@ services:
     networks:
       - backend
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: practica
-      POSTGRES_HOST_AUTH_METHOD: 'trust'
-  #  volumes:
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_DB: '${POSTGRES_DB:-practica}'
+      # POSTGRES_HOST_AUTH_METHOD: 'trust' no secure in production
+    volumes:
+      - ~/Escritorio/Docker/postgres/data:/var/lib/postgresql/data
 
   storage:
     image: redis:alpine
@@ -21,8 +22,12 @@ services:
       - backend
     ports:
       - '6379'
-  #   volumes:
-  #    - ~/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    command: 'redis-server --appendonly yes --requirepass ${REDIS_SECRET}'
+    # environment:
+    #   REDIS_PASSWORD: '${REDIS_SECRET}'
+    volumes:
+      - ~/Escritorio/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - ~/Escritorio/Docker/redis/data:/data
 
   servernode:
     container_name: server
@@ -37,8 +42,11 @@ services:
     volumes:
       - ./server:/app
     environment:
-      POSTGRES_DB: db
+      POSTGRES_HOST: db
       REDIS_HOST: storage
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_DB: '${POSTGRES_DB:-practica}'
     depends_on:
       - db
       - storage

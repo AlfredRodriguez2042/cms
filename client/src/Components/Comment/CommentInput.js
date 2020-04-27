@@ -1,20 +1,16 @@
 import React, { useState, useRef } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import { CREATE_COMMENT } from '../../Graphql/Mutations/Comments'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import {
-  Grid,
-  Button,
-  makeStyles,
-  ListItemAvatar,
-  Avatar,
-  Paper,
-} from '@material-ui/core'
+import { Grid, Button, makeStyles } from '@material-ui/core'
+import { ListItemAvatar, Avatar, Paper } from '@material-ui/core'
 import { Send, PriorityHigh } from '@material-ui/icons'
 
+import { useComment } from '../../hooks/useComment'
+import { validateError } from '../../Utils/ValidateError'
+import Loader from '../Loader'
+
 // alt #eff3f5
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   textarea: {
     outline: 'none',
     resize: 'none',
@@ -31,20 +27,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Comment = () => {
+const CommentInput = () => {
   const classes = useStyles()
   const userId = useSelector((state) => state.user.user.id)
   const toggleInput = useRef()
   const hidenFooter = useRef()
   const { id } = useParams()
   const [content, setContent] = useState('')
-  const [create, { loading, error }] = useMutation(CREATE_COMMENT, {
-    variables: {
-      content,
-      userId,
-      articleId: id,
-    },
-  })
+  const variables = {
+    content,
+    userId,
+    articleId: id,
+  }
+  const { create, error, loading } = useComment(variables)
   const handelFocus = () => {
     toggleInput.current.classList.toggle('toggle')
     hidenFooter.current.classList.toggle('hidenFooter')
@@ -53,8 +48,13 @@ const Comment = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     create()
+    e.target.reset()
+  }
+  if (process.env.NODE_ENV !== 'producion') {
+    validateError(error)
   }
 
+  if (loading) return <Loader />
   return (
     <Paper>
       <form onSubmit={handleSubmit}>
@@ -92,4 +92,4 @@ const Comment = () => {
   )
 }
 
-export default Comment
+export default CommentInput

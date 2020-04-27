@@ -26,3 +26,4 @@ client/yarn-error.log*
 server/.env
 
 client/notas.txt
+.env

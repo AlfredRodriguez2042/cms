@@ -1,20 +1,20 @@
 module.exports = {
   DATABASE: {
-    database: 'practica',
-    username: 'postgres',
-    password: 'postgres',
+    database: process.env.POSTGRES_DB || 'practica',
+    username: process.env.POSTGRES_USER || 'postgres',
+    password: process.env.POSTGRES_PASSWORD || 'postgres',
     options: {
-      host: process.env.POSTGRES_DB || 'localhost',
+      host: process.env.POSTGRES_HOST || 'localhost',
       dialect: 'postgres',
       pool: {
         max: 5,
-        min: 0
+        min: 0,
       },
       define: {
         underscored: true,
-        timestamps: true
+        timestamps: true,
       },
-      logging: false
-    }
-  }
+      logging: false,
+    },
+  },
 }

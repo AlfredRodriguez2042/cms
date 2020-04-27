@@ -43,7 +43,7 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 apolloServer.applyMiddleware({ app, path, cors: corsOptions })
 
-app.get('/confirm/:id', async (req, resd) => {
+app.get('/confirm/:id', async (req, res) => {
   const { id } = req.params
   const userId = await client.get(id)
   // update user

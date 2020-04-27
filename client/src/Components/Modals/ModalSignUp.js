@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { Button, Link } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { Form, Input, Modal, Checkbox } from 'antd'
 import Joi from '@hapi/joi'
@@ -12,6 +12,7 @@ import { SIGNUP_MUTATION } from '.././../Graphql/Mutations/User'
 import Loader from '.././Loader'
 import { validateError } from '../../Utils/ValidateError'
 import { CountRender } from '../Renders'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -63,10 +64,9 @@ const ModalSignUp = () => {
     variables: state,
     update(proxy, result) {
       setVisible(false)
-      console.log('prx', proxy)
       console.log('enviado', result)
     },
-    onError(e) {},
+    onError() {},
   })
 
   if (process.env.NODE_ENV !== 'production') {
@@ -81,7 +81,9 @@ const ModalSignUp = () => {
   const onFinishFailed = ({ errorFields }) => {
     form.scrollToField(errorFields[0].name)
   }
-
+  const handleLink = () => {
+    setVisible(false)
+  }
   if (loading) {
     return <Loader />
   }
@@ -231,7 +233,10 @@ const ModalSignUp = () => {
                 setCheck(target.checked)
               }}
             >
-              I have read the <Link>agreement</Link>
+              I have read the{' '}
+              <Link to="/privacy-policy" onClick={handleLink}>
+                agreement
+              </Link>
             </Checkbox>
           </FormItem>
           <Button

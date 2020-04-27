@@ -6,7 +6,11 @@ export const CREATE_COMMENT = gql`
       input: { userId: $userId, content: $content, articleId: $articleId }
     ) {
       id
+      createdAt
       content
+      user {
+        username
+      }
     }
   }
 `
@@ -15,6 +19,9 @@ export const SUSCRIPTION_COMMENT = gql`
     newComment {
       createdAt
       content
+      user {
+        username
+      }
     }
   }
 `

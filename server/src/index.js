@@ -18,7 +18,7 @@ memory()
 
 function main() {
   try {
-    sequelize.sync({ force: false }).then(() => {
+    sequelize.sync({ force: true }).then(() => {
       httpServer.listen(PORT, (err) => {
         if (err) {
           console.log('error occurred trying to listen on port 80')

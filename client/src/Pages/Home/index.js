@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams, useRouteMatch } from 'react-router-dom'
 import Carrousel from '../../Components/Carrousel'
+import Albun from '../../Components/hero'
 
 const Home = () => {
   const params = useParams()
@@ -24,6 +25,7 @@ const Home = () => {
         expedita aspernatur perspiciatis eveniet, quam sit debitis quod
         molestias.
       </p>
+      <Albun />
     </>
   )
 }

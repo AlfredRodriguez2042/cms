@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
 import { LIKE_ARTICLE } from '../../Graphql/Mutations/like'
 import { makeStyles, IconButton } from '@material-ui/core'
 import { HeartFilled } from '@ant-design/icons'
-import { ARTICLES_QUERY } from '../../Graphql/Querys/Articles'
-import { GetArtcles } from '../../Redux/Actions/Article'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   ghost: {
     color: '#ef9a9a',
     '&:hover': {
@@ -19,9 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 const FavoriteButton = ({ post }) => {
-  const dispatch = useDispatch()
   const classes = useStyles()
-  const username = useSelector((state) => state.user.user.username)
   const userId = useSelector((state) => state.user.user.id)
   const [like, setLike] = useState(false)
   const [create] = useMutation(LIKE_ARTICLE, {
@@ -37,19 +33,20 @@ const FavoriteButton = ({ post }) => {
     if (post.likes.map((like) => like.userId === userId)) {
       post.likes.map((like) => {
         if (like.userId === userId) {
+          console.log('color')
           return setLike(true)
         } else {
           return setLike(false)
         }
       })
     }
-  }, [like, username])
+  }, [like, userId])
 
   return (
     <span>
       <IconButton
         className={like ? classes.favorite : classes.ghost}
-        disabled={!username}
+        disabled={!userId}
         onClick={create}
       >
         <HeartFilled style={{ fontSize: '13px' }} />

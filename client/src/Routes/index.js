@@ -8,6 +8,7 @@ const Home = lazy(() => import('../Pages/Home'))
 const Page404 = lazy(() => import('../Pages/Page404'))
 const About = lazy(() => import('../Pages/About'))
 const Articles = lazy(() => import('../Pages/Articles'))
+const Policy = lazy(() => import('../Pages/Policy'))
 const Admin = lazy(() => import('../Pages/Admin'))
 const Dashboard = lazy(() => import('../Pages/Admin/Dashboard'))
 const PrivateRoute = lazy(() => import('./PrivateRoute'))
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route path="/about" exact component={About} />
           <Route path="/articles" exact component={Articles} />
           <Route path="/articles/:id/" exact component={SingleArticle} />
+          <Route path="/privacy-policy/" exact component={Policy} />
           <PrivateRoute path="/article/edit" exact component={Admin} />
           <PrivateRoute path="/article/edit/:id" exact component={Home} />
           <PrivateRoute path="/dashboard" exact component={Dashboard} />

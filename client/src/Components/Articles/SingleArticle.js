@@ -12,7 +12,7 @@ import { translateMarkdown } from '../../Utils'
 import { SIDEBAR } from '../../Config'
 import Page404 from '../../Pages/Page404'
 import { CalendarOutlined } from '@ant-design/icons'
-import Comment from '../Comment/Comment'
+import CommentInput from '../Comment/CommentInput'
 import { SUSCRIPTION_COMMENT } from '../../Graphql/Mutations/Comments'
 import { validateError } from '../../Utils/ValidateError'
 import CommentBox from '../Comment/CommentBox'
@@ -63,7 +63,9 @@ const SingleArticle = () => {
   const { data, loading, error } = useQuery(ARTICLE_QUERY, {
     variables: { id },
   })
-  validateError(error)
+  if (process.env.NODE_ENV !== 'production') {
+    validateError(error)
+  }
   if (error) {
     history.push('/404')
     return <Page404 />
@@ -130,10 +132,10 @@ const SingleArticle = () => {
           </div>
         ))}
 
-        <div>{newComment && <CommentBox comment={newComment} />}</div>
+        {/* <div>{newComment && <CommentBox comment={newComment} />}</div> */}
       </Grid>
       <Grid className={classes.comments}>
-        <Comment />
+        <CommentInput />
       </Grid>
     </>
   )

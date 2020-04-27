@@ -1,18 +1,10 @@
 import React from 'react'
-import {
-  Paper,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  Typography,
-  Grid,
-  makeStyles,
-} from '@material-ui/core'
+import { Paper, ListItem, ListItemAvatar, Avatar } from '@material-ui/core'
+import { ListItemText, Typography, Grid, makeStyles } from '@material-ui/core'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   date: {
     float: 'right',
     fontSize: '.8em',

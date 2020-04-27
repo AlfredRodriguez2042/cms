@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 })
 
-const CreateArticle = (props) => {
+const CreateArticle = () => {
   const classes = useStyles()
   const userId = useSelector((state) => state.user.user.id)
   const params = useParams()
@@ -70,7 +70,7 @@ const CreateArticle = (props) => {
     },
   })
   validateError(error)
-  const [update, _] = useMutation(CREATE_ARTICLE, {
+  const [update] = useMutation(CREATE_ARTICLE, {
     variables: {
       title,
       content,

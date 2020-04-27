@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize'
 import bcrypt from 'bcrypt'
-const { UUID, UUIDV4, STRING, TEXT, INTEGER, ENUM, BOOLEAN } = DataTypes
+const { UUID, UUIDV4, STRING, BLOB, ENUM, BOOLEAN } = DataTypes
 
 class User extends Model {
   static init(sequelize) {
@@ -11,6 +11,9 @@ class User extends Model {
           allowNull: false,
           type: UUID,
           defaultValue: UUIDV4(),
+        },
+        thumbnail: {
+          type: BLOB,
         },
         name: {
           type: STRING,
@@ -37,6 +40,11 @@ class User extends Model {
         active: {
           type: BOOLEAN,
           defaultValue: false,
+        },
+        status: {
+          type: ENUM,
+          values: ['active', 'disable', 'deleted', 'pending'],
+          defaultValue: 'active',
         },
       },
       {

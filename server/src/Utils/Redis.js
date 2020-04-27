@@ -1,36 +1,36 @@
-import redis from "ioredis"
-import session from "express-session"
-import connectRedis from "connect-redis"
-require("dotenv").config()
+import redis from 'ioredis'
+import session from 'express-session'
+import connectRedis from 'connect-redis'
+require('dotenv').config()
 
 const RedisStore = connectRedis(session)
 export const client = redis.createClient({
-  port: 6379, // Redis port
-  host: process.env.REDIS_HOST || "127.0.0.1" // Redis host
+  port: process.env.REDIS_PORT, // Redis port
+  host: process.env.REDIS_HOST || '127.0.0.1', // Redis host
   //  family: 4, // 4 (IPv4) or 6 (IPv6)
-  // password: 'auth',
+  password: process.env.REDIS_SECRET,
   // db: 0
 })
 const store = new RedisStore({ client })
-
+console.log(process.env.POSTGRES_PASSWORD)
 export const sessionOption = session({
-  name: "qid",
+  name: 'qid',
   store,
   secret: process.env.SESSION,
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 7
-  }
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
 })
 
-client.on("connect", () => console.log("Redis is connected"))
+client.on('connect', () => console.log('Redis is connected'))
 
-export const RedisCache = async model => {
+export const RedisCache = async (model) => {
   await client.del(process.env.REDIS_CACHE_KEY)
   const items = await model.find()
-  const StringItems = items.map(item => JSON.stringify(item))
+  const StringItems = items.map((item) => JSON.stringify(item))
 
   return await client.lpush(process.env.REDIS_CACHE_KEY, ...StringItems)
 }
