@@ -6,6 +6,7 @@ import SingleArticle from '../Components/Articles/SingleArticle'
 
 const Home = lazy(() => import('../Pages/Home'))
 const Page404 = lazy(() => import('../Pages/Page404'))
+const ConfirmEmail = lazy(() => import('../Pages/Email'))
 const About = lazy(() => import('../Pages/About'))
 const Articles = lazy(() => import('../Pages/Articles'))
 const Policy = lazy(() => import('../Pages/Policy'))
@@ -19,6 +20,7 @@ const AppRouter = () => {
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/confirm/email" exact component={ConfirmEmail} />
           <Route path="/home" exact component={Home} />
           <Route path="/about" exact component={About} />
           <Route path="/articles" exact component={Articles} />

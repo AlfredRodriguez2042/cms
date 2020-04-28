@@ -13,7 +13,9 @@ const apolloServer = new ApolloServer({
   context: (request) => ({
     req: request.req,
     res: request.res,
-    //  url: request.req.protocol + '://' + request.req.get('host'),
+    url: request.req
+      ? request.req.protocol + '://' + request.req.get('host')
+      : '',
     client,
     pubsub,
   }),

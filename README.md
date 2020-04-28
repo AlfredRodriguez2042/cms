@@ -82,7 +82,7 @@
 
 - [Postgres]() como base de datos principal
 - [Redis]() para guardar sesiones y como cache
--
+- [Amazon]() estare usando amazon S3 o cloudinary para las imagenes
 
 #### Orchestration
 
@@ -201,7 +201,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [linkedin](www.linkedin.com/in/alfredrodriguez2042) - email
+Alfredo Rodriguez - [linkedin](www.linkedin.com/in/alfredrodriguez2042) - email : Alfred2042@hotmail.com
 
 Project Link: [https://github.com/AlfredRodriguez2042/cms](https://github.com/AlfredRodriguez2042/cms)
 

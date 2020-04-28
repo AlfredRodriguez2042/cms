@@ -48,6 +48,7 @@ export default {
     },
     Articles: async (_, __, { req, res }) => {
       // checkAuth(req, res)
+      console.log(req.query)
       const posts = await Article.findAll(options)
 
       return posts

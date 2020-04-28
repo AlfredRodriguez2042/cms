@@ -1,17 +1,17 @@
-import User from "../../Models/user"
-import Role from "../../Models/role"
-import { checkAdmin, isAuth, checkAuth } from "../../Utils/auth"
-import { ConfirmEmail } from "../../Utils/email"
-import { validationUser, verify } from "../../Utils/validation"
+import User from '../../Models/user'
+import Role from '../../Models/role'
+import { checkAdmin, isAuth, checkAuth } from '../../Utils/auth'
+import { ConfirmEmail } from '../../Utils/email'
+import { validationUser, verify } from '../../Utils/validation'
 const options = [
   {
-    association: "articles"
+    association: 'articles',
   },
   {
-    association: "roles",
-    attributes: ["name"],
-    through: { attributes: [] }
-  }
+    association: 'roles',
+    attributes: ['name'],
+    through: { attributes: [] },
+  },
 ]
 
 export default {
@@ -20,7 +20,7 @@ export default {
       //  isAuth(req)
 
       const user = await User.findByPk(id, {
-        include: options
+        include: options,
       })
       console.log(user.createdAt)
 
@@ -30,11 +30,11 @@ export default {
       // checkAuth(req, res)
 
       const users = await User.findAll({
-        include: options
+        include: options,
       })
 
       return users
-    }
+    },
   },
   Mutation: {
     createUser: async (_, { input }, { url, client }) => {
@@ -50,10 +50,10 @@ export default {
       verify(Email, email)
       verify(Username, username)
       if (!roles) {
-        roles = "user"
+        roles = 'user'
       }
       const [role, created] = await Role.findOrCreate({
-        where: { name: roles }
+        where: { name: roles },
       })
 
       try {
@@ -61,29 +61,35 @@ export default {
 
         user.addRole(role)
 
-        //  const userConfirm = ConfirmEmail(url, user.id, client)
+        const userConfirm = await ConfirmEmail(url, user.id, client)
+        console.log(userConfirm)
         return user
       } catch (error) {
-        //  console.log('err', error.errors[0].message)
         return error.errors[0].message
       }
+    },
+    updateUser: async (_, { input }) => {
+      const { id, ...data } = input
+      console.log(data.email)
+      const user = await User.update(data, { where: { id } })
+      console.log(user)
+      return user
     },
     deleteUser: async (_, { id }) => {
       const user = await User.destroy({ where: id })
       return user
     },
     Logout: async (_, __, { req, res }) => {
-      req.session.destroy("qid")
-      res.cookie("x-token", "logout...", {
+      req.session.destroy('qid')
+      res.cookie('x-token', 'logout...', {
         httpOnly: true,
-        expires: new Date(Date.now() + 1)
+        expires: new Date(Date.now() + 1),
       })
-      res.cookie("qid", "logout...", {
+      res.cookie('qid', 'logout...', {
         httpOnly: true,
-        expires: new Date(Date.now() + 1)
+        expires: new Date(Date.now() + 1),
       })
-      console.log(req.session)
       return true
-    }
-  }
+    },
+  },
 }

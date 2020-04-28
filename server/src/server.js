@@ -3,9 +3,10 @@ import helmet from 'helmet'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import apolloServer from './Apollo'
-import { client, sessionOption } from './Utils/Redis'
+import { sessionOption } from './Utils/Redis'
 import { middlewareSession } from './Middlewares/auth'
 import { httpsRedirect, wwwRedirect } from './Utils/Redirect'
+import { email } from './Routes/email'
 import rateLimit from 'express-rate-limit'
 require('dotenv').config()
 
@@ -43,10 +44,6 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 apolloServer.applyMiddleware({ app, path, cors: corsOptions })
 
-app.get('/confirm/:id', async (req, res) => {
-  const { id } = req.params
-  const userId = await client.get(id)
-  // update user
-})
+app.get('/confirm/:id', email)
 
 export default app

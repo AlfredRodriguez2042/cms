@@ -41,6 +41,8 @@ services:
       - 5500:5500
     volumes:
       - ./server:/app
+    env_file:
+      - .env
     environment:
       POSTGRES_HOST: db
       REDIS_HOST: storage

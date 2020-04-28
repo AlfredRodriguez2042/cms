@@ -5,18 +5,18 @@ require('dotenv').config()
 
 const RedisStore = connectRedis(session)
 export const client = redis.createClient({
-  port: process.env.REDIS_PORT, // Redis port
+  port: process.env.REDIS_PORT || 6379, // Redis port
   host: process.env.REDIS_HOST || '127.0.0.1', // Redis host
   //  family: 4, // 4 (IPv4) or 6 (IPv6)
   password: process.env.REDIS_SECRET,
   // db: 0
 })
 const store = new RedisStore({ client })
-console.log(process.env.POSTGRES_PASSWORD)
+
 export const sessionOption = session({
   name: 'qid',
   store,
-  secret: process.env.SESSION,
+  secret: process.env.EXPRESS_SESSION,
   resave: false,
   saveUninitialized: false,
   cookie: {

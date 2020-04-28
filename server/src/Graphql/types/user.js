@@ -12,6 +12,7 @@ export default `
     username: String!
     email: String!
     password: String
+    thumbnail: String
     roles: [Roles] !
     active: Boolean!
     createdAt: ID!
@@ -25,7 +26,7 @@ export default `
     thumbnail: String
     active: Boolean
     roles: [Roles] !
-    
+
   }
 
   type AuthPayload {
@@ -35,6 +36,7 @@ export default `
 
   type Mutation {
     createUser(input: UserInput!): User!
+    updateUser(input: UserUpdateInput!): User!
     deleteUser(id:ID): User!
     Login(input: LoginInput): AuthPayload!
     Logout:Boolean
@@ -43,9 +45,19 @@ export default `
 
   input UserInput {
     name: String!
+    thumbnail: String
     username: String!
     email: String!
     password: String!
+    roles: String
+  }
+
+  input UserUpdateInput {
+    id:ID!
+    thumbnail: String
+    username: String
+    email: String
+    password: String
     roles: String
   }
 
