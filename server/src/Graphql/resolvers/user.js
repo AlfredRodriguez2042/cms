@@ -3,6 +3,7 @@ import Role from '../../Models/role'
 import { checkAdmin, isAuth, checkAuth } from '../../Utils/auth'
 import { ConfirmEmail } from '../../Utils/email'
 import { validationUser, verify } from '../../Utils/validation'
+import { sendEmail } from '../../Utils/nodemailer'
 const options = [
   {
     association: 'articles',
@@ -61,8 +62,9 @@ export default {
 
         user.addRole(role)
 
-        const userConfirm = await ConfirmEmail(url, user.id, client)
-        console.log(userConfirm)
+        const Url = await ConfirmEmail(url, user.id, client)
+        await sendEmail(Url, email, 'Please Confirm Email')
+
         return user
       } catch (error) {
         return error.errors[0].message
@@ -70,9 +72,9 @@ export default {
     },
     updateUser: async (_, { input }) => {
       const { id, ...data } = input
-      console.log(data.email)
+
       const user = await User.update(data, { where: { id } })
-      console.log(user)
+
       return user
     },
     deleteUser: async (_, { id }) => {
