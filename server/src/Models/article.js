@@ -1,4 +1,5 @@
-import { Model, DataTypes } from "sequelize"
+import { Model, DataTypes } from 'sequelize'
+
 const { UUID, UUIDV4, STRING, TEXT, INTEGER } = DataTypes
 
 class Article extends Model {
@@ -38,47 +39,48 @@ class Article extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, {
-      foreignKey: "user_id",
-      as: "user",
+      foreignKey: 'user_id',
+      as: 'user',
     })
     this.hasMany(models.Tag, {
       foreignKey: {
-        name: "articleId",
-        field: "article_id",
+        name: 'articleId',
+        field: 'article_id',
       },
-      as: "tags",
-      onUpdate: "CASCADE",
+
+      as: 'tags',
+      onUpdate: 'CASCADE',
     })
     this.belongsToMany(models.Category, {
       foreignKey: {
-        name: "articleId",
-        field: "article_id",
+        name: 'articleId',
+        field: 'article_id',
       },
-      through: "Category_Group",
-      as: "categories",
-      onUpdate: "CASCADE",
+      through: 'Category_Group',
+      as: 'categories',
+      onUpdate: 'CASCADE',
     })
     this.hasMany(models.Comment, {
       foreignKey: {
-        name: "articleId",
-        field: "article_id",
+        name: 'articleId',
+        field: 'article_id',
       },
-      as: "comments",
+      as: 'comments',
     })
     this.hasMany(models.Reply, {
       foreignKey: {
-        name: "articleId",
-        field: "article_id",
+        name: 'articleId',
+        field: 'article_id',
       },
-      as: "replies",
-    }),
-      this.hasMany(models.Likes, {
-        foreignKey: {
-          name: "articleId",
-          field: "article_id",
-        },
-        as: "likes",
-      })
+      as: 'replies',
+    })
+    this.hasMany(models.Likes, {
+      foreignKey: {
+        name: 'articleId',
+        field: 'article_id',
+      },
+      as: 'likes',
+    })
   }
 }
 export default Article

@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize'
-const { UUID, UUIDV4, TEXT } = DataTypes
 
+const { UUID, UUIDV4 } = DataTypes
+//  eslint-disable-next-line
 class Category_Group extends Model {
   static init(sequelize) {
     super.init(
@@ -8,14 +9,14 @@ class Category_Group extends Model {
         id: {
           type: UUID,
           primaryKey: true,
-          defaultValue: UUIDV4()
-        }
+          defaultValue: UUIDV4(),
+        },
       },
       {
-        sequelize
+        sequelize,
       }
     )
   }
 }
-
+//  eslint-disable-next-line
 export default Category_Group

@@ -1,7 +1,5 @@
 import { ApolloServer, PubSub } from 'apollo-server-express'
 import { schema } from './Graphql'
-import AuthDirective from './Utils/directive'
-import { createDirective } from 'apollo-directive'
 import { client } from './Utils/Redis'
 import { userLoader } from './Utils/Loaders'
 import { validationRules, formatError } from './Middlewares/auth'
@@ -14,9 +12,8 @@ const apolloServer = new ApolloServer({
   context: (request) => ({
     req: request.req,
     res: request.res,
-    url: request.req
-      ? request.req.protocol + '://' + request.req.get('host')
-      : '',
+    //  eslint-disable-next-line
+    url: request.req?.protocol + '://' + request.req.get('host'),
     client,
     pubsub,
     userLoader,

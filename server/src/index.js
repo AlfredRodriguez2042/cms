@@ -3,6 +3,7 @@ import apolloServer from './Apollo'
 import sequelize from './Models'
 import { createServer } from 'http'
 import v8 from 'v8'
+
 require('@babel/register')({ ignore: [] })
 
 const httpServer = createServer(app)
@@ -27,7 +28,8 @@ function main() {
         const uid = parseInt(process.env.SUDO_UID)
         console.log(uid)
         if (uid) {
-          // process.setuid(uid)  set uid of the process to user with lower privileges, only in docker run root user
+          //  process.setuid(uid)  set uid of the process to user with lower privileges,
+          //  only in docker run root user
         }
         console.log(
           `>>>   🚀   Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`

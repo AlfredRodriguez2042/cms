@@ -20,7 +20,7 @@ export default {
         await Likes.destroy({ where: { article_id: id } })
       }
 
-      return article //.reload({ include: [{ association: 'likes' }] })
+      return article // .reload({ include: [{ association: 'likes' }] })
     },
   },
 }

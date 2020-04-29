@@ -1,5 +1,7 @@
-import { Model, DataTypes } from 'sequelize'
 import bcrypt from 'bcrypt'
+
+import { Model, DataTypes } from 'sequelize'
+
 const { UUID, UUIDV4, STRING, BLOB, ENUM, BOOLEAN } = DataTypes
 
 class User extends Model {
@@ -52,6 +54,7 @@ class User extends Model {
       }
     )
   }
+
   static associate(models) {
     this.belongsToMany(models.Role, {
       foreignKey: {

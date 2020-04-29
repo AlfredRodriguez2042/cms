@@ -1,4 +1,5 @@
-import { Model, DataTypes } from "sequelize"
+import { Model, DataTypes } from 'sequelize'
+
 const { UUID, UUIDV4, TEXT } = DataTypes
 
 class Comment extends Model {
@@ -20,53 +21,24 @@ class Comment extends Model {
       }
     )
   }
+
   static associate(models) {
     this.belongsTo(models.Article, {
       foreignKey: {
-        name: "articleId",
-        field: "article_id",
+        name: 'articleId',
+        field: 'article_id',
       },
-      as: "article",
+      as: 'article',
     })
     this.belongsTo(models.User, {
       foreignKey: {
-        name: "userId",
-        field: "user_id",
+        name: 'userId',
+        field: 'user_id',
       },
-      as: "user",
+      as: 'user',
     })
-    // this.hasMany(models.Reply)
+    //  this.hasMany(models.Reply)
   }
 }
 
 export default Comment
-
-// export default (
-//   sequelize,
-//   { UUID, STRING, BOOLEAN, TEXT, DATE, NOW, UUIDV4 }
-// ) => {
-//   const Comment = sequelize.define('Comment', {
-//     id: {
-//       type: UUID,
-//       primaryKey: true,
-//       defaultValue: UUIDV4()
-//     },
-//     content: {
-//       type: TEXT,
-//       allowNull: false
-//     }
-//   })
-//   Comment.associate = models => {
-//     Comment.belongsTo(models.Article, {
-//       foreignKey: 'article_id',
-//       as: 'article'
-//     })
-//     Comment.belongsTo(models.User, {
-//       foreignKey: 'user_id',
-//       as: 'user'
-//     })
-//     Comment.hasMany(models.Reply)
-//   }
-
-//   return Comment
-// }

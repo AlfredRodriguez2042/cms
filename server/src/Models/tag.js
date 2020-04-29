@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize'
-const { UUID, UUIDV4, STRING, TEXT, INTEGER, ENUM } = DataTypes
+
+const { UUID, UUIDV4, STRING } = DataTypes
 
 class Tag extends Model {
   static init(sequelize) {
@@ -8,18 +9,19 @@ class Tag extends Model {
         id: {
           type: UUID,
           defaultValue: UUIDV4,
-          primaryKey: true
+          primaryKey: true,
         },
         name: {
           type: STRING,
-          allowNull: false
-        }
+          allowNull: false,
+        },
       },
       {
-        sequelize
+        sequelize,
       }
     )
   }
+
   static associate(models) {
     this.belongsTo(models.Article)
   }

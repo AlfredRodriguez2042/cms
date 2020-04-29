@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize'
-const { UUID, UUIDV4, TEXT } = DataTypes
+
+const { UUID, UUIDV4 } = DataTypes
 
 class Likes extends Model {
   static init(sequelize) {
@@ -16,12 +17,16 @@ class Likes extends Model {
       }
     )
   }
+
   static associate(models) {
     this.belongsTo(models.User, {
       foreignKey: 'user_id',
       as: 'user',
-    }),
-      this.belongsTo(models.Article)
+    })
+    this.belongsTo(models.Article, {
+      foreignKey: 'article_id',
+      as: 'article',
+    })
   }
 }
 export default Likes

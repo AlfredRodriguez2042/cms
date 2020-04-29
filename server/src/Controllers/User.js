@@ -27,6 +27,7 @@ export default {
     return users
   },
   UserCreate: async (input, url, redis) => {
+    //  eslint-disable-next-line
     let { roles, ...data } = input
     const { error } = validationUser(data)
     if (error) {
@@ -41,7 +42,7 @@ export default {
     if (!roles) {
       roles = 'user'
     }
-    const [role, created] = await Role.findOrCreate({
+    const [role] = await Role.findOrCreate({
       where: { name: roles },
     })
 

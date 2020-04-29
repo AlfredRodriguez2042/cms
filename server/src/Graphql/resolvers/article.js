@@ -1,6 +1,5 @@
 import Article from '../../Models/article'
 import sequelize from '../../Models'
-import { checkAuth } from '../../Utils/auth'
 
 const options = {
   include: [
@@ -32,7 +31,7 @@ const options = {
 
 export default {
   Query: {
-    Article: async (_, { id }, { req }) => {
+    Article: async (_, { id }) => {
       try {
         const post = await Article.findByPk(id, options)
         await Article.update(
@@ -46,7 +45,7 @@ export default {
         console.log(error)
       }
     },
-    Articles: async (_, __, { req, res }) => {
+    Articles: async (_, __, { req }) => {
       // checkAuth(req, res)
       console.log(req.query)
       const posts = await Article.findAll(options)

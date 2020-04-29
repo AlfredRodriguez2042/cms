@@ -1,6 +1,7 @@
 import redis from 'ioredis'
 import session from 'express-session'
 import connectRedis from 'connect-redis'
+
 require('dotenv').config()
 
 const RedisStore = connectRedis(session)
@@ -32,5 +33,9 @@ export const RedisCache = async (model) => {
   const items = await model.find()
   const StringItems = items.map((item) => JSON.stringify(item))
 
-  return await client.lpush(process.env.REDIS_CACHE_KEY, ...StringItems)
+  const newItems = await client.lpush(
+    process.env.REDIS_CACHE_KEY,
+    ...StringItems
+  )
+  return newItems
 }

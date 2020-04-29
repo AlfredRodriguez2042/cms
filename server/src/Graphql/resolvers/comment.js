@@ -1,4 +1,5 @@
 import Comment from '../../Models/comment'
+
 const COMMENT_ADDED = 'COMMENT_ADDED'
 
 export default {

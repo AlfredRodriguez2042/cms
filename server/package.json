@@ -7,10 +7,16 @@
     "build": "babel src/ -d dist",
     "start": " cross-env NODE_ENV=production nodemon src/index.js --exec babel-node",
     "dev": "cross-env NODE_ENV=development nodemon  src/index.js --exec babel-node ",
-    "limit": "cross-env LIMIT=2048 increase-memory-limit"
+    "limit": "cross-env LIMIT=2048 increase-memory-limit",
+    "lint": "eslint src"
   },
   "author": "Alfredo Rodriguez G.",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
@@ -19,6 +25,7 @@
     "@babel/register": "^7.9.0",
     "@hapi/joi": "^17.1.1",
     "apollo-directive": "^0.1.2",
+    "babel-eslint": "^10.1.0",
     "bcrypt": "^4.0.1",
     "connect-redis": "^4.0.4",
     "cookie-parser": "^1.4.5",
@@ -26,12 +33,19 @@
     "csurf": "^1.11.0",
     "dataloader": "^2.0.0",
     "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
     "express-rate-limit": "^5.1.1",
     "express-session": "^1.17.1",
     "graphql-cost-analysis": "^1.0.3",
     "graphql-depth-limit": "^1.1.0",
     "graphql-upload": "^10.0.0",
+    "husky": "^4.2.5",
     "ioredis": "^4.16.3",
+    "jest": "^25.5.0",
     "jsonwebtoken": "^8.5.1",
     "merge-graphql-schemas": "^1.7.8",
     "mongoose": "^5.9.10",

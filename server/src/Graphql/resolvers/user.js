@@ -1,4 +1,4 @@
-//import { checkAdmin, isAuth, checkAuth } from '../../Utils/auth'
+//  import { checkAdmin, isAuth, checkAuth } from '../../Utils/auth'
 import controller from '../../Controllers/User'
 
 export default {
@@ -7,7 +7,7 @@ export default {
       return controller.User(id, userLoader)
     },
     Users: () => {
-      //  checkAuth(req, res)
+      // checkAuth(req, res)
       return controller.Users()
     },
   },

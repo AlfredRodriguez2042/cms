@@ -1,4 +1,5 @@
 import { Model, DataTypes } from 'sequelize'
+
 const { UUID, UUIDV4, STRING } = DataTypes
 
 class Category extends Model {
@@ -8,27 +9,28 @@ class Category extends Model {
         id: {
           type: UUID,
           primaryKey: true,
-          defaultValue: UUIDV4()
+          defaultValue: UUIDV4(),
         },
         name: {
           type: STRING,
-          allowNull: false
-        }
+          allowNull: false,
+        },
       },
       {
-        sequelize
+        sequelize,
       }
     )
   }
+
   static associate(models) {
     this.belongsToMany(models.Article, {
       foreignKey: {
         name: 'categoryId',
-        field: 'category_id'
+        field: 'category_id',
       },
       through: 'Category_Group',
       as: 'articles',
-      onUpdate: 'CASCADE'
+      onUpdate: 'CASCADE',
     })
   }
 }

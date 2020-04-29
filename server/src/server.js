@@ -3,11 +3,12 @@ import helmet from 'helmet'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import apolloServer from './Apollo'
+import rateLimit from 'express-rate-limit'
 import { sessionOption } from './Utils/Redis'
 import { middlewareSession } from './Middlewares/auth'
 import { httpsRedirect, wwwRedirect } from './Utils/Redirect'
 import { email } from './Routes/email'
-import rateLimit from 'express-rate-limit'
+
 require('dotenv').config()
 
 const app = express()

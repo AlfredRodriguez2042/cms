@@ -1,6 +1,8 @@
 import { Model, DataTypes } from 'sequelize'
-const { UUID, UUIDV4, ENUM, STRING } = DataTypes
 
+const { UUID, UUIDV4, ENUM } = DataTypes
+
+//  eslint-disable-next-line
 class Role extends Model {
   static init(sequelize) {
     super.init(
@@ -8,31 +10,33 @@ class Role extends Model {
         id: {
           type: UUID,
           primaryKey: true,
-          defaultValue: UUIDV4()
+          defaultValue: UUIDV4(),
         },
         name: {
           type: ENUM,
           values: ['user', 'admin', 'disabled'],
           allowNull: false,
-          defaultValue: 'user'
-        }
+          defaultValue: 'user',
+        },
       },
       {
-        sequelize
+        sequelize,
       }
     )
   }
+
   static associate(models) {
     this.belongsToMany(models.User, {
       foreignKey: {
         name: 'roleId',
-        field: 'role_id'
+        field: 'role_id',
       },
 
       through: 'user_role',
       as: 'user',
-      onUpdate: 'CASCADE'
+      onUpdate: 'CASCADE',
     })
   }
 }
+//  eslint-disable-next-line
 export default Role

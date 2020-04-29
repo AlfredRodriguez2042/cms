@@ -1,5 +1,6 @@
 import User from '../Models/user'
 import { client } from '../Utils/Redis'
+
 require('dotenv').config()
 
 export const email = async (req, res) => {
