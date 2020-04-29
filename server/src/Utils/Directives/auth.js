@@ -1,8 +1,8 @@
 import { SchemaDirectiveVisitor } from 'apollo-server-express'
 import { defaultFieldResolver } from 'graphql'
 
-import { isAuth } from '../auth'
-
+import { isAuth, checkAdmin } from '../auth'
+//  la segun la doc. en caso de tener un objeto o un field
 class AuthDirective extends SchemaDirectiveVisitor {
   visitObject(type) {
     this.ensureFieldsWrapped(type)
@@ -13,11 +13,9 @@ class AuthDirective extends SchemaDirectiveVisitor {
     this.ensureFieldsWrapped(details.objectType)
     field._requiredAuthRole = this.args.requires
   }
-
   ensureFieldsWrapped(objectType) {
-    if (objectType._authFieldsWrapped) {
-      return (objectType._authFieldsWrapped = true)
-    }
+    if (objectType._authFieldsWrapped) return
+    objectType._authFieldsWrapped = true
 
     const fields = objectType.getFields()
 
@@ -27,16 +25,18 @@ class AuthDirective extends SchemaDirectiveVisitor {
       field.resolve = async (...args) => {
         const requiredRole =
           field._requiredAuthRole || objectType._requiredAuthRole
-        console.log('reqire', requiredRole)
+        // si no requiere un rol lo devuelve
         if (!requiredRole) {
-          console.log('no require')
           return resolve.apply(this, args)
         }
         const context = args[2]
-
+        //  si es admin
+        if (requiredRole !== 'user') {
+          checkAdmin(context.req)
+          return resolve.apply(this, args)
+        }
+        // si es tipo user
         isAuth(context.req)
-        console.log('fin')
-
         return resolve.apply(this, args)
       }
     })

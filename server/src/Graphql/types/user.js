@@ -1,9 +1,9 @@
 export default `
 
   type Query {
-    User(id:ID):User!
-    Users:[User!]
-    Profile:User!
+    User(id:ID): User!
+    Users: [User!]
+    Profile: User!
   }
 
   type User {
@@ -11,9 +11,9 @@ export default `
     name: String!
     username: String!
     email: String!
-    password: String
+    password: String @password(min:10, max:15)
     thumbnail: String
-    roles: [Roles] !
+    roles: [Roles]! @auth(requires:admin)
     active: Boolean!
     createdAt: ID!
     articles:[ArticleShort!]

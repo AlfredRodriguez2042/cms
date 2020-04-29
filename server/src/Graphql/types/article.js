@@ -2,7 +2,7 @@ export default `
 
   type Query {
     Article(id:ID): Article!
-    Articles:[Article!]
+    Articles:[Article!] @auth(requires:user)
   }
 
   type Article {

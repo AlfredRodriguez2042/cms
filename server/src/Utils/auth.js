@@ -34,8 +34,6 @@ export const checkAuth = (req, res) => {
   createRefreshToken(decode.id, res)
 }
 
-export const isAdmin = () => {}
-
 export const checkAdmin = (req) => {
   if (req.user.role !== 'admin') {
     throw new AuthenticationError('Must be admin ')

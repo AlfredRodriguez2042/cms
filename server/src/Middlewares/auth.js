@@ -68,8 +68,6 @@ export const middlewareSession = async (req, res, next) => {
       role: user.roles[0].name,
     }
 
-    console.log('user', user.id)
-
     next()
   } catch (error) {
     console.log('errors:')
