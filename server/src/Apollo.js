@@ -3,6 +3,7 @@ import { schema } from './Graphql'
 import AuthDirective from './Utils/directive'
 import { createDirective } from 'apollo-directive'
 import { client } from './Utils/Redis'
+import { userLoader } from './Utils/Loaders'
 import { validationRules, formatError } from './Middlewares/auth'
 
 const pubsub = new PubSub()
@@ -18,6 +19,7 @@ const apolloServer = new ApolloServer({
       : '',
     client,
     pubsub,
+    userLoader,
   }),
   validationRules:
     process.env.NODE_ENV !== 'development' ? validationRules : [],

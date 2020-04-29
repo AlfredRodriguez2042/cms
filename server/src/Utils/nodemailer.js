@@ -35,4 +35,5 @@ export const sendEmail = async (url, email, message) => {
     }
     console.log('Error ocurred', +err.message)
   })
+  _transporter.close()
 }
