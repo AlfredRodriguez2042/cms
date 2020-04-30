@@ -1,0 +1,13 @@
+type Query {
+  channels: [Channel]
+  channel(channelID: ID!): Channel
+}
+
+type Channel {
+  id: ID!
+  name: String!
+  createdAt: Date!
+  users: [User]
+  membersCount: Int
+  messages(limit: Int!): [Message]
+}

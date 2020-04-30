@@ -1,0 +1,23 @@
+type Query {
+  messagesForChannel(channelID: ID!): [Message]
+}
+
+type Message {
+  id: ID!
+  #indexInChannel: Int
+  createdAt: Date!
+  createdBy: User!
+  channel: Channel!
+  content: String!
+}
+
+type JoinResult {
+  user: User!
+  channel: Channel!
+}
+
+type Mutation {
+  typing(userID: ID!, channelID: ID!): Boolean
+  join(username: String!, channelName: String!): JoinResult
+  newMessage(channelID: ID!, userID: ID!, text: String!): Message
+}

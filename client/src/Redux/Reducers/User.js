@@ -3,7 +3,7 @@ import { storage_token } from '../../Utils/constants'
 import jwt from 'jsonwebtoken'
 //import { Cookies } from 'react-cookie'
 
-const jwtstorage = localStorage.getItem(storage_token)
+export const jwtstorage = localStorage.getItem(storage_token)
 
 if (jwtstorage) {
   const decoded = jwt.decode(jwtstorage)
@@ -21,10 +21,10 @@ const initialState = {
   followings: {},
   playList: [],
   likes: {},
-  errorMessage: ''
+  errorMessage: '',
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   Object.freeze(state)
   switch (action.type) {
     case USER_LOADED:
@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         status: 'success',
         user: action.payload,
-        roles: action.payload.roles[0].name
+        roles: action.payload.roles[0].name,
       }
     case USER_LOGIN_ERROR:
       localStorage.removeItem(storage_token)
@@ -42,15 +42,16 @@ export default function(state = initialState, action) {
         ...state,
         token: null,
         status: 'failure',
-        errorMessage: action.payload
+        errorMessage: action.payload,
       }
     case USER_LOG_OUT:
+      localStorage.removeItem(storage_token)
       return {
         ...state,
         isAuthenticated: false,
         status: 'idle',
         user: {},
-        roles: 'user'
+        roles: 'user',
       }
     default:
       return state

@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useDispatch } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
 import { SignIn } from '../../Redux/Actions/User'
+import { storage_token } from '../../Utils/constants'
 
 export const SIGNIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
@@ -63,7 +64,8 @@ export function useCheckAuth() {
   const dispatch = useDispatch()
 
   const [checkLoggedIn, { error, loading }] = useMutation(CHECK_LOGGED_IN, {
-    onCompleted: ({ checkLoggedIn: { user } }) => {
+    onCompleted: ({ checkLoggedIn: { user, token } }) => {
+      localStorage.setItem(storage_token, token)
       dispatch(SignIn(user))
     },
     onError: () => {},

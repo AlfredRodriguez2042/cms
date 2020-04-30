@@ -45,8 +45,7 @@ export default {
         console.log(error)
       }
     },
-    Articles: async (_, __, { req }) => {
-      // checkAuth(req, res)
+    Articles: async () => {
       const posts = await Article.findAll(options)
 
       return posts

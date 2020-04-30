@@ -15,4 +15,12 @@ export const schema = makeExecutableSchema({
     auth: authDirective,
     password: PasswordDirective,
   },
+  resolverValidationOptions: {
+    requireResolversForResolveType: false,
+  },
+  logger: {
+    log: (err) => {
+      console.log('[GraphQL LOG]:', err)
+    },
+  },
 })

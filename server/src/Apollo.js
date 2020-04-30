@@ -13,11 +13,26 @@ const apolloServer = new ApolloServer({
     req: request.req,
     res: request.res,
     //  eslint-disable-next-line
-    url: request.req?.protocol + '://' + request.req.get('host'),
+    url: request.req?.protocol + '://' + request.req?.get('host'),
     client,
     pubsub,
     userLoader,
   }),
+  subscriptions: {
+    onConnect: (connectionParams, webSocket, context) => {
+      const { token } = connectionParams
+      webSocket.on('Login', (soket) => {
+        console.log(soket)
+
+        soket.broadcast.emit('Login', 'user has login')
+      })
+
+      if (token) {
+        context.socket.emit('Login', 'welcome')
+      }
+    },
+    onDisconnect: () => {},
+  },
   validationRules:
     process.env.NODE_ENV !== 'development' ? validationRules : [],
   formatError,

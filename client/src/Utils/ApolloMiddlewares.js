@@ -2,6 +2,7 @@ import { ApolloLink, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import { jwtstorage } from '../Redux/Reducers/User'
 
 const AUTH_TOKEN = 'token'
 const REFRESH_TOKEN = 'refreshToken'
@@ -25,8 +26,12 @@ const wsLink = new WebSocketLink({
   uri: `ws://localhost:5500/graphql`,
   options: {
     reconnect: true,
+    connectionParams: {
+      token: jwtstorage,
+    },
   },
 })
+
 const links = split(
   // split based on operation type
   ({ query }) => {

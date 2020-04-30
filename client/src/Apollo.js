@@ -9,7 +9,7 @@ import App from './App'
 import { link } from './Utils/ApolloMiddlewares'
 
 const cache = new InMemoryCache({
-  dataIdFromObject: object => object.id || null
+  dataIdFromObject: (object) => object.id || object.node || null,
 }).restore(window.__APOLLO_STATE__)
 
 const resolvers = {
@@ -18,14 +18,14 @@ const resolvers = {
     updateNetworkStatus: (_, { isConnected }, { cache }) => {
       cache.writeData({ data: { isConnected } })
       return null
-    }
-  }
+    },
+  },
 }
 
 const client = new ApolloClient({
   link,
   cache,
-  resolvers
+  resolvers,
 })
 
 const apolloClient = () => (

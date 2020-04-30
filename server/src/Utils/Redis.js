@@ -30,7 +30,7 @@ client.on('connect', () => console.log('Redis is connected'))
 
 export const RedisCache = async (model) => {
   await client.del(process.env.REDIS_CACHE_KEY)
-  const items = await model.find()
+  const items = await model.findAll()
   const StringItems = items.map((item) => JSON.stringify(item))
 
   const newItems = await client.lpush(

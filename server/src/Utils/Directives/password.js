@@ -7,7 +7,7 @@ class PasswordDirective extends SchemaDirectiveVisitor {
 
     const { min, max } = this.args
 
-    field.resolve = async function (...args) {
+    field.resolve = async (...args) => {
       const result = await resolve.apply(this, args)
 
       if (typeof result === 'string') {

@@ -15,6 +15,7 @@ export const createRefreshToken = (id, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
   })
+  return refreshToken
 }
 export const checkAuth = (req, res) => {
   if (!req.isAuth) throw new AuthenticationError('Error, must be authenticated')

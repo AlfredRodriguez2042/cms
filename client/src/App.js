@@ -6,12 +6,17 @@ import Layout from './Layout'
 import 'antd/dist/antd.css'
 import ErrorBoundary from './Components/ErrorBoundary'
 import Loader from './Components/Loader'
+import { useSelector } from 'react-redux'
 
 const App = () => {
+  const isAuth = useSelector((state) => state.user.token)
   const { loading, checkLoggedIn } = useCheckAuth()
 
   useEffect(() => {
-    checkLoggedIn()
+    if (isAuth) {
+      console.log('autenticamndo')
+      checkLoggedIn()
+    }
     // window.addEventListener('unload', StoreState)
   }, [checkLoggedIn])
   if (loading) {

@@ -1,0 +1,8 @@
+type Subscription {
+  #onChannelAdded: Channel
+  #onTypingIndicatorChanged(channelID: ID!): [User]
+  #onMessageAdded(channelID: ID!): Message
+  #onMemberJoin(channelID: ID!): User
+  newComment: Comment!
+  userOnline: User
+}

@@ -2,7 +2,7 @@ import { SchemaDirectiveVisitor } from 'apollo-server-express'
 import { defaultFieldResolver } from 'graphql'
 
 import { isAuth, checkAdmin } from '../auth'
-//  la segun la doc. en caso de tener un objeto o un field
+//  segun la doc. en caso de tener un objeto o un field
 class AuthDirective extends SchemaDirectiveVisitor {
   visitObject(type) {
     this.ensureFieldsWrapped(type)
@@ -13,6 +13,7 @@ class AuthDirective extends SchemaDirectiveVisitor {
     this.ensureFieldsWrapped(details.objectType)
     field._requiredAuthRole = this.args.requires
   }
+
   ensureFieldsWrapped(objectType) {
     if (objectType._authFieldsWrapped) return
     objectType._authFieldsWrapped = true
