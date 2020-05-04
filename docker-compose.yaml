@@ -23,8 +23,6 @@ services:
     ports:
       - '6379'
     command: 'redis-server --appendonly yes --requirepass ${REDIS_SECRET}'
-    # environment:
-    #   REDIS_PASSWORD: '${REDIS_SECRET}'
     volumes:
       - ~/Escritorio/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
       - ~/Escritorio/Docker/redis/data:/data
@@ -74,4 +72,6 @@ services:
 
 networks:
   backend:
+    external: true
+    name: backend
     driver: bridge

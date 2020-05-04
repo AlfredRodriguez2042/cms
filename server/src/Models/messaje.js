@@ -29,7 +29,7 @@ class Message extends Model {
     })
     this.belongsTo(models.Channel, {
       foreignKey: 'channel_id',
-      as: 'channel',
+      as: 'channels',
     })
   }
 }

@@ -25,6 +25,14 @@ export default {
     if (!isMatch) {
       throw new Error('invalid email/password, try again')
     }
+    await User.update(
+      {
+        status: 'active',
+      },
+      {
+        where: { email },
+      }
+    )
     req.session.userId = user.id
 
     pubsub.publish('user_online', {

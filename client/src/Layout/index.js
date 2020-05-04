@@ -4,6 +4,7 @@ import { AdminBar, UserBar } from './SideBar'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Container, Hidden } from '@material-ui/core'
 import { useSelector } from 'react-redux'
+import UsersOnline from '../Components/UsersOnline'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 const Layout = ({ children }) => {
   const rol = useSelector((state) => state.user.roles)
+  const user = useSelector((state) => state.user.user)
 
   const classes = useStyles()
   return (
@@ -42,11 +44,11 @@ const Layout = ({ children }) => {
         {rol === 'user' ? (
           <>
             <Hidden smDown>
-              <Grid item sm={4} md={3} lg={2} xl={2}>
-                <UserBar />
+              <Grid item sm={2} md={2} lg={2} xl={2}>
+                <UserBar user={user} />
               </Grid>
             </Hidden>
-            <Grid item xs={12} sm={12} md={8} xl={8}>
+            <Grid item xs={12} sm={10} md={7} xl={7}>
               <Container>{children}</Container>
             </Grid>
           </>
@@ -57,6 +59,11 @@ const Layout = ({ children }) => {
             </Grid>
             <Grid item md={8}>
               {children}
+            </Grid>
+            <Grid>
+              <Hidden smDown>
+                <UsersOnline />
+              </Hidden>
             </Grid>
           </>
         )}

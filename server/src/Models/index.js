@@ -9,6 +9,8 @@ import Comment from './comment'
 import Role from './role'
 import Likes from './likes'
 import userRole from './userRole'
+import Message from './messaje'
+import Channel from './channel'
 
 import { DATABASE } from '../Config'
 
@@ -27,6 +29,8 @@ Comment.init(sequelize)
 Role.init(sequelize)
 userRole.init(sequelize)
 Likes.init(sequelize)
+Message.init(sequelize)
+Channel.init(sequelize)
 
 //  Associations
 Article.associate(sequelize.models)
@@ -38,5 +42,7 @@ Reply.associate(sequelize.models)
 Comment.associate(sequelize.models)
 Role.associate(sequelize.models)
 Likes.associate(sequelize.models)
+Message.associate(sequelize.models)
+Channel.associate(sequelize.models)
 
 module.exports = sequelize

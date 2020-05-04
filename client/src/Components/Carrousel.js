@@ -1,7 +1,8 @@
 import React from 'react'
 import { Carousel } from 'antd'
 import { Paper, makeStyles } from '@material-ui/core'
-const Styles = makeStyles((theme) => ({
+
+const Styles = makeStyles(() => ({
   papper: {},
   img: {
     height: '300px',
@@ -9,9 +10,11 @@ const Styles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     '& > *': {
       width: '100%',
+      height: '100%',
     },
   },
 }))
+
 const carrousel = () => {
   const classes = Styles()
   return (

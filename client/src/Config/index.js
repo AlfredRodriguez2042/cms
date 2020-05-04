@@ -18,8 +18,8 @@ export const COLOR_LIST = [
 
 export const SIDEBAR = {
   avatar: require('../assets/avatar.jpeg'),
-  title: 'kuro',
-  subtitle: 'Bienvenido a mi pequeño blog',
+  username: 'kuro',
+  bio: 'Bienvenido a mi pequeño blog',
   homepages: {
     GitHub: {
       link: 'https://github.com/AlfredRodriguez2042',

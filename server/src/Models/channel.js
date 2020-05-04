@@ -27,19 +27,16 @@ class Channel extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.User, {
-      foreignKey: {
-        name: 'channelId',
-        field: 'channel_id',
-      },
+    this.belongsTo(models.User, {
+      foreignKey: 'user_id',
       as: 'channel',
     })
-    this.belongsTo(models.Message, {
+    this.hasMany(models.Message, {
       foreignKey: {
         name: 'channelId',
         field: 'channel_id',
       },
-      as: 'channel',
+      as: 'channels',
     })
   }
 }

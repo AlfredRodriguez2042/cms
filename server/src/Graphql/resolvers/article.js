@@ -14,6 +14,13 @@ const options = {
     },
     {
       association: 'user',
+      include: [
+        {
+          association: 'roles',
+          attributes: ['name'],
+          through: { attributes: [] },
+        },
+      ],
     },
     {
       association: 'comments',
@@ -53,6 +60,7 @@ export default {
   },
   Mutation: {
     createArticle: async (_, { input }) => {
+      console.log(input)
       const post = await Article.create(input, {
         include: [
           {

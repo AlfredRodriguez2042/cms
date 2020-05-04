@@ -4,27 +4,36 @@ import { ConfirmEmail } from '../Utils/email'
 import { sendEmail } from '../Utils/nodemailer'
 import { validationUser, verify } from '../Utils/validation'
 
-const options = [
-  {
-    association: 'articles',
-  },
-  {
-    association: 'roles',
-    attributes: ['name'],
-    through: { attributes: [] },
-  },
-]
+const options = {
+  include: [
+    {
+      association: 'articles',
+    },
+    {
+      association: 'roles',
+      attributes: ['name'],
+      through: { attributes: [] },
+    },
+  ],
+}
 export default {
   User: async (id, userLoader) => {
     const user = await userLoader.load(id)
     return user
   },
   Users: async () => {
-    const users = await User.findAll({
-      include: options,
-    })
+    const users = await User.findAll(options)
 
     return users
+  },
+  UsersOnline: async () => {
+    const online = await User.findAll({
+      where: {
+        status: 'active',
+      },
+    })
+
+    return online
   },
   UserCreate: async (input, url, redis) => {
     //  eslint-disable-next-line

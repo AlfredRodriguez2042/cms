@@ -2,6 +2,7 @@ type Query {
   User(id: ID): User!
   Users: [User!]
   Profile(id: ID): User!
+  UsersOnline: [User!]
 }
 
 type User implements Node {
@@ -14,6 +15,7 @@ type User implements Node {
   active: Boolean!
   createdAt: ID!
   lastLoginAt: Date!
+  status: String!
   roles: [Roles]! @auth(requires: admin)
   channels: [Channel]
   articles: [ArticleShort!]
@@ -40,7 +42,7 @@ type Mutation {
   updateUser(input: UserUpdateInput!): User!
   deleteUser(id: ID): User!
   Login(input: LoginInput): AuthPayload!
-  Logout: Boolean
+  Logout(input: LogOutInput): Boolean
   checkLoggedIn: AuthPayload!
 }
 
@@ -61,7 +63,10 @@ input UserUpdateInput {
   password: String
   roles: String
 }
-
+input LogOutInput {
+  id: ID!
+  status: String!
+}
 input LoginInput {
   email: String!
   password: String!

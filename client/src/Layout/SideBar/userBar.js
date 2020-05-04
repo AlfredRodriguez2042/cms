@@ -1,7 +1,6 @@
 import React from 'react'
 import { SIDEBAR } from '../../Config'
 import { Typography, makeStyles, Paper, Button, Link } from '@material-ui/core'
-import { IconButton } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { Divider } from 'antd'
 
@@ -30,7 +29,7 @@ const useStyle = makeStyles(() => ({
     textTransform: 'none',
     marginLeft: '4px',
   },
-  text: {
+  bio: {
     color: '#53575A',
   },
   paper: {
@@ -40,42 +39,47 @@ const useStyle = makeStyles(() => ({
   avatar: {
     width: '132px',
     height: '132px',
-    borderRadius: '66px',
+    borderRadius: '50%', //'66px',
   },
 }))
-const UserBar = () => {
+const UserBar = ({ user }) => {
+  if (Object.keys(user).length === 0) {
+    user = UserBar.defaultProps.user
+  }
   const classes = useStyle()
   return (
     <Paper>
       <div className={classes.paper}>
         <img src={SIDEBAR.avatar} className={classes.avatar} alt="" />
-        <Typography component="h1" variant="h4">
-          {SIDEBAR.title}
-        </Typography>
-        <Typography variant="h6" className={classes.tex}>
-          {SIDEBAR.subtitle}
+        <Typography variant="h6">{user.username}</Typography>
+        <Typography variant="body2" className={classes.bio}>
+          {user.bio}
         </Typography>
         <ul className={classes.homepages}>
-          {Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
-            <Button
-              key={linkName}
-              className={classes.iconButton}
-              startIcon={item.icon}
-            >
-              <Link href={item.link} className={classes.link}>
-                {linkName}
-              </Link>
-            </Button>
-          ))}
+          {/* {!user.id &&
+            Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
+              <Button
+                key={linkName}
+                className={classes.iconButton}
+                startIcon={item.icon}
+              >
+                <Link href={item.link} className={classes.link}>
+                  {linkName}
+                </Link>
+              </Button>
+            ))} */}
         </ul>
-        <Alert variant="outlined" severity="info">
-          esta pagina se esta actualizando constantemente
-        </Alert>
+        <Alert severity="info">la pagina se actualiza con frecuencia</Alert>
         <Divider orientation="left">Frontend</Divider>
+        <Divider orientation="center">&</Divider>
         <Divider orientation="left">Backend</Divider>
       </div>
     </Paper>
   )
+}
+
+UserBar.defaultProps = {
+  user: SIDEBAR,
 }
 
 export default UserBar

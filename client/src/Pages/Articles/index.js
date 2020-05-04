@@ -7,6 +7,7 @@ import FilterArticle from '../../Components/Articles/FilterArticle'
 import Titles from '../../Components/Titles'
 import { validateError } from '../../Utils/ValidateError'
 import { useArticles } from '../../hooks/useArticles'
+import ErrorBoundary from 'antd/lib/alert/ErrorBoundary'
 
 const Articles = () => {
   const filterList = useSelector((state) => state.articles.listArticles)
@@ -30,9 +31,13 @@ const Articles = () => {
       <Titles title="Filtrar por" />
 
       <FilterArticle state={state} setState={setState} />
-      {filterList.length > 0
-        ? filterList.map((post) => <ArticleContent key={post.id} post={post} />)
-        : Posts.map((post) => <ArticleContent key={post.id} post={post} />)}
+      <ErrorBoundary>
+        {filterList.length > 0
+          ? filterList.map((post) => (
+              <ArticleContent key={post.id} post={post} />
+            ))
+          : Posts.map((post) => <ArticleContent key={post.id} post={post} />)}
+      </ErrorBoundary>
     </div>
   )
 }

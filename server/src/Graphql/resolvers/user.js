@@ -10,6 +10,9 @@ export default {
       // checkAuth(req, res)
       return controller.Users()
     },
+    UsersOnline: () => {
+      return controller.UsersOnline()
+    },
   },
   Mutation: {
     createUser: (_, { input }, { url, client }) => {

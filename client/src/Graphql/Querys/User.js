@@ -18,6 +18,7 @@ export const PROFILE_QUERY = gql`
     }
   }
 `
+
 export const POSTS_QUERY = gql`
   {
     Posts {
@@ -28,6 +29,15 @@ export const POSTS_QUERY = gql`
       createdAt
       commentNum
       likesNum
+    }
+  }
+`
+
+export const USERS_ONLINE_QUERY = gql`
+  {
+    UsersOnline {
+      id
+      username
     }
   }
 `

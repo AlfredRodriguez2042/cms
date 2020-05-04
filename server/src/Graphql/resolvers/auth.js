@@ -1,4 +1,5 @@
 import controller from '../../Controllers/Auth'
+import userController from '../../Controllers/User'
 import { isAuth } from '../../Utils/auth'
 
 export default {
@@ -10,7 +11,8 @@ export default {
       isAuth(req)
       return controller.CheckLoggedIn(req, res)
     },
-    Logout: async (_, __, { req, res }) => {
+    Logout: async (_, { input }, { req, res }) => {
+      userController.UpdateUser(input)
       req.session.destroy('qid')
       res.cookie('x-token', 'logout...', {
         httpOnly: true,

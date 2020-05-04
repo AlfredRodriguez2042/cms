@@ -1,10 +1,13 @@
-FROM nginx
+FROM node
 
-COPY build/ ./usr/share/nginx/html
+WORKDIR /app
+COPY build ./
+RUN npm install -g serve
+# FROM nginx
 
-EXPOSE 80
+# COPY build/ ./usr/share/nginx/html
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
 
 
 

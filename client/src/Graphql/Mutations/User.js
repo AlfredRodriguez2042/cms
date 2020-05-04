@@ -19,6 +19,7 @@ export const SIGNIN_MUTATION = gql`
     }
   }
 `
+
 export const SIGNUP_MUTATION = gql`
   mutation createUser(
     $name: String!
@@ -54,9 +55,19 @@ const CHECK_LOGGED_IN = gql`
     }
   }
 `
+
 export const LOGOUT = gql`
-  mutation Logout {
-    Logout
+  mutation Logout($id: ID!, $status: String!) {
+    Logout(input: { id: $id, status: $status })
+  }
+`
+export const USERS_ONLINE = gql`
+  subscription userOnline {
+    userOnline {
+      id
+      username
+      tumbnail
+    }
   }
 `
 

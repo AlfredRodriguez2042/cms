@@ -1,6 +1,6 @@
 type Query {
   channels: [Channel]
-  channel(channelID: ID!): Channel
+  channel(id: ID!): Channel
 }
 
 type Channel {

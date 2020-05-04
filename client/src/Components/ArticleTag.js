@@ -25,7 +25,12 @@ const ArticleTag = (props) => {
 
           {tagList.map((tag, i) => (
             <Tag key={i}>
-              <Link to={`/tags/${tag.name}`}>{tag.name}</Link>
+              <Link
+                to={`/tags/${tag.name}`}
+                color={getColor(tag.name, tagColorList)}
+              >
+                {tag.name}
+              </Link>
             </Tag>
           ))}
         </>

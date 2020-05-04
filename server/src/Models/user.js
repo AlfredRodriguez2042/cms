@@ -45,7 +45,7 @@ class User extends Model {
         },
         status: {
           type: ENUM,
-          values: ['active', 'disable', 'deleted', 'pending'],
+          values: ['active', 'disable', 'deleted', 'pending', 'offline'],
           defaultValue: 'active',
         },
       },
@@ -92,6 +92,13 @@ class User extends Model {
         field: 'user_id',
       },
       as: 'likes',
+    })
+    this.hasMany(models.Channel, {
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id',
+      },
+      as: 'channels',
     })
   }
 }

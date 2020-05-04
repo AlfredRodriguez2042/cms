@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  web:
+    container_name: web
+    build: .
+    command: serve -s
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+    deploy:
+      replicas: 2
+    stdin_open: true
+
+networks:
+  backend:
+  default:
+    external:
+      name: backend
