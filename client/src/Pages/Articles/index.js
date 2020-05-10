@@ -30,7 +30,7 @@ const Articles = () => {
     <div>
       <Titles title="Filtrar por" />
 
-      <FilterArticle state={state} setState={setState} />
+      {/* <FilterArticle state={state} setState={setState} /> */}
       <ErrorBoundary>
         {filterList.length > 0
           ? filterList.map((post) => (
