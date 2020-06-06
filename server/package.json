@@ -59,7 +59,7 @@
     "uuid": "^7.0.3"
   },
   "dependencies": {
-    "apollo-server-express": "^2.12.0",
+    "apollo-server-express": "^2.14.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "graphql": "^15.0.0",
