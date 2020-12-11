@@ -17,11 +17,11 @@ const Articles = () => {
   if (process.env.NODE_ENV !== 'production') {
     validateError(error)
   }
-
+console.log(articles)
   if (loading) {
     return <Loader />
   }
-  const Posts = data.Articles.map((item) => {
+  const Posts = articles.map((item) => {
     const index = item.content.indexOf('<!--more-->')
     item.content = translateMarkdown(item.content.slice(0, index))
     return item

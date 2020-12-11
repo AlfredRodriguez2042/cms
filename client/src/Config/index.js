@@ -17,7 +17,7 @@ export const COLOR_LIST = [
 ]
 
 export const SIDEBAR = {
-  avatar: require('../assets/avatar.jpeg'),
+  avatar: require('../assets/cat.gif'),
   username: 'kuro',
   bio: 'Bienvenido a mi pequeño blog',
   homepages: {

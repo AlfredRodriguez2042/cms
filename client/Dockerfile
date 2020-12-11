@@ -9,23 +9,25 @@
 
 
 
-FROM node AS builder
+FROM node:14
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
 
-RUN npm run build
+COPY . .
+
+# RUN npm run build
 
 
-FROM node
+# FROM node:14
 
-RUN npm install -g serve
+# RUN npm install -g serve
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY --from=builder /app/build .
+# COPY --from=builder /app/build .
 
 

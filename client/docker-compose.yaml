@@ -1,16 +1,17 @@
 version: '3.7'
 services:
   web:
-    container_name: web
-    build: .
-    command: serve -s
+    container_name: client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm start
     ports:
       - 5000:5000
+    volumes:
+      - ./:/app
     networks:
       - backend
-    deploy:
-      replicas: 2
-    stdin_open: true
 
 networks:
   backend:

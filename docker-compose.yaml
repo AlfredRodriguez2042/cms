@@ -1,10 +1,10 @@
 version: '3.7'
 services:
   db:
-    image: postgres:alpine
-    container_name: mypostgres
+    image: ${DB_IMAGE}
+    container_name: postgresql
     ports:
-      - '5432'
+      - '${POSTGRES_PORT:-5432}'
     networks:
       - backend
     environment:
@@ -13,22 +13,23 @@ services:
       POSTGRES_DB: '${POSTGRES_DB:-practica}'
       # POSTGRES_HOST_AUTH_METHOD: 'trust' no secure in production
     volumes:
-      - ~/Escritorio/Docker/postgres/data:/var/lib/postgresql/data
+      - ~/Desktop/Docker/postgres/data:/var/lib/postgresql/data
 
   storage:
-    image: redis:alpine
-    container_name: myredis
+    image: ${STORAGE_IMAGE}
+    container_name: redis
     networks:
       - backend
     ports:
-      - '6379'
+      - '${REDIS_POSRT:-6379}'
     command: 'redis-server --appendonly yes --requirepass ${REDIS_SECRET}'
     volumes:
       - ~/Escritorio/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
       - ~/Escritorio/Docker/redis/data:/data
 
-  servernode:
+  server:
     container_name: server
+    image: graphql
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -36,7 +37,7 @@ services:
     networks:
       - backend
     ports:
-      - 5500:5500
+      - ${BACKEND_PORT}
     volumes:
       - ./server:/app
     env_file:
@@ -47,10 +48,26 @@ services:
       POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
       POSTGRES_USER: '${POSTGRES_USER:-postgres}'
       POSTGRES_DB: '${POSTGRES_DB:-practica}'
+    links:
+      - db
     depends_on:
       - db
       - storage
-
+  client:
+    image: react
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    command: npm start
+    networks:
+      - backend
+    ports:
+      - 5000:5000
+    volumes:
+      - ./client:/app
+    environment:
+      - BACKEND_PORT: server
   # netdata:
   #   image: netdata/netdata
   #   hostname: kuro.com # set to fqdn of host
