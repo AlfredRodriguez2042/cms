@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 services:
   db:
     image: ${DB_IMAGE}
@@ -18,6 +18,14 @@ services:
   storage:
     image: ${STORAGE_IMAGE}
     container_name: redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     networks:
       - backend
     ports:
@@ -55,7 +63,7 @@ services:
       - storage
   client:
     image: react
-    container_name: client
+    #  container_name: client  # need container name hash
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -63,11 +71,19 @@ services:
     networks:
       - backend
     ports:
-      - 5000:5000
+      - 5000:3000
+    deploy:
+      mode: replicated
+      replicas: 2
     volumes:
       - ./client:/app
+      - /app/node_modules
     environment:
-      - BACKEND_PORT: server
+      BACKEND_HOST: server
+      BACKEND_PORT: ${BACKEND_PORT}
+    links:
+      - 'server'
+
   # netdata:
   #   image: netdata/netdata
   #   hostname: kuro.com # set to fqdn of host

@@ -9,7 +9,7 @@ const REFRESH_TOKEN = 'refreshToken'
 
 const httpLink = new HttpLink({
   credentials: 'include',
-  uri: 'http://localhost:5500/graphql',
+  uri: 'http://0.0.0.0:32809/graphql',
   // puedes enviar los token en los headers en cada request
   // headers: {
   //   authorization: `Bearer ${AUTH_TOKEN}`
@@ -23,7 +23,7 @@ const httpLink = new HttpLink({
   },
 })
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:5500/graphql`,
+  uri: `ws://0.0.0.0:32809/graphql`,
   options: {
     reconnect: true,
     connectionParams: {
