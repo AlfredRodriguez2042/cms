@@ -18,7 +18,7 @@ const apolloServer = new ApolloServer({
     pubsub,
     userLoader,
   }),
-  subscriptions: {path:"/"    },
+  subscriptions: { path: '/' },
 
   validationRules:
     process.env.NODE_ENV !== 'development' ? validationRules : [],

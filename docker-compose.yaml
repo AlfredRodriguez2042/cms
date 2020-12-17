@@ -150,3 +150,8 @@ networks:
     external: true
     name: backend
     driver: bridge
+
+volumes:
+  certs:
+  html:
+  vhostd:
