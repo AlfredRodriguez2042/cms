@@ -32,8 +32,8 @@ services:
       - '${REDIS_POSRT:-6379}'
     command: 'redis-server --appendonly yes --requirepass ${REDIS_SECRET}'
     volumes:
-      - ~/Escritorio/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
-      - ~/Escritorio/Docker/redis/data:/data
+      - ~/Desktop/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - ~/Desktop/Docker/redis/data:/data
 
   server:
     container_name: server
@@ -45,7 +45,7 @@ services:
     networks:
       - backend
     ports:
-      - ${BACKEND_PORT}
+      - ${BACKEND_PORT}:${BACKEND_PORT}
     volumes:
       - ./server:/app
     env_file:
@@ -63,7 +63,7 @@ services:
       - storage
   client:
     image: react
-    #  container_name: client  # need container name hash
+    #  container_name: client  # need container name hash for replicas
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -74,7 +74,11 @@ services:
       - 5000:3000
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.type == client
     volumes:
       - ./client:/app
       - /app/node_modules
@@ -84,6 +88,44 @@ services:
     links:
       - 'server'
 
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      NGINX_PROXY_CONTAINER: nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  nginx:
+    image: nginx
+    expose:
+      - "80"
+    volumes:
+      - ~/Desktop/Docker/wwww:/usr/share/nginx/html:ro
+    environment:
+       VIRTUAL_HOST: ${VIRTUAL_HOST}
+       LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    depends_on:
+      - nginx-proxy
+      - letsencrypt
   # netdata:
   #   image: netdata/netdata
   #   hostname: kuro.com # set to fqdn of host

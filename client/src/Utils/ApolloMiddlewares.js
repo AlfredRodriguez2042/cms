@@ -6,10 +6,11 @@ import { jwtstorage } from '../Redux/Reducers/User'
 
 const AUTH_TOKEN = 'token'
 const REFRESH_TOKEN = 'refreshToken'
+const host = window.location.host
 
 const httpLink = new HttpLink({
   credentials: 'include',
-  uri: 'http://0.0.0.0:32809/graphql',
+  uri: '/graphql/',
   // puedes enviar los token en los headers en cada request
   // headers: {
   //   authorization: `Bearer ${AUTH_TOKEN}`
@@ -23,7 +24,7 @@ const httpLink = new HttpLink({
   },
 })
 const wsLink = new WebSocketLink({
-  uri: `ws://0.0.0.0:32809/graphql`,
+  uri: `ws://${host}/graphql/`,
   options: {
     reconnect: true,
     connectionParams: {

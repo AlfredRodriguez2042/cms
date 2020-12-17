@@ -18,21 +18,8 @@ const apolloServer = new ApolloServer({
     pubsub,
     userLoader,
   }),
-  subscriptions: {
-    onConnect: (connectionParams, webSocket, context) => {
-      const { token } = connectionParams
-      webSocket.on('Login', (soket) => {
-        console.log(soket)
+  subscriptions: {path:"/"    },
 
-        soket.broadcast.emit('Login', 'user has login')
-      })
-
-      if (token) {
-        context.socket.emit('Login', 'welcome')
-      }
-    },
-    onDisconnect: () => {},
-  },
   validationRules:
     process.env.NODE_ENV !== 'development' ? validationRules : [],
   formatError,
