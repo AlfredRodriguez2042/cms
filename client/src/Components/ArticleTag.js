@@ -12,7 +12,7 @@ function getColor(name, colorList) {
 }
 
 const ArticleTag = (props) => {
-  const tagColorList = useSelector((state) => state.articles.tagList) // 相当于 connect(state => state.article.tagList)(ArticleTag)
+  const tagColorList = useSelector((state) => state.articles.tagList) // connect(state => state.article.tagList)(ArticleTag)
   const { tagList, categoryList } = props
   // color={getColor(tag.name, tagColorList)
 

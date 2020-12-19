@@ -72,7 +72,7 @@ export default {
     const { id, ...data } = input
 
     const user = await User.update(data, { where: { id } })
-
+    console.log(user)
     return user
   },
   DeleteUser: async (id) => {

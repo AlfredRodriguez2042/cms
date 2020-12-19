@@ -9,7 +9,6 @@ import Loader from './Components/Loader'
 import { useSelector } from 'react-redux'
 
 const App = () => {
-  console.log(process.env)
   const isAuth = useSelector((state) => state.user.token)
   const { loading, checkLoggedIn } = useCheckAuth()
 

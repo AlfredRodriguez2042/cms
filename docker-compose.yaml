@@ -61,6 +61,7 @@ services:
     depends_on:
       - db
       - storage
+
   client:
     image: react
     #  container_name: client  # need container name hash for replicas
@@ -88,44 +89,45 @@ services:
     links:
       - 'server'
 
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - certs:/etc/nginx/certs:ro
-      - vhostd:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-    labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+  # nginx-proxy:
+  #   image: jwilder/nginx-proxy
+  #   restart: always
+  #   ports:
+  #     - '80:80'
+  #     - '443:443'
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #     - certs:/etc/nginx/certs:ro
+  #     - vhostd:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #   labels:
+  #     - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
-  letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    restart: always
-    environment:
-      NGINX_PROXY_CONTAINER: nginx-proxy
-    volumes:
-      - certs:/etc/nginx/certs:rw
-      - vhostd:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+  # letsencrypt:
+  #   image: jrcs/letsencrypt-nginx-proxy-companion
+  #   restart: always
+  #   environment:
+  #     NGINX_PROXY_CONTAINER: nginx-proxy
+  #   volumes:
+  #     - certs:/etc/nginx/certs:rw
+  #     - vhostd:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
 
-  nginx:
-    image: nginx
-    expose:
-      - "80"
-    volumes:
-      - ~/Desktop/Docker/wwww:/usr/share/nginx/html:ro
-    environment:
-       VIRTUAL_HOST: ${VIRTUAL_HOST}
-       LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
-       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-    depends_on:
-      - nginx-proxy
-      - letsencrypt
+  # nginx:
+  #   image: nginx
+  #   expose:
+  #     - '80'
+  #   volumes:
+  #     - ~/Desktop/Docker/wwww:/usr/share/nginx/html:ro
+  #   environment:
+  #     VIRTUAL_HOST: ${VIRTUAL_HOST}
+  #     LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+  #     LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+  #   depends_on:
+  #     - nginx-proxy
+  #     - letsencrypt
+
   # netdata:
   #   image: netdata/netdata
   #   hostname: kuro.com # set to fqdn of host
@@ -150,8 +152,7 @@ networks:
     external: true
     name: backend
     driver: bridge
-
-volumes:
-  certs:
-  html:
-  vhostd:
+# volumes:
+#   certs:
+#   html:
+#   vhostd:

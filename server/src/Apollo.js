@@ -9,6 +9,7 @@ const apolloServer = new ApolloServer({
   schema,
   introspection: process.env.NODE_ENV === 'development',
   tracing: process.env.NODE_ENV === 'development',
+  playground: process.env.NODE_ENV === 'development',
   context: (request) => ({
     req: request.req,
     res: request.res,
@@ -18,7 +19,7 @@ const apolloServer = new ApolloServer({
     pubsub,
     userLoader,
   }),
-  subscriptions: { path: '/' },
+  //  subscriptions: { path: '/graphql/' },
 
   validationRules:
     process.env.NODE_ENV !== 'development' ? validationRules : [],

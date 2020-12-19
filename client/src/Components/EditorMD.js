@@ -11,8 +11,10 @@ function EditorMD(props) {
       onChange={props.onChange}
       options={{
         autofocus: true,
-        autosave: true,
-        previewRender: translateMarkdown
+        autosave: {
+          enabled: true,
+        },
+        previewRender: translateMarkdown,
       }}
     />
   )

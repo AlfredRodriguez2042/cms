@@ -37,7 +37,12 @@ app.use(sessionOption)
 
 app.enable('trust proxy')
 app.use(compression())
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy:
+      process.env.NODE_ENV === 'production' ? undefined : false,
+  })
+)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(path, middlewareSession)

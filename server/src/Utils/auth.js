@@ -36,7 +36,7 @@ export const checkAuth = (req, res) => {
 }
 
 export const checkAdmin = (req) => {
-  console.log(req)
+  console.log(req.user)
   if (req.user.role !== 'admin') {
     throw new AuthenticationError('Must be admin ')
   }
