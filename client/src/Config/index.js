@@ -1,6 +1,7 @@
 import React from 'react'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import GitHubIcon from '@material-ui/icons/GitHub'
+import avatar from '../assets/cat.gif'
 
 export const COLOR_LIST = [
   'magenta',
@@ -17,7 +18,7 @@ export const COLOR_LIST = [
 ]
 
 export const SIDEBAR = {
-  avatar: require('../assets/cat.gif'),
+  avatar,
   username: 'kuro',
   bio: 'Bienvenido a mi pequeño blog',
   homepages: {

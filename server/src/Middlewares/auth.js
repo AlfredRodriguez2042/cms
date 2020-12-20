@@ -18,9 +18,9 @@ export const middlewareSession = async (req, res, next) => {
     ) {
       console.log('localStorage')
       //  eslint-disable-next-line
-      token = req.headers.authorization.split(' ')[1]
+      token = req.headers.authorization.split(' ')[0]
     } else if (req.headers.cookie) {
-      const gettoken = req.headers.cookie.split(';')[0]
+      const gettoken = req.headers.cookie.split(' ')[2]
       //  eslint-disable-next-line
       token = gettoken.split('x-token=')[1]
     }
@@ -54,7 +54,6 @@ export const middlewareSession = async (req, res, next) => {
         },
       ],
     })
-
     if (!user) {
       console.log('!..user')
       req.isAuth = false

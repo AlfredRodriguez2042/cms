@@ -12,6 +12,8 @@ const App = () => {
   const isAuth = useSelector((state) => state.user.token)
   const { loading, checkLoggedIn } = useCheckAuth()
 
+  console.log(process.env.REACT_APP)
+
   useEffect(() => {
     if (isAuth) {
       console.log('autenticamndo')

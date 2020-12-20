@@ -60,7 +60,7 @@ export default {
   },
   Mutation: {
     createArticle: async (_, { input }) => {
-      console.log(input)
+      console.log('createarticle server', input)
       const post = await Article.create(input, {
         include: [
           {

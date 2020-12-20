@@ -1,0 +1,26 @@
+{
+  "name": "cms",
+  "version": "1.0.0",
+  "description": "blog manager system",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up",
+    "stop": "docker-compose down",
+    "test": "docker-compose up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlfredRodriguez2042/cms.git"
+  },
+  "keywords": [
+    "docker",
+    "cms",
+    "blog"
+  ],
+  "author": "Alfred Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlfredRodriguez2042/cms/issues"
+  },
+  "homepage": "https://github.com/AlfredRodriguez2042/cms#readme"
+}

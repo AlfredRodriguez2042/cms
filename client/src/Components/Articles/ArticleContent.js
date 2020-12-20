@@ -13,10 +13,19 @@ const useStyles = makeStyles(() => ({
     color: '#394d69',
     fontSize: '22px',
     cursor: 'pointer',
+    '&:hover': {
+      color: '#48b2ff',
+    },
   },
   paper: {
     padding: '1em',
     marginBottom: '1em',
+    transition: 'all 0.2s linear',
+    '&:hover': {
+      backgroundColor: '#effbff',
+      boxShadow: '0 15px 30px 0 rgba(0, 0, 0, 0.1)',
+      transform: 'translate3d(0, -5px 0)',
+    },
   },
 }))
 
