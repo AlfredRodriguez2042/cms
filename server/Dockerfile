@@ -1,6 +1,8 @@
 FROM node
 
-WORKDIR /app
+WORKDIR /home/node
+
+USER node
 
 USER node
 
@@ -8,7 +10,7 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 
 
 

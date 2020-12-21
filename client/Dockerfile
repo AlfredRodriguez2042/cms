@@ -1,6 +1,8 @@
 FROM node:14
 
-WORKDIR /app
+WORKDIR /home/node/
+
+USER node
 
 USER node
 
@@ -12,5 +14,5 @@ ENV REACT_APP_BACKEND_PORT $BACKEND_PORT
 
 RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 

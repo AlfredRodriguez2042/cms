@@ -17,6 +17,9 @@ FROM node:14
 ...
 # At the end, set the user to use when running this image
 USER node
+...
+# Permissions
+COPY --chown=node:node . .
 ```
 
 Note that the `node` user is neither a build-time nor a run-time dependency and it can be removed or altered, as long as the functionality of the application you want to add to the container does not depend on it.
