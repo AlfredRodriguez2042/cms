@@ -1,8 +1,8 @@
 FROM node:14
 
-WORKDIR /home/node/
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-USER node
+WORKDIR /home/node/
 
 USER node
 
@@ -12,7 +12,8 @@ ARG BACKEND_PORT
 
 ENV REACT_APP_BACKEND_PORT $BACKEND_PORT
 
+COPY --chown=node:node . .
+
 RUN npm install
 
-COPY --chown=node:node . .
 
