@@ -47,7 +47,7 @@ services:
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
     volumes:
-      - ./server:/app
+      - ./server:/home/node/app
     env_file:
       - .env
     environment:
@@ -81,7 +81,7 @@ services:
         constraints:
           - node.labels.type == client
     volumes:
-      - ./client:/app
+      - ./client:/home/node/app
       - /app/node_modules
     environment:
       BACKEND_HOST: server

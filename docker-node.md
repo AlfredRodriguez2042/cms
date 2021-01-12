@@ -15,11 +15,20 @@ Alternatively, the user can be activated in the `Dockerfile`:
 ```Dockerfile
 FROM node:14
 ...
+# create a directori and set permisions
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+...
+# set default work directory
+WORKDIR /home/node/app
+...
 # At the end, set the user to use when running this image
 USER node
 ...
 # Permissions
 COPY --chown=node:node . .
+...
+# last step install dependecies
+RUN npm install
 ```
 
 Note that the `node` user is neither a build-time nor a run-time dependency and it can be removed or altered, as long as the functionality of the application you want to add to the container does not depend on it.
