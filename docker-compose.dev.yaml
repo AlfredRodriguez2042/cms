@@ -1,0 +1,88 @@
+version: '3.9'
+services:
+  db:
+    ports:
+      - '${POSTGRES_PORT:-5432}'
+    environment:
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_DB: '${POSTGRES_DB:-practica}'
+
+  storage:
+    ports:
+      - '${REDIS_POSRT:-6379}'
+
+  server:
+    build:
+      args:
+        NODE_ENV: development
+        BACKEND_PORT: ${BACKEND_PORT}
+      context: ./server
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./server:/home/node/app
+    environment:
+      BACKEND_PORT: ${BACKEND_PORT}
+      NODE_ENV: development
+      POSTGRES_HOST: db
+      REDIS_HOST: storage
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_DB: '${POSTGRES_DB:-practica}'
+      JWT_SECRET: ${JWT_SECRET}
+      EXPRESS_SESSION: ${EXPRESS_SESSION}
+
+  client:
+    image: react
+    #  container_name: client  # need container name hash for replicas
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    command: npm start
+    ports:
+      - 5000:3000
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.type == client
+    networks:
+      - backend
+    volumes:
+      - ./client:/home/node/app
+      - /app/node_modules
+    environment:
+      BACKEND_HOST: server
+      WDS_SOCKET_HOST: server
+      REACT_APP_BACKEND_PORT: ${BACKEND_PORT}
+      #  CHOKIDAR_USEPOLLING: true
+    links:
+      - 'server'
+    depends_on:
+      - server
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - 5500:80
+    networks:
+      - backend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - server
+      - client
+
+networks:
+  backend:
+    external: true
+    name: backend
+    driver: bridge
+# volumes:
+#   certs:
+#   html:
+#   vhostd:

@@ -3,16 +3,34 @@ services:
   db:
     image: ${DB_IMAGE}
     container_name: postgresql
+    ports:
+      - '${POSTGRES_PORT:-5432}'
     networks:
       - backend
+    environment:
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_DB: '${POSTGRES_DB:-practica}'
+      # POSTGRES_HOST_AUTH_METHOD: 'trust' no secure in production
     volumes:
       - ~/Desktop/Docker/postgres/data:/var/lib/postgresql/data
 
   storage:
     image: ${STORAGE_IMAGE}
     container_name: redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     networks:
       - backend
+    ports:
+      - '${REDIS_POSRT:-6379}'
+    command: 'redis-server --appendonly yes --requirepass ${REDIS_SECRET}'
     volumes:
       - ~/Desktop/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
       - ~/Desktop/Docker/redis/data:/data
@@ -20,13 +38,59 @@ services:
   server:
     container_name: server
     image: graphql
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: npm run dev
     networks:
       - backend
+    ports:
+      - '${BACKEND_PORT}'
+    volumes:
+      - ./server:/home/node/app
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: db
+      REDIS_HOST: storage
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_DB: '${POSTGRES_DB:-practica}'
     links:
       - db
     depends_on:
       - db
       - storage
+
+  client:
+    image: react
+    #  container_name: client  # need container name hash for replicas
+    build:
+      args:
+        BACKEND_PORT: ${BACKEND_PORT}
+      context: ./client
+      dockerfile: Dockerfile
+    command: npm start
+    networks:
+      - backend
+    ports:
+      - 5000:3000
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.type == client
+    volumes:
+      - ./client:/home/node/app
+      - /app/node_modules
+    environment:
+      BACKEND_HOST: server
+      CHOKIDAR_USEPOLLING: true
+      REACT_APP_BACKEND_PORT: ${BACKEND_PORT}
+    links:
+      - 'server'
 
   # nginx-proxy:
   #   image: jwilder/nginx-proxy

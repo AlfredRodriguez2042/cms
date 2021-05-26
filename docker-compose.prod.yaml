@@ -1,32 +1,53 @@
 version: '3.9'
 services:
   db:
-    image: ${DB_IMAGE}
-    container_name: postgresql
-    networks:
-      - backend
-    volumes:
-      - ~/Desktop/Docker/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      # POSTGRES_HOST_AUTH_METHOD: 'trust' no secure in production
 
   storage:
-    image: ${STORAGE_IMAGE}
-    container_name: redis
-    networks:
-      - backend
-    volumes:
-      - ~/Desktop/Docker/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
-      - ~/Desktop/Docker/redis/data:/data
+    command: 'redis-server --appendonly yes --requirepass ${REDIS_SECRET}'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
 
   server:
-    container_name: server
-    image: graphql
+    build:
+      args:
+        BACKEND_PORT: ${BACKEND_PORT}
+      context: ./server
+      dockerfile: Dockerfile.prod
+    command: node dist/index.js
+    environment:
+      BACKEND_PORT: ${BACKEND_PORT}
+      POSTGRES_HOST: db
+      REDIS_HOST: storage
+      REDIS_SECRET: ${REDIS_SECRET}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      EXPRESS_SESSION: ${EXPRESS_SESSION}
+
+  nginx:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
     networks:
       - backend
-    links:
-      - db
     depends_on:
-      - db
-      - storage
+      - server
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
   # nginx-proxy:
   #   image: jwilder/nginx-proxy
