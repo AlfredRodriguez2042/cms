@@ -58,7 +58,7 @@
     "easymde": "^2.15.0",
     "formik": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
-    "marked": "^2.0.3",
+    "marked": "^2.0.0",
     "moment": "^2.29.1",
     "react-cookie": "^4.0.3",
     "react-helmet": "^6.1.0",
