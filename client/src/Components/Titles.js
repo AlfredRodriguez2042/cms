@@ -2,15 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 
-const Titles = ({ title, type }) => {
+const Titles = ({ title, type, ...rest }) => {
   return (
-    <Typography
-      component="h2"
-      variant={type}
-      color="primary"
-      gutterBottom
-      align="center"
-    >
+    <Typography variant={type} {...rest} align="center">
       {title}
     </Typography>
   )

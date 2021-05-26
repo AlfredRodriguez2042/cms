@@ -1,0 +1,9 @@
+FROM node:14
+
+WORKDIR /home/node/app
+
+COPY package*.json ./
+
+EXPOSE 5500
+
+RUN npm install

@@ -55,4 +55,4 @@ ArticleTag.propTypes = {
   categoryList: PropTypes.array.isRequired,
 }
 
-export default withRouter(ArticleTag)
+export default ArticleTag

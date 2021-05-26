@@ -1,0 +1,11 @@
+FROM node:14
+
+WORKDIR /home/node/app
+
+COPY package*.json ./
+
+ARG BACKEND_HOST
+
+ENV BACKEND_HOST=$BACKEND_HOST
+
+RUN npm install

@@ -19,7 +19,7 @@ const apolloServer = new ApolloServer({
     pubsub,
     userLoader,
   }),
-  //  subscriptions: { path: '/graphql/' },
+  subscriptions: { path: '/subscription' },
 
   validationRules:
     process.env.NODE_ENV !== 'development' ? validationRules : [],

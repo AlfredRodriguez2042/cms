@@ -67,7 +67,7 @@ const SingleArticle = () => {
     validateError(error)
   }
   if (error) {
-    history.push('/404')
+    history('/404')
     return <Page404 />
   }
 

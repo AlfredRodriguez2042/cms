@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import reportWebVitals from './reportWebVitals'
 import ApolloClient from './Apollo'
-import './Scss/main.scss'
+//import './Scss/main.scss'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from './Utils/theme'
-require('dotenv').config()
 const RootApp = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -16,4 +16,10 @@ const RootApp = () => {
   )
 }
 
-ReactDOM.render(<RootApp />, document.getElementById('root'))
+ReactDOM.render(
+  <React.StrictMode>
+    <RootApp />
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+reportWebVitals()

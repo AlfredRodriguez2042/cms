@@ -1,12 +1,13 @@
 import { makeExecutableSchema } from 'apollo-server-express'
 import path from 'path'
-import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas'
+import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
+import { loadFilesSync } from '@graphql-tools/load-files'
 import authDirective from '../Utils/Directives/auth'
 import PasswordDirective from '../Utils/Directives/password'
 
-const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './types')))
+const typeDefs = mergeTypeDefs(loadFilesSync(path.join(__dirname, './types')))
 const resolvers = mergeResolvers(
-  fileLoader(path.join(__dirname, './resolvers'))
+  loadFilesSync(path.join(__dirname, './resolvers'))
 )
 export const schema = makeExecutableSchema({
   typeDefs,

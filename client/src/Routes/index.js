@@ -1,36 +1,68 @@
-import React, { lazy, Suspense } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import React, { Suspense, lazy } from 'react'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import Loader from '../Components/Loader'
 import ErrorBoundary from '../Components/ErrorBoundary'
-import SingleArticle from '../Components/Articles/SingleArticle'
-
-const Home = lazy(() => import('../Pages/Home'))
+import { routes, PublicRoute } from './routes'
 const Page404 = lazy(() => import('../Pages/Page404'))
-const ConfirmEmail = lazy(() => import('../Pages/Email'))
-const About = lazy(() => import('../Pages/About'))
-const Articles = lazy(() => import('../Pages/Articles'))
-const Policy = lazy(() => import('../Pages/Policy'))
-const Admin = lazy(() => import('../Pages/Admin'))
-const Dashboard = lazy(() => import('../Pages/Admin/Dashboard'))
-const PrivateRoute = lazy(() => import('./PrivateRoute'))
+const renderRoutes = (routes, contextPath) => {
+  const children = []
+  // const role = useSelector((state) => state.user.user.role)
+  // const isAuth = useSelector((state) => state.user.isAuth)
 
+  const renderRoute = (item, routeContextPath) => {
+    let newContextPath = item.path
+      ? `${routeContextPath}/${item.path}`
+      : routeContextPath
+    newContextPath = newContextPath.replace(/\/+/g, '/')
+    // if (newContextPath.includes('admin') && role !== 'admin') {
+    //   item = {
+    //     ...item,
+    //     component: () => <Redirect to="/" />,
+    //     children: [],
+    //   }
+    // }
+    // if (newContextPath.includes('app') && !isAuth) {
+    //   item = {
+    //     ...item,
+    //     component: () => <Redirect to="/" />,
+    //     children: [],
+    //   }
+    // }
+    //   if (!item.component) return
+
+    if (item.childRoutes) {
+      const childRoutes = renderRoutes(item.childRoutes, newContextPath)
+      children.push(
+        <Route
+          key={newContextPath}
+          render={(props) => (
+            <item.component {...props}>{childRoutes}</item.component>
+          )}
+          path={newContextPath}
+        />
+      )
+      item.childRoutes.forEach((r) => renderRoute(r, newContextPath))
+    } else {
+      children.push(
+        <Route
+          key={newContextPath}
+          component={item.component}
+          path={newContextPath}
+          exact
+        />
+      )
+    }
+  }
+  routes.forEach((item) => renderRoute(item, contextPath))
+  return <Switch>{children}</Switch>
+}
+const mainroutes = renderRoutes(routes, '/')
 const AppRouter = () => {
+  const role = 'user'
   return (
     <ErrorBoundary>
       <Suspense fallback={<Loader />}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/confirm/email" exact component={ConfirmEmail} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/about" exact component={About} />
-          <Route path="/articles" exact component={Articles} />
-          <Route path="/articles/:id/" exact component={SingleArticle} />
-          <Route path="/privacy-policy/" exact component={Policy} />
-          <PrivateRoute path="/article/edit" exact component={Admin} />
-          <PrivateRoute path="/article/edit/:id" exact component={Home} />
-          <PrivateRoute path="/dashboard" exact component={Dashboard} />
-          <Route path="*" component={Page404} />
-        </Switch>
+        <Switch>{mainroutes}</Switch>
       </Suspense>
     </ErrorBoundary>
   )

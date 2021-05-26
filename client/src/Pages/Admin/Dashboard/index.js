@@ -7,6 +7,7 @@ import { Container, Paper, Grid } from '@material-ui/core'
 import Chart from './Chart'
 import Deposits from './Deposits'
 import Orders from './Orders'
+import Page from '../../../Components/Base/Page'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(9),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -38,26 +39,28 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}>
-            <Chart />
-          </Paper>
-        </Grid>
+    <Page title="Dashboard">
+      <Container>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={8} lg={9}>
+            <Paper className={fixedHeightPaper}>
+              <Chart />
+            </Paper>
+          </Grid>
 
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-            <Deposits />
-          </Paper>
-        </Grid>
+          <Grid item xs={12} md={4} lg={3}>
+            <Paper className={fixedHeightPaper}>
+              <Deposits />
+            </Paper>
+          </Grid>
 
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Orders />
-          </Paper>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Orders />
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Page>
   )
 }

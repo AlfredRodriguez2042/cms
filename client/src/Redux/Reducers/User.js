@@ -5,12 +5,12 @@ import jwt from 'jsonwebtoken'
 
 export const jwtstorage = localStorage.getItem(storage_token)
 
-if (jwtstorage) {
-  const decoded = jwt.decode(jwtstorage)
-  if ((decoded.exp = 1000 < Date.now())) {
-    localStorage.removeItem(storage_token)
-  }
-}
+// if (jwtstorage) {
+//   const decoded = jwt.decode(jwtstorage)
+//   if ((decoded.exp = 1000 < Date.now())) {
+//     localStorage.removeItem(storage_token)
+//   }
+// }
 
 const initialState = {
   token: jwtstorage,

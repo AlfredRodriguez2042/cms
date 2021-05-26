@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -16,9 +15,9 @@ import { validateError } from '../../utils'
 import { signIn } from '../../Redux/actions/Auth'
 import { connect } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh'
+    height: '100vh',
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -28,25 +27,25 @@ const useStyles = makeStyles(theme => ({
         ? theme.palette.grey[900]
         : theme.palette.grey[50],
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   },
   paper: {
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }))
 
 function SignIn(props) {
@@ -59,7 +58,7 @@ function SignIn(props) {
     const value = type === 'checkbox' ? target.checked : target.value
     setValues({
       ...values,
-      [name]: value
+      [name]: value,
     })
   }
 
@@ -70,10 +69,10 @@ function SignIn(props) {
       localStorage.setItem('jwt', token)
       props.signIn(user)
       props.history.push('/')
-    }
+    },
   })
   validateError(error)
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     login()
   }
@@ -81,7 +80,6 @@ function SignIn(props) {
 
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
@@ -151,6 +149,6 @@ function SignIn(props) {
   )
 }
 
-const mapStateToProps = state => ({ errorMessage: state.auth.errorMessage })
+const mapStateToProps = (state) => ({ errorMessage: state.auth.errorMessage })
 
 export default connect(mapStateToProps, { signIn })(SignIn)

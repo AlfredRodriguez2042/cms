@@ -2,10 +2,11 @@ import React from 'react'
 import Titles from '../../Components/Titles'
 import { Typography } from '@material-ui/core'
 import BadgeAvatar from '../../Components/BadgeAvatar'
+import Page from '../../Components/Base/Page'
 
 const Policy = () => {
   return (
-    <>
+    <Page title="policy">
       <Titles title="Privacy & Policy" />
       <BadgeAvatar title="Kuro" />
       <Typography variant="subtitle1">
@@ -16,7 +17,7 @@ const Policy = () => {
         informacion
         <br /> de cambiar los terminos se pondra un aviso
       </Typography>
-    </>
+    </Page>
   )
 }
 export default Policy

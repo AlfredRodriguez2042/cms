@@ -5,19 +5,16 @@ import { getMainDefinition } from 'apollo-utilities'
 import { jwtstorage } from '../../Redux/Reducers/User'
 
 const host = window.location.host
-let uri1
-let uri2
-if (process.env.NODE_ENV !== 'production') {
-  uri1 = 'http://localhost:5500/graphql/'
-  uri2 = `ws://localhost:5500/graphql`
-} else {
-  uri1 = '/graphql'
-  uri2 = `ws://${host}/`
-}
+const socket =
+  process.env.NODE_ENV !== 'production'
+    ? `ws://localhost:5500/subscription`
+    : `ws://subscriptions`
+const api =
+  process.env.NODE_ENV !== 'production' ? 'http://localhost:5500/api/' : '/api'
 
 const httpLink = new HttpLink({
   credentials: 'include',
-  uri: uri1,
+  uri: api,
   // puedes enviar los token en los headers en cada request
   // headers: {
   //   authorization: `Bearer ${AUTH_TOKEN}`
@@ -32,12 +29,12 @@ const httpLink = new HttpLink({
 })
 
 const wsLink = new WebSocketLink({
-  uri: uri2,
+  uri: socket,
   options: {
     reconnect: true,
-    connectionParams: {
-      token: jwtstorage,
-    },
+    // connectionParams: {
+    //   token: jwtstorage,
+    // },
   },
 })
 

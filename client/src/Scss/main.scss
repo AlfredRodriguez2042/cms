@@ -1,3 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700&display=swap');
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper__effects {
+  z-index: -1;
+
+  .cube {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 4px solid purple;
+    right: 10%;
+    bottom: 10%;
+    animation: spin 10s linear infinite;
+    &:nth-child(2) {
+      right: 20%;
+      top: 30%;
+    }
+    &:nth-child(3) {
+      left: 15%;
+      top: 40%;
+    }
+    &:nth-child(4) {
+      left: 35%;
+      bottom: 10%;
+    }
+  }
+  .triangle {
+    position: absolute;
+    border-top: 30px solid transparent;
+    border-left: 30px solid springgreen;
+    left: 30%;
+    top: 20%;
+    animation: spin 15s linear infinite;
+    &::after {
+      content: '';
+      position: absolute;
+      border-top: 30px solid transparent;
+      border-left: 30px solid springgreen;
+      opacity: 0.5;
+      left: -35px;
+      top: -25px;
+    }
+    &:last-child {
+      left: 40%;
+      top: 40%;
+    }
+  }
+  .circle {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    top: 45%;
+    right: 10%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: spin 10s linear infinite;
+
+    .line {
+      width: 1px;
+      background-color: salmon;
+    }
+    &:last-child {
+      left: 5%;
+      top: 80%;
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
+
 .action-icon {
   position: fixed;
   bottom: 100px;

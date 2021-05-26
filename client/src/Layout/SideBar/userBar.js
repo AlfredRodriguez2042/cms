@@ -1,45 +1,43 @@
 import React from 'react'
 import { SIDEBAR } from '../../Config'
-import { Typography, makeStyles, Paper, Button, Link } from '@material-ui/core'
+import {
+  Typography,
+  makeStyles,
+  Box,
+  Container,
+  Card,
+  CardContent,
+  Button,
+} from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { Divider } from 'antd'
 
 const useStyle = makeStyles(() => ({
-  homepages: {
-    padding: 0,
-    width: '214px',
-    lineHeight: '24px',
-    display: 'flex',
-    justifyContent: 'center',
-    listStyle: 'none',
+  card: {
+    width: '15.5%',
+    position: 'fixed',
+    // left: 0,
   },
-  item: {
-    padding: '0 6px',
-    // textAlign: 'center'
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#53575A',
-    marginLeft: '4px',
+  title: {
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    letterSpacing: '1px',
   },
   iconButton: {
-    padding: 2,
-    fontSize: '16px',
-    borderRadius: '7px',
     textTransform: 'none',
-    marginLeft: '4px',
   },
-  bio: {
-    color: '#53575A',
-  },
-  paper: {
+
+  body: {
     textAlign: 'center',
-    padding: 10,
   },
   avatar: {
     width: '132px',
     height: '132px',
     borderRadius: '50%', //'66px',
+  },
+  container: {
+    position: 'relative',
+    marginTop: '6.3em',
   },
 }))
 const UserBar = ({ user }) => {
@@ -48,33 +46,41 @@ const UserBar = ({ user }) => {
   }
   const classes = useStyle()
   return (
-    <Paper>
-      <div className={classes.paper}>
-        <img src={SIDEBAR.avatar} className={classes.avatar} alt="" />
-        <Typography variant="h6">{user.username}</Typography>
-        <Typography variant="body2" className={classes.bio}>
-          {user.bio}
-        </Typography>
-        <ul className={classes.homepages}>
-          {/* {!user.id &&
-            Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
-              <Button
-                key={linkName}
-                className={classes.iconButton}
-                startIcon={item.icon}
-              >
-                <Link href={item.link} className={classes.link}>
+    <Container className={classes.container}>
+      <Card className={classes.card}>
+        <Box display="flex" justifyContent="center">
+          <img
+            src={user.avatar}
+            className={classes.avatar}
+            alt={user.username}
+          />
+        </Box>
+        <CardContent className={classes.body}>
+          <Typography variant="h5" className={classes.title}>
+            {user.username}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            {user.bio}
+          </Typography>
+          <Box display="flex" justifyContent="space-between">
+            {!user.id &&
+              Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
+                <Button
+                  startIcon={item.icon}
+                  href={item.link}
+                  className={classes.iconButton}
+                >
                   {linkName}
-                </Link>
-              </Button>
-            ))} */}
-        </ul>
-        <Alert severity="info">la pagina se actualiza con frecuencia</Alert>
-        <Divider orientation="left">Frontend</Divider>
-        <Divider orientation="center">&</Divider>
-        <Divider orientation="left">Backend</Divider>
-      </div>
-    </Paper>
+                </Button>
+              ))}
+          </Box>
+          <Alert severity="info">la pagina se actualiza con frecuencia</Alert>
+          <Divider orientation="left">Frontend</Divider>
+          <Divider orientation="center">&</Divider>
+          <Divider orientation="left">Backend</Divider>
+        </CardContent>
+      </Card>
+    </Container>
   )
 }
 

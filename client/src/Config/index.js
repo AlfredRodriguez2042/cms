@@ -2,6 +2,8 @@ import React from 'react'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import avatar from '../assets/cat.gif'
+import Logo from '../assets/logo.svg'
+import { Folder, Info } from '@material-ui/icons'
 
 export const COLOR_LIST = [
   'magenta',
@@ -16,7 +18,10 @@ export const COLOR_LIST = [
   'geekblue',
   'purple',
 ]
-
+export const Config = {
+  name: 'KuroDev',
+  logo: Logo,
+}
 export const SIDEBAR = {
   avatar,
   username: 'kuro',
@@ -28,7 +33,7 @@ export const SIDEBAR = {
     },
     LinkedIn: {
       link: 'https://linkedin.com/in/AlfredRodriguez2042',
-      icon: <LinkedInIcon color="primary" />,
+      icon: <LinkedInIcon color="primary" fontSize="small" />,
     },
   },
 }
@@ -78,4 +83,65 @@ export const MYINFO = {
     },
   ],
   fetures: [],
+}
+
+export const projectBrief = {
+  title: 'Project Brief',
+  description: '',
+  tabs: [
+    {
+      tabButton: 'Details',
+      tabIcon: <Folder />,
+      tabContent: (
+        <span>
+          <p>
+            Collaboratively administrate empowered markets via plug-and-play
+            networks. Dynamically procrastinate B2C users after installed base
+            benefits.
+          </p>
+          <br />
+          <p>
+            Dramatically visualize customer directed convergence without
+            revolutionary ROI. Collaboratively administrate empowered markets
+            via plug-and-play networks. Dynamically procrastinate B2C users
+            after installed base benefits.
+          </p>
+          <br />
+          <p>
+            Dramatically visualize customer directed convergence without
+            revolutionary ROI. Collaboratively administrate empowered markets
+            via plug-and-play networks. Dynamically procrastinate B2C users
+            after installed base benefits.
+          </p>
+        </span>
+      ),
+    },
+    {
+      tabButton: 'Info',
+      tabIcon: <Info />,
+      tabContent: (
+        <span>
+          <p>
+            Collaboratively administrate empowered markets via plug-and-play
+            networks. Dynamically procrastinate B2C users after installed base
+            benefits.
+          </p>
+          <br />
+          <p>
+            Dramatically visualize customer directed convergence without
+            revolutionary ROI. Collaboratively administrate empowered markets
+            via plug-and-play networks. Dynamically procrastinate B2C users
+            after installed base benefits.
+          </p>
+          <br />
+          <p>
+            Dramatically visualize customer directed convergence without
+            revolutionary ROI. Collaboratively administrate empowered markets
+            via plug-and-play networks. Dynamically procrastinate B2C users
+            after installed base benefits.
+          </p>
+        </span>
+      ),
+    },
+  ],
 }

@@ -8,7 +8,7 @@ require('@babel/register')({ ignore: [] })
 
 const httpServer = createServer(app)
 apolloServer.installSubscriptionHandlers(httpServer)
-const PORT = process.env.PORT || 5500
+const PORT = process.env.BACKEND_PORT || 5500
 
 function memory() {
   const totalHeapSize = v8.getHeapStatistics().total_available_size

@@ -18,7 +18,7 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <Link to="/dashboard">
+      <Link to="/admin/dashboard">
         <ListItemText primary="Dashboard" />
       </Link>
     </ListItem>
@@ -26,7 +26,7 @@ export const mainListItems = (
       <ListItemIcon>
         <EditIcon />
       </ListItemIcon>
-      <Link to="/article/edit">
+      <Link to="/admin/article/edit">
         <ListItemText primary="Edit Article" />
       </Link>
     </ListItem>
