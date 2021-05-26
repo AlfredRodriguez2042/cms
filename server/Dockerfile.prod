@@ -10,18 +10,24 @@ RUN npm install && npm run build
 
 COPY ./src/Graphql/types /app/dist/Graphql/types
 
-
-FROM node:14
-
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-
-COPY --chown=node:node --from=builder2 /app/node_modules /home/node/app
-COPY --chown=node:node --from=builder2 /app/dist /home/node/app
-
-WORKDIR /home/node/app
-
 USER node
 
 ARG BACKEND_PORT
 
 EXPOSE $BACKEND_PORT
+
+
+# FROM node:14
+
+# RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+
+# COPY --chown=node:node --from=builder2 /app/node_modules /home/node/app
+# COPY --chown=node:node --from=builder2 /app/dist /home/node/app
+
+# WORKDIR /home/node/app
+
+# USER node
+
+# ARG BACKEND_PORT
+
+# EXPOSE $BACKEND_PORT
