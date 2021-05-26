@@ -4,9 +4,11 @@
   "description": "blog manager system",
   "main": "index.js",
   "scripts": {
-    "start": "docker-compose up",
-    "stop": "docker-compose down",
-    "test": "docker-compose up"
+    "start": "docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d",
+    "stop": "docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml down -v",
+    "start:prod": "docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d",
+    "stop:prod": "docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml down -v",
+    "test": "docker-compose -f dockere-compose.test.yaml up"
   },
   "repository": {
     "type": "git",

@@ -15,7 +15,7 @@ const app = express()
 const path = '/graphql'
 const corsOptions = {
   credentials: true,
-  origin: ['http://localhost:5000', 'http://client:5000'],
+  origin: ['http://localhost:5000', 'http://client:5000', 'http://nginx:80'],
 }
 
 // redirects should be ideally setup in reverse proxy like nignx
