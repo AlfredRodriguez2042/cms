@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 
 import { useSelector } from 'react-redux'
-import Modals from '../../../Components/Modals'
 
 import MenuInfo from '../../../Components/MenuInfo'
 import { Link } from '@material-ui/core'
+import ModalForm from 'Components/Modal/ModalForm'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -61,7 +61,7 @@ const NavBar = () => {
             </Link>
           ))
         ) : (
-          <Modals />
+          <ModalForm></ModalForm>
         )}
 
         {isAuth && <MenuInfo />}

@@ -1,6 +1,6 @@
 import { USER_LOADED, USER_LOGIN_ERROR, USER_LOG_OUT } from '../types'
 
-export const SignIn = (user) => {
+export const loginUserAcction = (user) => {
   return (dispatch) => {
     try {
       dispatch({

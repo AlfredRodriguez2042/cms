@@ -88,16 +88,11 @@ const CreateArticle = () => {
 
   return (
     <Page title="create">
+      <Typography variant="h4" align="center" style={{ marginBottom: '10px' }}>
+        CREATE ARTICLE
+      </Typography>
       <Container>
         <Grid container item spacing={1}>
-          <Grid item xs={12}>
-            <Typography
-              variant="h4"
-              style={{ textAlign: 'center', marginBottom: '10px' }}
-            >
-              CREATE ARTICLE
-            </Typography>
-          </Grid>
           <Grid item xs={12}>
             <div className={classes.list}>
               <span className={classes.label}>Title:</span>

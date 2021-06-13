@@ -1,7 +1,6 @@
 import { USER_LOGIN_ERROR, USER_LOADED, USER_LOG_OUT } from '../types'
 import { storage_token } from '../../Utils/constants'
 import jwt from 'jsonwebtoken'
-//import { Cookies } from 'react-cookie'
 
 export const jwtstorage = localStorage.getItem(storage_token)
 

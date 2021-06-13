@@ -58,7 +58,6 @@ const renderRoutes = (routes, contextPath) => {
 }
 const mainroutes = renderRoutes(routes, '/')
 const AppRouter = () => {
-  const role = 'user'
   return (
     <ErrorBoundary>
       <Suspense fallback={<Loader />}>
