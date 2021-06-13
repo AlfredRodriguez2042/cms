@@ -10,7 +10,7 @@ RUN npm install && npm run build
 
 COPY ./src/Graphql/types /app/dist/Graphql/types
 
-USER node
+#USER node
 
 ARG BACKEND_PORT
 
