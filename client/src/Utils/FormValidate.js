@@ -1,40 +1,17 @@
-import Joi from '@hapi/joi'
+import * as Yup from 'yup'
 
-const customError = () => {
-  return new Error('Invalid password must be a number and one capital letter')
-}
-
-export const validationUser = user => {
-  const schema = Joi.object({
-    name: Joi.string().required(),
-    username: Joi.string()
-      .alphanum()
-      .min(5)
-      .max(12)
-      .required(),
-    email: Joi.string()
-      .email({ minDomainSegments: 2 })
-      .required(),
-    password: Joi.string()
-      .min(8)
-      .max(16)
-      .pattern(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)
-      .error(customError)
-      .required()
-  })
-  return schema.validate(user)
-}
-
-export const validationLogin = user => {
-  const schema = Joi.object({
-    email: Joi.string()
-      .email({ minDomainSegments: 2 })
-      .required(),
-    password: Joi.string()
-      .alphanum()
-      .min(8)
-      .max(16)
-      .required()
-  })
-  return schema.validate(user)
-}
+export const createUserSchema = Yup.object().shape({
+  username: Yup.string().min(4).max(12).required(),
+  email: Yup.string().email().required(),
+  password: Yup.string()
+    .min(8)
+    .max(16)
+    .matches(
+      /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+      'Invalid password must be a number and one capital letter'
+    ),
+})
+export const loginUserSchema = Yup.object().shape({
+  email: Yup.string().email().required(),
+  password: Yup.string().required(),
+})
