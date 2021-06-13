@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { Paper, makeStyles } from '@material-ui/core'
 import { EyeFilled, WechatFilled } from '@ant-design/icons'
 import { CalendarOutlined } from '@ant-design/icons'
-import FavoriteButton from '../Buttons.js/FavoriteButton'
+import FavoriteButton from '../Buttons/FavoriteButton'
 
 const useStyles = makeStyles(() => ({
   title: {

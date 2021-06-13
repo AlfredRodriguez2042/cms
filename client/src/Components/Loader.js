@@ -10,13 +10,12 @@ const useStyles = makeStyles({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 })
 
 function Loader() {
   const classes = useStyles()
-  console.log('loadeeeer')
   return (
     <div className={classes.center}>
       <CircularProgress />

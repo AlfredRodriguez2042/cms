@@ -1,23 +1,19 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import ReactDOMServer from 'react-dom/server'
 
 import SimpleMDE from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
 import { translateMarkdown } from '../Utils'
 
-function EditorMD(props) {
-  return (
-    <SimpleMDE
-      value={props.value}
-      onChange={props.onChange}
-      options={{
-        autofocus: true,
-        autosave: {
-          enabled: true,
-        },
-        previewRender: translateMarkdown,
-      }}
-    />
-  )
+function EditorMD({ value, onChange }) {
+  const options = useMemo(() => {
+    return {
+      autofocus: true,
+      spellChecker: false,
+      previewRender: translateMarkdown,
+    }
+  }, [])
+  return <SimpleMDE value={value} onChange={onChange} options={options} />
 }
 
 export default EditorMD
