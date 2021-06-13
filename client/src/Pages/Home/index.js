@@ -8,6 +8,8 @@ import {
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Page from '../../Components/Base/Page'
+import Portfolio from './Portfolio'
+import Services from './Services'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -24,7 +26,6 @@ const Home = () => {
   const classes = useStyles()
   const params = useParams()
 
-  //console.log(params.id)
   return (
     <Page title="home">
       <div className="wrapper__effects">
@@ -77,6 +78,8 @@ const Home = () => {
           </Typography>
         </Box>
       </Container>
+      <Services />
+      <Portfolio />
     </Page>
   )
 }

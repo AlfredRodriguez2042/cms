@@ -55,9 +55,11 @@
     "clsx": "^1.1.1",
     "easymde": "^2.15.0",
     "formik": "^2.2.8",
+    "highlight.js": "^11.0.1",
     "jsonwebtoken": "^8.5.1",
     "marked": "^2.0.5",
     "moment": "^2.29.1",
+    "node-sass": "^6.0.0",
     "react-helmet": "^6.1.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
@@ -69,6 +71,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "subscriptions-transport-ws": "^0.9.18",
-    "xss": "^1.0.9"
+    "xss": "^1.0.9",
+    "yup": "^0.32.9"
   }
 }
