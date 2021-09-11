@@ -4,17 +4,17 @@ import { Input, Button } from 'antd'
 import { PlusOutlined, SyncOutlined } from '@ant-design/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
-import EditorMD from '../../../Components/EditorMD'
-import TagGroup from '../../../Components/Filters/TagGroup'
-import CategoryGroup from '../../../Components/Filters/CategoryGroup'
-import { CREATE_ARTICLE } from '../../../Graphql/Mutations/Articles'
+import EditorMD from 'Components/EditorMD'
+import TagGroup from 'Components/Filters/TagGroup'
+import CategoryGroup from 'Components/Filters/CategoryGroup'
+import { CREATE_ARTICLE } from 'Graphql/Mutations/Articles'
 
 import { useMutation } from '@apollo/react-hooks'
 import { useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { validateError } from '../../../Utils/ValidateError'
-import { ARTICLES_QUERY } from '../../../Graphql/Querys/Articles'
-import Page from '../../../Components/Base/Page'
+import { validateError } from 'Utils/ValidateError'
+import { ARTICLES_QUERY } from 'Graphql/Querys/Articles'
+import Page from 'Components/Base/Page'
 
 const useStyles = makeStyles({
   list: {

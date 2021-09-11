@@ -2,14 +2,21 @@ import { Grid, Hidden, makeStyles } from '@material-ui/core'
 import React from 'react'
 import Header from './Header'
 import { UserBar } from '../SideBar'
+import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles(() => ({
   content: {
-    marginTop: 64,
+    marginTop: '64px',
   },
 }))
 const PublicLayout = ({ children }) => {
+  const role = useSelector((state) => state.user.roles)
+  const history = useHistory()
   const classes = useStyles()
+  if (role === 'admin') {
+    history.push('/admin')
+  }
   return (
     <div>
       <Grid item xs={12} md={12} xl={12}>

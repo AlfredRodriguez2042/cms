@@ -46,7 +46,7 @@ class User extends Model {
         status: {
           type: ENUM,
           values: ['active', 'disable', 'deleted', 'pending', 'offline'],
-          defaultValue: 'active',
+          defaultValue: 'offline',
         },
       },
       {

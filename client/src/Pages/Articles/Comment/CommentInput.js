@@ -5,9 +5,9 @@ import { Grid, Button, makeStyles } from '@material-ui/core'
 import { ListItemAvatar, Avatar, Paper } from '@material-ui/core'
 import { Send, PriorityHigh } from '@material-ui/icons'
 
-import { useComment } from '../../hooks/useComment'
-import { validateError } from '../../Utils/ValidateError'
-import Loader from '../Loader'
+import Loader from 'Components/Loader'
+import { validateError } from 'Utils/ValidateError'
+import { useComment } from 'Hooks/useComment'
 
 // alt #eff3f5
 const useStyles = makeStyles(() => ({

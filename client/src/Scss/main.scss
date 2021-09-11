@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700&display=swap');
 
+body {
+  min-height: 100vh;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -128,34 +132,6 @@
     border: 1px solid #ddd;
   }
 
-  pre,
-  code {
-    font-family: consolas, Menlo, 'PingFang SC', 'Microsoft YaHei', monospace;
-  }
-  code {
-    padding: 2px 4px;
-    word-wrap: break-word;
-    color: #ff502c;
-    background: #fff5f5;
-    border-radius: 3px;
-    font-size: 13px;
-  }
-  pre {
-    padding: 10px;
-    overflow: auto;
-    margin: 20px 0;
-    font-size: 13px;
-    color: #4d4d4c;
-    background: #f7f7f7;
-    line-height: 1.6;
-  }
-  pre code {
-    padding: 0;
-    color: #555;
-    background: none;
-    text-shadow: none;
-    font-family: consolas, Menlo, 'PingFang SC', 'Microsoft YaHei', monospace;
-  }
   h2,
   h3,
   h4,
@@ -263,3 +239,4 @@
   fill: currentColor;
   overflow: hidden;
 }
+@import './highlighting';

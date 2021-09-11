@@ -18,6 +18,24 @@ const { username, password, database, options } = DATABASE
 
 const sequelize = new Sequelize(database, username, password, options)
 
+const defaultAdmin = {
+  name: 'admin',
+  username: 'admin',
+  email: 'admin@email.com',
+  password: 'admin1234',
+  roles: {
+    name: 'admin',
+  },
+}
+const defaultValue = async () => {
+  try {
+    await User.findOrCreate(defaultAdmin, {
+      include: [{ association: 'roles' }],
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 //  init
 Article.init(sequelize)
 User.init(sequelize)
@@ -31,7 +49,6 @@ userRole.init(sequelize)
 Likes.init(sequelize)
 Message.init(sequelize)
 Channel.init(sequelize)
-
 //  Associations
 Article.associate(sequelize.models)
 User.associate(sequelize.models)
@@ -45,4 +62,5 @@ Likes.associate(sequelize.models)
 Message.associate(sequelize.models)
 Channel.associate(sequelize.models)
 
+defaultValue()
 module.exports = sequelize

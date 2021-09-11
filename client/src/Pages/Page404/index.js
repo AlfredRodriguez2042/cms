@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Result, Button } from 'antd'
 
-function PageNotFound(props) {
+function Page404(props) {
   return (
     <Result
       status="404"
@@ -22,4 +22,4 @@ function PageNotFound(props) {
   )
 }
 
-export default PageNotFound
+export default Page404

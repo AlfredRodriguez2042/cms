@@ -40,7 +40,7 @@ const FavoriteButton = ({ post }) => {
         }
       })
     }
-  }, [like, userId])
+  }, [post.likes, like, userId])
 
   return (
     <span>

@@ -2,12 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
-
-import { useSelector } from 'react-redux'
-
 import MenuInfo from '../../../Components/MenuInfo'
 import { Link } from '@material-ui/core'
-import ModalForm from 'Components/Modal/ModalForm'
+import ButtonNotification from 'Components/Buttons/ButtonNotification'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -19,24 +16,24 @@ const useStyles = makeStyles((theme) => ({
     //color: '#383a42'
     //  color: '#53575A',
   },
+  toolbarNav: {
+    overflowX: 'auto',
+  },
 }))
 
-const _private = [{ title: 'system', url: '/system' }]
-const _public = [
-  { title: 'Home', url: '/' },
-  { title: 'About', url: '/about' },
-  { title: 'Articles', url: '/articles' },
+const sections = [
+  { title: 'Home', url: '/admin' },
+  { title: 'About', url: '/admin/about' },
+  { title: 'Articles', url: '/admin/articles' },
 ]
 
 const NavBar = () => {
-  const isAuth = useSelector((state) => state.user.isAuthenticated)
-
   const classes = useStyles()
 
   return (
     <>
       <Toolbar component="nav" variant="dense">
-        {_public.map((section) => (
+        {sections.map((section) => (
           <Link
             color="textPrimary"
             component={NavLink}
@@ -47,24 +44,8 @@ const NavBar = () => {
             {section.title}
           </Link>
         ))}
-
-        {isAuth ? (
-          _private.map((section) => (
-            <Link
-              color="textPrimary"
-              component={NavLink}
-              key={section.title}
-              to={section.url}
-              className={classes.toolbarLink}
-            >
-              {section.title}
-            </Link>
-          ))
-        ) : (
-          <ModalForm></ModalForm>
-        )}
-
-        {isAuth && <MenuInfo />}
+        <ButtonNotification />
+        <MenuInfo />
       </Toolbar>
     </>
   )

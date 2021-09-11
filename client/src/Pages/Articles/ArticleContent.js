@@ -1,12 +1,14 @@
 import React from 'react'
 import moment from 'moment'
-import ArticleTag from '../ArticleTag'
+import FavoriteButton from 'Components/Buttons/FavoriteButton'
+import ArticleTag from 'Components/ArticleTag'
+
 import { Divider } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { Paper, makeStyles } from '@material-ui/core'
 import { EyeFilled, WechatFilled } from '@ant-design/icons'
 import { CalendarOutlined } from '@ant-design/icons'
-import FavoriteButton from '../Buttons/FavoriteButton'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -30,10 +32,14 @@ const useStyles = makeStyles(() => ({
 }))
 
 const ArticleContent = ({ post }) => {
+  const role = useSelector((state) => state.user.roles)
   const classes = useStyles()
   const history = useHistory()
 
-  const JumpTo = (id) => history.push(`/articles/${id}/`)
+  const JumpTo = (id) =>
+    history.push(
+      role !== 'admin' ? `/articles/${id}/` : `/admin/articles/${id}/`
+    )
   return (
     <Paper className={classes.paper}>
       <div>

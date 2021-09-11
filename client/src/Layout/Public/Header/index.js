@@ -1,7 +1,6 @@
 import React from 'react'
 import Navigation from './Navegation'
-import Search from '../../../Components/Search'
-import { Config } from '../../../Config'
+import { Config } from 'Config'
 import {
   Typography,
   Toolbar,
@@ -14,7 +13,7 @@ import {
 } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
 import DrawerMenu from './DrawerMenu'
-import useToggle from '../../../hooks/useToggle'
+import useToggle from 'Hooks/useToggle'
 
 const useStyle = makeStyles((theme) => ({
   toolbar: {
@@ -55,7 +54,7 @@ const PublicHeader = () => {
               <small style={{ color: 'red' }}> {logo2} </small>
             </Typography>
           </Box>
-          <Search />
+
           <Hidden smDown>
             <Navigation />
           </Hidden>

@@ -32,7 +32,7 @@ const initialState = {
   tagList: tag,
 }
 
-export default function articleReducer(state = initialState, action) {
+const articleReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ARTICLES:
       return {
@@ -56,3 +56,5 @@ export default function articleReducer(state = initialState, action) {
       return state
   }
 }
+
+export default articleReducer

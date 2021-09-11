@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import ReactDOMServer from 'react-dom/server'
 
 import SimpleMDE from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'

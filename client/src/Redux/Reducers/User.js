@@ -1,6 +1,5 @@
 import { USER_LOGIN_ERROR, USER_LOADED, USER_LOG_OUT } from '../types'
-import { storage_token } from '../../Utils/constants'
-import jwt from 'jsonwebtoken'
+import { storage_token } from 'Utils/constants'
 
 export const jwtstorage = localStorage.getItem(storage_token)
 
@@ -22,8 +21,7 @@ const initialState = {
   likes: {},
   errorMessage: '',
 }
-
-export default function (state = initialState, action) {
+const user = (state = initialState, action) => {
   Object.freeze(state)
   switch (action.type) {
     case USER_LOADED:
@@ -56,3 +54,4 @@ export default function (state = initialState, action) {
       return state
   }
 }
+export default user

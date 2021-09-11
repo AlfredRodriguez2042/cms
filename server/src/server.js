@@ -50,8 +50,8 @@ app.use(
 )
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(path, middlewareSession)
 app.use(cookieParser(process.env.JWT_SECRET))
+app.use(path, middlewareSession)
 
 apolloServer.applyMiddleware({ app, path, cors: corsOptions })
 

@@ -205,6 +205,10 @@ Alfredo Rodriguez - [linkedin](www.linkedin.com/in/alfredrodriguez2042) - email 
 
 Project Link: [https://github.com/AlfredRodriguez2042/cms](https://github.com/AlfredRodriguez2042/cms)
 
+## Donate
+
+If you liked this project, you can donate to support it :heart:
+
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements

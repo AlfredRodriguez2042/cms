@@ -3,6 +3,9 @@ import User from '../Models/user'
 import depthLimit from 'graphql-depth-limit'
 import costAnalyzer from 'graphql-cost-analysis'
 
+//  !important al actualizar librerias
+// todo: Aveces cambia o falla el split de 2 cookies paso a 3 y le pone ; al final
+
 export const middlewareSession = async (req, res, next) => {
   try {
     const IsAuthorization = req.session.userId
@@ -10,7 +13,6 @@ export const middlewareSession = async (req, res, next) => {
       req.isAuth = false
       return next()
     }
-
     let token
     if (
       req.headers.authorization &&
@@ -20,9 +22,10 @@ export const middlewareSession = async (req, res, next) => {
       //  eslint-disable-next-line
       token = req.headers.authorization.split(' ')[0]
     } else if (req.headers.cookie) {
-      const gettoken = req.headers.cookie.split(' ')[2]
+      const gettoken = req.headers.cookie.split(' ')[1].split(';')[0]
       //  eslint-disable-next-line
-      token = gettoken.split('x-token=')[1]
+      token = gettoken.split('=')[1]
+      console.log('token', token)
     }
 
     if (!token) {

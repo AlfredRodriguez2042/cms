@@ -20,6 +20,8 @@ services:
       context: ./server
       dockerfile: Dockerfile.dev
     command: npm run dev
+    ports:
+      - 5400:5500
     volumes:
       - ./server:/home/node/app
     environment:

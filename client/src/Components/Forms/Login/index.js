@@ -17,6 +17,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { SIGNIN_MUTATION } from 'Graphql/Mutations/User'
 import { validateError } from 'Utils/ValidateError'
 import { loginUserSchema } from 'Utils/FormValidate'
+import Loader from 'Components/Loader'
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -78,6 +79,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      {loading && <Loader />}
       <Grid className={classes.grid}>
         <TextField
           placeholder="email"

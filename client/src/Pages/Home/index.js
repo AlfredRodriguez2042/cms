@@ -1,85 +1,27 @@
-import {
-  Box,
-  Button,
-  Container,
-  makeStyles,
-  Typography,
-} from '@material-ui/core'
+import { Container, makeStyles } from '@material-ui/core'
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import Page from '../../Components/Base/Page'
+import Page from 'Components/Base/Page'
+import Hero from './Hero'
 import Portfolio from './Portfolio'
 import Services from './Services'
 
-const useStyles = makeStyles((theme) => ({
-  content: {
-    minHeight: `calc(100vh - 120px)`,
-  },
-  title: {
-    fontSize: '3rem',
-    lineHeight: '4.2rem',
-    fontWeight: 'bold',
-    marginBottom: '1rem',
+const useStyles = makeStyles(() => ({
+  scrollSnap: {
+    height: '100vh',
+    scrollSnapType: ' y mandatory',
+    // overflowY: 'scroll',
   },
 }))
 const Home = () => {
   const classes = useStyles()
-  const params = useParams()
 
   return (
-    <Page title="home">
-      <div className="wrapper__effects">
-        <div className=" cube"></div>
-        <div className=" cube"></div>
-        <div className=" cube"></div>
-        <div className=" cube"></div>
-        <div className=" cube"></div>
-        <div className="triangle"></div>
-        <div className="triangle"></div>
-
-        <div className="circle">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
-        <div className="circle">
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
-      </div>
+    <Page styles={classes.scrollSnap}>
       <Container>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          className={classes.content}
-        >
-          <Typography variant="h4" className={classes.title}>
-            <span>Powerful tools for</span>
-            <br />
-            <span>amazing webs</span>
-          </Typography>
-          <Typography>te ayudamos a crear un proyecto a tu medida</Typography>
-          <Typography>
-            <Button variant="contained" color="primary">
-              view more
-            </Button>
-          </Typography>
-        </Box>
+        <Hero />
+        <Services />
+        <Portfolio />
       </Container>
-      <Services />
-      <Portfolio />
     </Page>
   )
 }

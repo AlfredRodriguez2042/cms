@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import SingleArticle from '../Components/Articles/SingleArticle'
+import SingleArticle from 'Pages/Articles/SingleArticle'
 import AdminLayout from '../Layout/Admin'
 import PublicLayout from '../Layout/Public'
 const Home = lazy(() => import('../Pages/Home'))
@@ -8,6 +8,7 @@ const About = lazy(() => import('../Pages/About'))
 const Articles = lazy(() => import('../Pages/Articles'))
 const Policy = lazy(() => import('../Pages/Policy'))
 const Page404 = lazy(() => import('../Pages/Page404'))
+const Profile = lazy(() => import('../Pages/Profile'))
 
 // Admin
 const Admin = lazy(() => import('../Pages/Admin'))
@@ -50,6 +51,11 @@ const PublicRoute = {
       component: ConfirmEmail,
     },
     {
+      path: '/app/profile',
+      exact: true,
+      component: Profile,
+    },
+    {
       path: '*',
       component: Page404,
     },
@@ -62,40 +68,49 @@ const AdminRoute = {
   component: AdminLayout,
   childRoutes: [
     {
-      path: '/article/edit',
+      path: '/',
       exact: true,
-      component: Admin,
+      component: Home,
     },
     {
       path: '/dashboard',
       exact: true,
       component: Dashboard,
     },
+    {
+      path: '/article/edit',
+      exact: true,
+      component: Admin,
+    },
+    {
+      path: '/articles',
+      exact: true,
+      component: Articles,
+    },
+    {
+      path: '/articles/:id',
+      exact: true,
+      component: SingleArticle,
+    },
+
     {
       path: '/user',
       exact: true,
       component: User,
     },
     {
+      path: '/profile',
+      exact: true,
+      component: Profile,
+    },
+    {
+      path: '/about',
+      exact: true,
+      component: About,
+    },
+    {
       path: '*',
       component: Page404,
-    },
-  ],
-}
-const UserRoute = {
-  path: '/app',
-  name: 'home',
-  component: AdminLayout,
-  childRoutes: [
-    {
-      path: 'edit',
-      exact: true,
-      component: Admin,
-    },
-    {
-      path: '/dashboard',
-      exact: true,
-      component: Dashboard,
     },
   ],
 }

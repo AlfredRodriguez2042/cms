@@ -6,10 +6,20 @@ import { USER_LOG_OUT } from '../Redux/types'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { MoreVert, PowerSettingsNew, Star, Person } from '@material-ui/icons'
-import { IconButton, Menu } from '@material-ui/core'
+import { Avatar, IconButton, makeStyles, Menu } from '@material-ui/core'
 import { validateError } from '../Utils/ValidateError'
 
+const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+  },
+  top: {
+    top: '56px',
+  },
+}))
+
 export default function MenuInfo() {
+  const classes = useStyles()
   const id = useSelector((state) => state.user.user.id)
   const role = useSelector((state) => state.user.roles)
   const dispatch = useDispatch()
@@ -42,8 +52,13 @@ export default function MenuInfo() {
   }
 
   return (
-    <div>
-      <IconButton onClick={handleClick}>
+    <div className={classes.root}>
+      <Avatar
+        src="https://material-ui.com/static/images/avatar/1.jpg"
+        alt="avatar"
+        sizes="large"
+      />
+      <IconButton disableRipple onClick={handleClick} size="small">
         <MoreVert />
       </IconButton>
       <Menu
@@ -66,7 +81,7 @@ export default function MenuInfo() {
           component={Link}
           to={role !== 'admin' ? '/app/profile' : '/admin/profile'}
         >
-          <Person fontSize="small" color="inherit" style={{ marginRight: 5 }} />
+          <Person fontSize="small" style={{ marginRight: 5 }} />
           Profile
         </MenuItem>
         <MenuItem

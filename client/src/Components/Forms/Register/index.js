@@ -3,7 +3,9 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Link,
   makeStyles,
+  Switch,
   TextField,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
@@ -21,6 +23,7 @@ import { SIGNUP_MUTATION } from 'Graphql/Mutations/User'
 import { validateError } from 'Utils/ValidateError'
 import { Alert } from '@material-ui/lab'
 import { createUserSchema } from 'Utils/FormValidate'
+import Loader from 'Components/Loader'
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -33,6 +36,7 @@ const useStyles = makeStyles(() => ({
 const RegisterForm = ({ setClosed }) => {
   const [showPassword, hiddenPassword] = useState(false)
   const [state, setState] = useState()
+  const [checked, setChecked] = useState(false)
   const classes = useStyles()
   const initialValues = {
     name: '',
@@ -54,9 +58,6 @@ const RegisterForm = ({ setClosed }) => {
   const onSubmit = (values) => {
     setState(values)
     SignUp()
-    if (!error) {
-      console.log('error')
-    }
   }
   const formik = useFormik({
     validationSchema: createUserSchema,
@@ -84,6 +85,7 @@ const RegisterForm = ({ setClosed }) => {
   })
   return (
     <form onSubmit={formik.handleSubmit}>
+      {loading && <Loader />}
       <Grid className={classes.grid}>
         <TextField
           placeholder="name"
@@ -155,19 +157,26 @@ const RegisterForm = ({ setClosed }) => {
           type={showPassword ? 'text' : 'password'}
           variant="outlined"
           name="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          error
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.password}
+          error={touched['password'] && errors['password']}
           helperText={errors['password']}
         />
-      </Grid>
-      <Grid className={classes.grid}>
+        <Switch
+          checked={checked}
+          color="primary"
+          onChange={() => setChecked(!checked)}
+          disabled={!isValid}
+        />
+        I have read the <Link to="/privacy-policy">agreement</Link>
+        <Grid className={classes.grid}></Grid>
         <Button
           className={classes.input}
           type="submit"
           variant="contained"
           fullWidth
-          disabled={!isValid || isSubmitting}
+          disabled={!isValid || !checked || isSubmitting}
           color="primary"
         >
           Submit

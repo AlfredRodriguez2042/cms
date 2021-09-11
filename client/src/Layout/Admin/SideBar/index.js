@@ -1,9 +1,10 @@
 import React from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
-import { mainListItems, secondaryListItems } from './ListItem'
-import { Drawer, List, IconButton, Divider } from '@material-ui/core'
+
+import { Drawer, IconButton, Divider } from '@material-ui/core'
 import { ChevronLeft } from '@material-ui/icons'
+import ListItems from './ListItems'
 
 const drawerWidth = 240
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const AdminBar = ({ open, close }) => {
+const SideBar = ({ open, close }) => {
   const classes = useStyles()
   return (
     <div className={classes.wrapper}>
@@ -63,17 +64,15 @@ const AdminBar = ({ open, close }) => {
         }}
       >
         <div className={classes.toolbarIcon}>
-          kuro
           <IconButton onClick={() => close()}>
             <ChevronLeft />
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <ListItems />
         <Divider />
-        <List>{secondaryListItems}</List>
       </Drawer>
     </div>
   )
 }
-export default AdminBar
+export default SideBar

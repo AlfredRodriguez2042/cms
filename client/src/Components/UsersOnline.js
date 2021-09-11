@@ -4,7 +4,7 @@ import { USERS_ONLINE } from '../Graphql/Mutations/User'
 import BadgeAvatar from './BadgeAvatar'
 import { validateError } from '../Utils/ValidateError'
 import Loader from './Loader'
-import useOnlineUser from '../hooks/useOnlineUser'
+import useOnlineUser from '../Hooks/useOnlineUser'
 
 const UsersOnline = () => {
   const { data: { userOnline } = {} } = useSubscription(USERS_ONLINE)

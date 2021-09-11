@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import Loader from '../../Components/Loader'
-import { translateMarkdown } from '../../Utils'
-import ArticleContent from '../../Components/Articles/ArticleContent'
+import React from 'react'
+import Loader from 'Components/Loader'
+import { translateMarkdown } from 'Utils'
+import ArticleContent from './ArticleContent'
 import { useSelector } from 'react-redux'
-import FilterArticle from '../../Components/Articles/FilterArticle'
-import Titles from '../../Components/Titles'
-import { validateError } from '../../Utils/ValidateError'
-import { useArticles } from '../../hooks/useArticles'
+import Titles from 'Components/Titles'
+import { validateError } from 'Utils/ValidateError'
+import { useArticles } from 'Hooks/useArticles'
 import ErrorBoundary from 'antd/lib/alert/ErrorBoundary'
+import Page from 'Components/Base/Page'
+import { Container } from '@material-ui/core'
 
 const Articles = () => {
   const filterList = useSelector((state) => state.articles.listArticles)
   const articles = useSelector((state) => state.articles.articles)
-  const [state, setState] = useState()
-  const { loading, error, data } = useArticles()
+  const { loading, error } = useArticles()
   if (process.env.NODE_ENV !== 'production') {
     validateError(error)
   }
-console.log(articles)
+  console.log(articles)
   if (loading) {
     return <Loader />
   }
@@ -27,18 +27,18 @@ console.log(articles)
     return item
   })
   return (
-    <div>
+    <Page title="articles">
       <Titles title="Filtrar por" />
-
-      {/* <FilterArticle state={state} setState={setState} /> */}
-      <ErrorBoundary>
-        {filterList.length > 0
-          ? filterList.map((post) => (
-              <ArticleContent key={post.id} post={post} />
-            ))
-          : Posts.map((post) => <ArticleContent key={post.id} post={post} />)}
-      </ErrorBoundary>
-    </div>
+      <Container>
+        <ErrorBoundary>
+          {filterList.length > 0
+            ? filterList.map((post) => (
+                <ArticleContent key={post.id} post={post} />
+              ))
+            : Posts.map((post) => <ArticleContent key={post.id} post={post} />)}
+        </ErrorBoundary>
+      </Container>
+    </Page>
   )
 }
 

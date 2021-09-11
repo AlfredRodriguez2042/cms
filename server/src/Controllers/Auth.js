@@ -18,7 +18,7 @@ export default {
         },
       ],
     })
-    console.log(user)
+
     if (!user) {
       throw new Error('invalid email/password, try again')
     }

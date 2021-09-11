@@ -1,6 +1,5 @@
 import React from 'react'
 import NavBar from './NavBar'
-import Search from 'Components/Search'
 import { Config } from 'Config'
 import {
   Typography,
@@ -13,7 +12,6 @@ import {
   Hidden,
 } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
-import { useSelector } from 'react-redux'
 const drawerWidth = 240
 const useStyle = makeStyles((theme) => ({
   appBar: {
@@ -34,6 +32,7 @@ const useStyle = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
+    flexWrap: 'nowrap',
   },
   hide: {
     display: 'none',
@@ -44,14 +43,13 @@ const useStyle = makeStyles((theme) => ({
 }))
 const AdminHeader = ({ open, close }) => {
   const classes = useStyle()
-  const role = useSelector((state) => state.user.roles)
   return (
     <AppBar
       color="inherit"
       position="fixed"
       className={!open ? classes.appBar : classes.appBarShift}
     >
-      <Container maxWidth="xl">
+      <Container component="header" maxWidth="xl">
         <Toolbar className={classes.toolbar}>
           <Box display="flex" justifyContent="center" alignItems="center">
             <IconButton
@@ -63,14 +61,8 @@ const AdminHeader = ({ open, close }) => {
 
             <Typography>{Config.name}</Typography>
           </Box>
-          <Search />
           <Hidden smDown>
             <NavBar />
-          </Hidden>
-          <Hidden mdUp>
-            <IconButton className={open ? classes.hide : classes.menuIcon}>
-              <Menu />
-            </IconButton>
           </Hidden>
         </Toolbar>
       </Container>

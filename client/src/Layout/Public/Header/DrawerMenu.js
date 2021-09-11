@@ -1,14 +1,15 @@
 import {
   Divider,
   Drawer,
+  Link,
   List,
   ListItem,
   ListItemText,
   makeStyles,
 } from '@material-ui/core'
 
-import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Config } from 'Config'
 
 const drawerWidth = 250
@@ -34,19 +35,12 @@ const useStyles = makeStyles((theme) => ({
     //  color: theme.palette.common.white,
   },
   divider: {
-    marginTop: theme.spacing(1),
+    //   marginTop: theme.spacing(1),
   },
 }))
 
 const DrawerMenu = ({ sections, setOpen, setClosed }) => {
   const classes = useStyles()
-  const location = useLocation()
-  useEffect(() => {
-    if (setOpen && setClosed) {
-      setClosed()
-    }
-  }, [location.pathname])
-
   return (
     <Drawer
       open={setOpen}
@@ -61,8 +55,8 @@ const DrawerMenu = ({ sections, setOpen, setClosed }) => {
         <Divider className={classes.divider} />
         {sections.map((section, i) => (
           <ListItem button key={i}>
-            <Link to={section.url}>
-              <ListItemText primary={section.name} />
+            <Link to={section.url} color="textPrimary" component={NavLink}>
+              <ListItemText primary={section.name} onClick={setClosed} />
             </Link>
           </ListItem>
         ))}

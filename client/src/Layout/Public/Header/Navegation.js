@@ -5,11 +5,11 @@ import Toolbar from '@material-ui/core/Toolbar'
 
 import { useSelector } from 'react-redux'
 
-import MenuInfo from '../../../Components/MenuInfo'
+import MenuInfo from 'Components/MenuInfo'
 import { Button, Link } from '@material-ui/core'
 import ModalForm from 'Components/Modal/ModalForm'
 import { LoginForm } from 'Components/Forms'
-import useToggle from 'hooks/useToggle'
+import useToggle from 'Hooks/useToggle'
 import { RegisterForm } from 'Components/Forms'
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,8 @@ const _public = [
   { title: 'Home', url: '/' },
   { title: 'About', url: '/about' },
   { title: 'Articles', url: '/articles' },
-  { title: 'Admin', url: '/admin ' },
+  { title: 'Tutorials', url: '/tutorials' },
+  { title: 'Tools', url: '/tools' },
 ]
 
 const Navigation = () => {
